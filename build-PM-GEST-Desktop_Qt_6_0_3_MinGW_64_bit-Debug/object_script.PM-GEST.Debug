@@ -1,0 +1,14 @@
+debug/CSVBD.o
+debug/Departement.o
+debug/Employe.o
+debug/InterfaceGestion.o
+debug/ModificationEmploye.o
+debug/ObjetType.o
+debug/Objets.o
+debug/Registre.o
+debug/main.o
+debug/FenPrincipale.o
+debug/qrc_ressources.o
+debug/moc_FenPrincipale.o
+debug/moc_InterfaceGestion.o
+debug/moc_ModificationEmploye.o

@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/Employe">
+        <file>res/files/Employe.csv</file>
+    </qresource>
+    <qresource prefix="/TypeObjets">
+        <file>res/files/TypeObjets.csv</file>
+    </qresource>
+    <qresource prefix="/Objets">
+        <file>res/files/Objets.csv</file>
+    </qresource>
+    <qresource prefix="/Departements">
+        <file>res/files/Departements.csv</file>
+    </qresource>
+    <qresource prefix="/Registre">
+        <file>res/files/Registre.csv</file>
+    </qresource>
+</RCC>

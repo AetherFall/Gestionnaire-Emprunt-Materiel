@@ -1,0 +1,4 @@
+ObjetID;ObjetType;ObjetNom;ObjetEstEmprunte;
+08D33C;1;CB#01;true;
+08D34C;1;CB#02;false;
+08D35C;2;CB#03;false;

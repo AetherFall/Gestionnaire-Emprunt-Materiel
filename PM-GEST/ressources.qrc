@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>res/icons/SVG/Refresh.svg</file>
+        <file>res/icons/SVG/Ajout.svg</file>
+        <file>res/icons/SVG/Modify.svg</file>
+        <file>res/icons/SVG/Delete2.svg</file>
+        <file>res/icons/SVG/Autre.svg</file>
+        <file>res/icons/SVG/Check.svg</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>res/images/radio.png</file>
+    </qresource>
+    <qresource prefix="/CSV">
+        <file>res/files/Departements.csv</file>
+        <file>res/files/Employe.csv</file>
+        <file>res/files/Objets.csv</file>
+        <file>res/files/Registre.csv</file>
+        <file>res/files/TypeObjets.csv</file>
+    </qresource>
+</RCC>

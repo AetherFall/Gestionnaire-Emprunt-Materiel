@@ -1,0 +1,14 @@
+release/CSVBD.o
+release/Departement.o
+release/Employe.o
+release/InterfaceGestion.o
+release/ModificationEmploye.o
+release/ObjetType.o
+release/Objets.o
+release/Registre.o
+release/main.o
+release/FenPrincipale.o
+release/qrc_ressources.o
+release/moc_FenPrincipale.o
+release/moc_InterfaceGestion.o
+release/moc_ModificationEmploye.o
