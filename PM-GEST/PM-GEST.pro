@@ -13,7 +13,10 @@ SOURCES += \
     Departement.cpp \
     Employe.cpp \
     InterfaceGestion.cpp \
+    ModificationAppareil.cpp \
+    ModificationDepartement.cpp \
     ModificationEmploye.cpp \
+    ModificationType.cpp \
     ObjetType.cpp \
     Objets.cpp \
     Registre.cpp \
@@ -26,7 +29,10 @@ HEADERS += \
     Employe.h \
     FenPrincipale.h \
     InterfaceGestion.h \
+    ModificationAppareil.h \
+    ModificationDepartement.h \
     ModificationEmploye.h \
+    ModificationType.h \
     ObjetType.h \
     Objets.h \
     Registre.h
@@ -34,7 +40,10 @@ HEADERS += \
 FORMS += \
     FenPrincipale.ui \
     InterfaceGestion.ui \
-    ModificationEmploye.ui
+    ModificationAppareil.ui \
+    ModificationDepartement.ui \
+    ModificationEmploye.ui \
+    ModificationType.ui
 
 TRANSLATIONS += \
     PM-GEST_fr_CA.ts
