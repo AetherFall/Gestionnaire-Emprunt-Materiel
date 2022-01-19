@@ -369,9 +369,8 @@ public:
 "	background-color:white;\n"
 "	color:white;\n"
 "	text-decoration:none;\n"
-"	text-style:none;\n"
 "}"));
-        chbGestion->setChecked(true);
+        chbGestion->setChecked(false);
         chbGestion->setTristate(false);
 
         horizontalLayout_4->addWidget(chbGestion);

@@ -112,6 +112,7 @@ public:
 "	border: 2px solid rgb(112, 112, 112);\n"
 "	border-radius: 15px;\n"
 "	background-color: white;\n"
+"	padding-left:20px;\n"
 "}"));
 
         verticalLayout_4->addWidget(txfEmploye);
@@ -142,6 +143,7 @@ public:
 "	border: 2px solid rgb(112, 112, 112);\n"
 "	border-radius: 15px;\n"
 "	background-color: white;\n"
+"	padding-left:20px;\n"
 "}"));
         txfObjet->setFrame(true);
 

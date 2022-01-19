@@ -10,7 +10,6 @@ ModificationEmploye::ModificationEmploye(QWidget *parent) : QWidget(parent), ui(
 
 }
 
-ModificationEmploye::~ModificationEmploye()
-{
+ModificationEmploye::~ModificationEmploye() {
     delete ui;
 }
