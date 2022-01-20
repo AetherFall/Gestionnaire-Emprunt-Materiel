@@ -1,11 +1,13 @@
 #include "FenPrincipale.h"
-
+#include "CSVBD.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    FenPrincipale w;
-    w.show();
-    return a.exec();
+    QApplication app(argc, argv);
+
+    FenPrincipale frame(new CSVBD());
+    frame.show();
+
+    return app.exec();
 }

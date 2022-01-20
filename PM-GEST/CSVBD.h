@@ -14,29 +14,33 @@
 
 using namespace std;
 
-class CSVBD
-{
+class CSVBD {
+    public:
+        CSVBD();
+        ~CSVBD();
 
-public:
-    CSVBD();
-    ~CSVBD();
-    void addEmploye(int id, string name, bool gestion);
-    void delEmploye(int id);
-    void addObjet(string id, int type, string name, bool estEmprunte);
-    void delObjet(string id);
-    void addTypeObjet(string typeName, string ImgfilePath);
-    void delTypeObjet(int id);
-    void addDepartement(string name);
-    void delDepartement(int id);
-    void addToRegistre(QDate date, int empId, int ObjId, int DepartementId, bool estRapporte = false);
-    void setEstRapporter(int registreId, bool estRapporter);
+        void addEmploye(int id, string name, bool gestion);
+        void delEmploye(int id);
+        void addObjet(string id, int type, string name, bool estEmprunte);
+        void delObjet(string id);
+        void addTypeObjet(string typeName, string ImgfilePath);
+        void delTypeObjet(int id);
+        void addDepartement(string name);
+        void delDepartement(int id);
+        void addToRegistre(QDate date, int empId, int ObjId, int DepartementId, bool estRapporte = false);
+        void setEstRapporter(int registreId, bool estRapporter);
 
-private:
-    vector<Employe*> employe;
-    vector<Objets*> objets;
-    vector<Registre*> registre;
-    vector<Departement*> departements;
-    vector<ObjetType*> typeObjet;
+        vector<Departement*> getListDepartement();
+
+    private:
+        vector<Departement*> departements;
+        vector<Employe*> employe;
+        vector<Objets*> objets;
+        vector<Registre*> registre;
+        vector<ObjetType*> typeObjet;
+
+        void lectureDepartement(string file);
+
 
 };
 

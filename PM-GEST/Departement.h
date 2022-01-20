@@ -7,11 +7,13 @@ class Departement
 {
 
 public:
-    Departement(int id, std::string name);
+    Departement(std::string name);
     ~Departement();
 
+    std::string getNom();
+    void setNom(std::string nom);
+
 private:
-    int id;
     std::string name;
 };
 

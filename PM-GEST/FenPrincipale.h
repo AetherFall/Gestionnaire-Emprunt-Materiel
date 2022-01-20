@@ -6,6 +6,8 @@
 #include <string>
 #include "InterfaceGestion.h"
 #include <iostream>
+#include "CSVBD.h"
+#include <QEvent>
 
 using namespace std;
 
@@ -18,12 +20,13 @@ class FenPrincipale : public QWidget
     Q_OBJECT
 
 public:
-    FenPrincipale(QWidget *parent = nullptr);
+    FenPrincipale(CSVBD *BD, QWidget *parent = nullptr);
     ~FenPrincipale();
 
 private:
     Ui::FenPrincipale *ui;
     InterfaceGestion *itGest;
+    CSVBD *BD;
 
 private slots:
     void affection();

@@ -1,7 +1,9 @@
 #include "CSVBD.h"
+#include <iostream>
 
 CSVBD::CSVBD() {
-
+    //Lecture des fichiers servant de base de données
+    lectureDepartement("..\\PM-GEST\\res\\files\\Departements.csv");
 }
 
 CSVBD::~CSVBD() {
@@ -32,3 +34,9 @@ CSVBD::~CSVBD() {
         registre.erase(registre.begin());
     }
 }
+
+void CSVBD::lectureDepartement(string file) {
+    departements.push_back(new Departement("Cours"));\
+}
+
+vector<Departement*> CSVBD::getListDepartement() { return departements; }

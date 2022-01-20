@@ -1,9 +1,11 @@
 #include "FenPrincipale.h"
 #include "ui_FenPrincipale.h"
 #include <QMessageBox>
+#include <QEvent>
 
-FenPrincipale::FenPrincipale(QWidget *parent): QWidget(parent), ui(new Ui::FenPrincipale) {
+FenPrincipale::FenPrincipale(CSVBD *BD, QWidget *parent): QWidget(parent), ui(new Ui::FenPrincipale) {
     //Paramétrage principal
+    this->BD = BD;
     ui->setupUi(this);
     setWindowFlags(Qt::Widget | Qt::MSWindowsFixedSizeDialogHint);
     setWindowTitle("Gestionnaire des emprunts matériel");
@@ -12,11 +14,15 @@ FenPrincipale::FenPrincipale(QWidget *parent): QWidget(parent), ui(new Ui::FenPr
     connect(ui->btnQuitter, SIGNAL(clicked()), qApp, SLOT(quit()));
     connect(ui->btnAffect, SIGNAL(clicked()), this, SLOT(affection()));
     connect(ui->btnDeAffect, SIGNAL(clicked()), this, SLOT(desaffection()));
+
+    //Ajout ActionListener
+
 }
 
 FenPrincipale::~FenPrincipale() {
     delete ui;
     delete itGest;
+    delete BD;
 }
 
 void FenPrincipale::affection(){
@@ -35,7 +41,7 @@ void FenPrincipale::affection(){
 
     if(codeEmploye == codeAdmin && codeObjet == codeObjAdmin){
         //Acces à l'interface de gestion
-        itGest = new InterfaceGestion(this);
+        itGest = new InterfaceGestion(BD, this);
         itGest->show();
     }
 

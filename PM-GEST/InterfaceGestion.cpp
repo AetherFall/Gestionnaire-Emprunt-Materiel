@@ -2,8 +2,9 @@
 #include "ui_InterfaceGestion.h"
 #include "ModificationEmploye.h"
 
-InterfaceGestion::InterfaceGestion(QWidget *parent): QWidget(parent), ui(new Ui::InterfaceGestion) {
+InterfaceGestion::InterfaceGestion(CSVBD *BD, QWidget *parent): QWidget(parent), ui(new Ui::InterfaceGestion) {
     //Paramétrage principal
+    this->BD = BD;
     ui->setupUi(this);
     setWindowFlags(Qt::Widget | Qt::MSWindowsFixedSizeDialogHint);
     setWindowTitle("Interface de gestion de l'application");
@@ -21,24 +22,25 @@ InterfaceGestion::~InterfaceGestion() {
     delete objScreen;
     delete departScreen;
     delete typeScreen;
+    delete BD;
 }
 
 void InterfaceGestion::ouvertureInterfaceEmp(){
-    empScreen = new ModificationEmploye(this);
+    empScreen = new ModificationEmploye(BD, this);
     empScreen->show();
 }
 
 void InterfaceGestion::ouvertureInterfaceObj(){
-    objScreen = new ModificationAppareil(this);
+    objScreen = new ModificationAppareil(BD, this);
     objScreen->show();
 }
 
 void InterfaceGestion::ouvertureInterfaceType() {
-    typeScreen = new ModificationType(this);
+    typeScreen = new ModificationType(BD, this);
     typeScreen->show();
 }
 
 void InterfaceGestion::ouvertureInterfaceDepart() {
-    departScreen = new ModificationDepartement(this);
+    departScreen = new ModificationDepartement(BD, this);
     departScreen->show();
 }

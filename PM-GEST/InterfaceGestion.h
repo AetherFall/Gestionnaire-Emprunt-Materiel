@@ -6,6 +6,7 @@
 #include "ModificationAppareil.h"
 #include "ModificationDepartement.h"
 #include "ModificationType.h"
+#include "CSVBD.h"
 
 namespace Ui {
 class InterfaceGestion;
@@ -16,7 +17,7 @@ class InterfaceGestion : public QWidget
     Q_OBJECT
 
 public:
-    explicit InterfaceGestion(QWidget *parent = nullptr);
+    explicit InterfaceGestion(CSVBD *BD, QWidget *parent = nullptr);
     ~InterfaceGestion();
 
 private:
@@ -25,6 +26,7 @@ private:
     ModificationAppareil *objScreen;
     ModificationDepartement *departScreen;
     ModificationType *typeScreen;
+    CSVBD *BD;
 
 private slots:
     void ouvertureInterfaceEmp();
