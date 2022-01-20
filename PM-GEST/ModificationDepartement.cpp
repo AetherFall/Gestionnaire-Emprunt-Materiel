@@ -9,17 +9,30 @@ ModificationDepartement::ModificationDepartement(CSVBD *BD, QWidget *parent) : Q
     ui->setupUi(this);
     this->BD = BD;
 
-   vector<Departement*> lstDepart = BD->getListDepartement();
-
-   std::cout << lstDepart.size() << std::endl;
-/*
-    ui->txfEmploye->setText(QString::fromStdString(lstDepart[0]->getNom()));*/
+    for(size_t i = 0; i < BD->getListDepartementSize(); i++){
+        ui->tblDepartement->addItem(new QListWidgetItem(QString::fromStdString(BD->getDepartementAt(i)->getNom())));
+        ui->tblDepartement->item(i)->setTextAlignment(Qt::AlignCenter);
+    }
 
     //Connection
     connect(ui->btnQuitter, SIGNAL(clicked()), this, SLOT(close()));
+    connect(ui->btnRefresh, SIGNAL(clicked()), this, SLOT(refresh()));
+    connect(ui->btnAdd, SIGNAL(clicked()), this, SLOT(ajout()));
+    connect(ui->btnDel, SIGNAL(clicked()), this, SLOT(suppression()));
+    connect(ui->btnMod, SIGNAL(clicked()), this, SLOT(modification()));
 }
 
 ModificationDepartement::~ModificationDepartement() {
     delete ui;
     delete BD;
 }
+
+void ModificationDepartement::refresh() {
+    //ui->tblDepartement->setSelectio
+}
+
+void ModificationDepartement::ajout() {}
+
+void ModificationDepartement::suppression() {}
+
+void ModificationDepartement::modification() {}

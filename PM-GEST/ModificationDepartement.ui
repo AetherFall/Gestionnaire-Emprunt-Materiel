@@ -47,8 +47,20 @@
 </string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_7">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
          <property name="topMargin">
           <number>10</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
          </property>
          <item>
           <widget class="QLineEdit" name="txfRecherche">
@@ -70,6 +82,7 @@
 	border-radius: 12px;
 	background-color: #B9B9B9;
 	padding-left:20px;
+	margin-left:10px;
 	color:black;
 }</string>
            </property>
@@ -82,9 +95,41 @@
           </widget>
          </item>
          <item>
-          <widget class="QListView" name="tblEmploye">
+          <widget class="QListWidget" name="tblDepartement">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
            <property name="styleSheet">
-            <string notr="true">border-style:none;</string>
+            <string notr="true">QListWidget{
+border-style:none;
+color:black;
+}
+
+QListWidget::item{
+background-color:#D8D7D7;
+}
+
+
+QListWidget::item:alternate{
+	background-color:#B2B2B2;
+}</string>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::CurrentChanged|QAbstractItemView::SelectedClicked</set>
+           </property>
+           <property name="alternatingRowColors">
+            <bool>true</bool>
+           </property>
+           <property name="textElideMode">
+            <enum>Qt::ElideNone</enum>
            </property>
           </widget>
          </item>

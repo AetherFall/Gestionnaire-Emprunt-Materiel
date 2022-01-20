@@ -17,7 +17,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QListView>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -33,7 +33,7 @@ public:
     QWidget *verticalWidget;
     QVBoxLayout *verticalLayout_7;
     QLineEdit *txfRecherche;
-    QListView *tblEmploye;
+    QListWidget *tblDepartement;
     QVBoxLayout *verticalLayout;
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout_5;
@@ -67,8 +67,9 @@ public:
         verticalWidget->setStyleSheet(QString::fromUtf8("background-color:#EBEBEB;\n"
 ""));
         verticalLayout_7 = new QVBoxLayout(verticalWidget);
+        verticalLayout_7->setSpacing(6);
         verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
-        verticalLayout_7->setContentsMargins(-1, 10, -1, -1);
+        verticalLayout_7->setContentsMargins(0, 10, 0, 0);
         txfRecherche = new QLineEdit(verticalWidget);
         txfRecherche->setObjectName(QString::fromUtf8("txfRecherche"));
         txfRecherche->setMinimumSize(QSize(0, 25));
@@ -78,16 +79,40 @@ public:
 "	border-radius: 12px;\n"
 "	background-color: #B9B9B9;\n"
 "	padding-left:20px;\n"
+"	margin-left:10px;\n"
 "	color:black;\n"
 "}"));
 
         verticalLayout_7->addWidget(txfRecherche);
 
-        tblEmploye = new QListView(verticalWidget);
-        tblEmploye->setObjectName(QString::fromUtf8("tblEmploye"));
-        tblEmploye->setStyleSheet(QString::fromUtf8("border-style:none;"));
+        tblDepartement = new QListWidget(verticalWidget);
+        tblDepartement->setObjectName(QString::fromUtf8("tblDepartement"));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(tblDepartement->sizePolicy().hasHeightForWidth());
+        tblDepartement->setSizePolicy(sizePolicy);
+        QFont font;
+        font.setPointSize(12);
+        tblDepartement->setFont(font);
+        tblDepartement->setStyleSheet(QString::fromUtf8("QListWidget{\n"
+"border-style:none;\n"
+"color:black;\n"
+"}\n"
+"\n"
+"QListWidget::item{\n"
+"background-color:#D8D7D7;\n"
+"}\n"
+"\n"
+"\n"
+"QListWidget::item:alternate{\n"
+"	background-color:#B2B2B2;\n"
+"}"));
+        tblDepartement->setEditTriggers(QAbstractItemView::CurrentChanged|QAbstractItemView::SelectedClicked);
+        tblDepartement->setAlternatingRowColors(true);
+        tblDepartement->setTextElideMode(Qt::ElideNone);
 
-        verticalLayout_7->addWidget(tblEmploye);
+        verticalLayout_7->addWidget(tblDepartement);
 
 
         horizontalLayout_2->addWidget(verticalWidget);
@@ -218,25 +243,25 @@ public:
         verticalLayout_3->setContentsMargins(-1, 90, -1, 0);
         label_2 = new QLabel(gridFrame);
         label_2->setObjectName(QString::fromUtf8("label_2"));
-        QFont font;
-        font.setFamily(QString::fromUtf8("Segoe UI"));
-        font.setPointSize(13);
-        label_2->setFont(font);
+        QFont font1;
+        font1.setFamily(QString::fromUtf8("Segoe UI"));
+        font1.setPointSize(13);
+        label_2->setFont(font1);
 
         verticalLayout_3->addWidget(label_2);
 
         txfEmploye = new QLineEdit(gridFrame);
         txfEmploye->setObjectName(QString::fromUtf8("txfEmploye"));
-        QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(txfEmploye->sizePolicy().hasHeightForWidth());
-        txfEmploye->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy1(QSizePolicy::Maximum, QSizePolicy::Maximum);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(txfEmploye->sizePolicy().hasHeightForWidth());
+        txfEmploye->setSizePolicy(sizePolicy1);
         txfEmploye->setMinimumSize(QSize(480, 30));
-        QFont font1;
-        font1.setFamily(QString::fromUtf8("Segoe UI"));
-        font1.setPointSize(11);
-        txfEmploye->setFont(font1);
+        QFont font2;
+        font2.setFamily(QString::fromUtf8("Segoe UI"));
+        font2.setPointSize(11);
+        txfEmploye->setFont(font2);
         txfEmploye->setStyleSheet(QString::fromUtf8("QLineEdit{\n"
 "	border: 2px solid rgb(112, 112, 112);\n"
 "	border-radius: 15px;\n"
@@ -257,17 +282,17 @@ public:
 
         btnQuitter = new QPushButton(gridFrame);
         btnQuitter->setObjectName(QString::fromUtf8("btnQuitter"));
-        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Maximum);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(btnQuitter->sizePolicy().hasHeightForWidth());
-        btnQuitter->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Maximum);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(btnQuitter->sizePolicy().hasHeightForWidth());
+        btnQuitter->setSizePolicy(sizePolicy2);
         btnQuitter->setMinimumSize(QSize(0, 45));
-        QFont font2;
-        font2.setFamily(QString::fromUtf8("Segoe UI"));
-        font2.setPointSize(16);
-        font2.setBold(false);
-        btnQuitter->setFont(font2);
+        QFont font3;
+        font3.setFamily(QString::fromUtf8("Segoe UI"));
+        font3.setPointSize(16);
+        font3.setBold(false);
+        btnQuitter->setFont(font3);
         btnQuitter->setCursor(QCursor(Qt::PointingHandCursor));
         btnQuitter->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "border-radius:22px;\n"

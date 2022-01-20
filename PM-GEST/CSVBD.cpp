@@ -36,7 +36,10 @@ CSVBD::~CSVBD() {
 }
 
 void CSVBD::lectureDepartement(string file) {
-    departements.push_back(new Departement("Cours"));\
+    departements.push_back(new Departement("Cours"));
+    departements.push_back(new Departement("Peinture"));
 }
 
 vector<Departement*> CSVBD::getListDepartement() { return departements; }
+Departement* CSVBD::getDepartementAt(int i) { return departements.at(i); }
+size_t CSVBD::getListDepartementSize() { return departements.size(); }

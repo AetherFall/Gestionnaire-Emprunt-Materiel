@@ -31,5 +31,8 @@ private:
 private slots:
     void affection();
     void desaffection();
+
+protected:
+    bool keyPress(QKeyEvent *keyEvent);
 };
 #endif // FENPRINCIPALE_H

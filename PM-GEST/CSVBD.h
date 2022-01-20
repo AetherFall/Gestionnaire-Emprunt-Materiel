@@ -31,6 +31,8 @@ class CSVBD {
         void setEstRapporter(int registreId, bool estRapporter);
 
         vector<Departement*> getListDepartement();
+        Departement* getDepartementAt(int i);
+        size_t getListDepartementSize();
 
     private:
         vector<Departement*> departements;
