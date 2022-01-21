@@ -95,21 +95,29 @@ public:
         QFont font;
         font.setPointSize(12);
         tblDepartement->setFont(font);
-        tblDepartement->setStyleSheet(QString::fromUtf8("QListWidget{\n"
+        tblDepartement->setStyleSheet(QString::fromUtf8("QListView{\n"
 "border-style:none;\n"
 "color:black;\n"
 "}\n"
 "\n"
-"QListWidget::item{\n"
+"QListView::item{\n"
 "background-color:#D8D7D7;\n"
 "}\n"
 "\n"
 "\n"
-"QListWidget::item:alternate{\n"
+"QListView::item:alternate{\n"
 "	background-color:#B2B2B2;\n"
+"}\n"
+"\n"
+"QListWidget::item:selected {\n"
+"	background-color:#727171;\n"
+"	color:white;\n"
 "}"));
-        tblDepartement->setEditTriggers(QAbstractItemView::CurrentChanged|QAbstractItemView::SelectedClicked);
+        tblDepartement->setEditTriggers(QAbstractItemView::CurrentChanged);
+        tblDepartement->setProperty("showDropIndicator", QVariant(false));
+        tblDepartement->setDefaultDropAction(Qt::IgnoreAction);
         tblDepartement->setAlternatingRowColors(true);
+        tblDepartement->setSelectionBehavior(QAbstractItemView::SelectRows);
         tblDepartement->setTextElideMode(Qt::ElideNone);
 
         verticalLayout_7->addWidget(tblDepartement);
@@ -318,6 +326,9 @@ public:
 
 
         retranslateUi(ModificationDepartement);
+
+        tblDepartement->setCurrentRow(-1);
+
 
         QMetaObject::connectSlotsByName(ModificationDepartement);
     } // setupUi

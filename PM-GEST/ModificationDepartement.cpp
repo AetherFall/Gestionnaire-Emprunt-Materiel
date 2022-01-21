@@ -11,15 +11,10 @@ ModificationDepartement::ModificationDepartement(CSVBD *BD, QWidget *parent) : Q
     ui->setupUi(this);
     this->BD = BD;
 
-    ui->tblDepartement->setSelectionModel(new QItemSelectionModel());
-
-    ui->tblDepartement->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->tblDepartement->setSelectionMode(QAbstractItemView::SingleSelection);
+    if(ui->tblDepartement->count())
+        ui->tblDepartement->setCurrentRow(0);
 
     updateTable();
-
-    if(ui->tblDepartement->count())
-        ui->tblDepartement->selectionModel()->selectedRows(0);
 
     //Connection
     connect(ui->btnQuitter, SIGNAL(clicked()), this, SLOT(close()));
@@ -27,7 +22,7 @@ ModificationDepartement::ModificationDepartement(CSVBD *BD, QWidget *parent) : Q
     connect(ui->btnAdd, SIGNAL(clicked()), this, SLOT(ajout()));
     connect(ui->btnDel, SIGNAL(clicked()), this, SLOT(suppression()));
     connect(ui->btnMod, SIGNAL(clicked()), this, SLOT(modification()));
-    connect(ui->tblDepartement->selectionModel(), SIGNAL(selectionChanged()), this, SLOT(updateTable()));
+    connect(ui->tblDepartement, SIGNAL(currentRowChanged(int)), this, SLOT(updateTable(int)));
 }
 
 ModificationDepartement::~ModificationDepartement() {
@@ -35,7 +30,7 @@ ModificationDepartement::~ModificationDepartement() {
     delete BD;
 }
 
-void ModificationDepartement::updateTable() {
+void ModificationDepartement::updateTable(int currentRow) {
     ui->tblDepartement->clear();
 
     for(size_t i = 0; i < BD->getListDepartementSize(); i++){
@@ -43,10 +38,10 @@ void ModificationDepartement::updateTable() {
         ui->tblDepartement->item(i)->setTextAlignment(Qt::AlignCenter);
     }
 
-    if(ui->tblDepartement->selectionModel()->hasSelection()){
-        QModelIndexList indexList = ui->tblDepartement->selectionModel()->selectedIndexes();
-        ui->txfEmploye->setText(BD->getDepartementAt(indexList.at(0).row())->getNom());
-    }
+    if(currentRow > -1)
+        ui->txfEmploye->setText(BD->getDepartementAt(currentRow)->getNom());
+    else
+        ui->txfEmploye->setText("");
 }
 
 void ModificationDepartement::refresh() {
@@ -65,13 +60,11 @@ void ModificationDepartement::ajout() {
     //TODO Mettre toute les erreures dans une classe d'erreur
 
     BD->addDepartement(ui->txfEmploye->text());
-
-    refresh();
-    updateTable();
+    updateTable(ui->tblDepartement->count() - 1);
 }
 
 void ModificationDepartement::suppression() {
-    if(!ui->tblDepartement->count()){
+    if(ui->tblDepartement->count()){
         if(ui->tblDepartement->selectionModel()->hasSelection()){
             int rep = QMessageBox::information(this, getTitle(INFORMATION), getInfo(DEP_DELETE), QMessageBox::Yes, QMessageBox::No);
 
@@ -91,14 +84,18 @@ void ModificationDepartement::suppression() {
 }
 
 void ModificationDepartement::modification() {
-    if(!ui->tblDepartement->count()){
+    if(ui->tblDepartement->count()){
         if(!ui->txfEmploye->text().isEmpty()) {
-            QModelIndexList indexList = ui->tblDepartement->selectionModel()->selectedIndexes();
+            if(ui->tblDepartement->selectionModel()->hasSelection()){
+                QModelIndexList indexList = ui->tblDepartement->selectionModel()->selectedIndexes();
 
-            if(ui->txfEmploye->text() != BD->getDepartementAt(indexList.at(0).row())->getNom()) {
-                BD->getDepartementAt(indexList.at(0).row())->setNom(ui->txfEmploye->text());
-                updateTable();
+                if(ui->txfEmploye->text() != BD->getDepartementAt(indexList.at(0).row())->getNom()) {
+                    BD->getDepartementAt(indexList.at(0).row())->setNom(ui->txfEmploye->text());
+                    updateTable();
+                }
             }
+            else
+                QMessageBox::critical(this, getTitle(ERROR), getError(DEP_CHAMPVIDE_TOMOD));
         }
 
         else

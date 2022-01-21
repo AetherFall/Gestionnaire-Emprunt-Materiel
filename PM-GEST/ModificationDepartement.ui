@@ -108,28 +108,45 @@
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">QListWidget{
+            <string notr="true">QListView{
 border-style:none;
 color:black;
 }
 
-QListWidget::item{
+QListView::item{
 background-color:#D8D7D7;
 }
 
 
-QListWidget::item:alternate{
+QListView::item:alternate{
 	background-color:#B2B2B2;
+}
+
+QListWidget::item:selected {
+	background-color:#727171;
+	color:white;
 }</string>
            </property>
            <property name="editTriggers">
-            <set>QAbstractItemView::CurrentChanged|QAbstractItemView::SelectedClicked</set>
+            <set>QAbstractItemView::CurrentChanged</set>
+           </property>
+           <property name="showDropIndicator" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="defaultDropAction">
+            <enum>Qt::IgnoreAction</enum>
            </property>
            <property name="alternatingRowColors">
             <bool>true</bool>
            </property>
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectRows</enum>
+           </property>
            <property name="textElideMode">
             <enum>Qt::ElideNone</enum>
+           </property>
+           <property name="currentRow">
+            <number>-1</number>
            </property>
           </widget>
          </item>
