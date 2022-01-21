@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include <QPushButton>
-#include <string>
 #include "InterfaceGestion.h"
 #include <iostream>
 #include "CSVBD.h"

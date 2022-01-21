@@ -2,7 +2,7 @@
 #define CSVBD_H
 
 #include <fstream>
-#include <string>
+#include <QString>
 #include <QDate>
 #include <vector>
 
@@ -19,14 +19,15 @@ class CSVBD {
         CSVBD();
         ~CSVBD();
 
-        void addEmploye(int id, string name, bool gestion);
+        void addEmploye(int id, QString name, bool gestion);
         void delEmploye(int id);
-        void addObjet(string id, int type, string name, bool estEmprunte);
-        void delObjet(string id);
-        void addTypeObjet(string typeName, string ImgfilePath);
+        void addObjet(QString id, int type, QString name, bool estEmprunte);
+        void delObjet(QString id);
+        void addTypeObjet(QString typeName, QString ImgfilePath);
         void delTypeObjet(int id);
-        void addDepartement(string name);
+        void addDepartement(QString name);
         void delDepartement(int id);
+        void modDepartement(QString name, int id);
         void addToRegistre(QDate date, int empId, int ObjId, int DepartementId, bool estRapporte = false);
         void setEstRapporter(int registreId, bool estRapporter);
 
@@ -41,7 +42,7 @@ class CSVBD {
         vector<Registre*> registre;
         vector<ObjetType*> typeObjet;
 
-        void lectureDepartement(string file);
+        void lectureDepartement(QString file);
 
 
 };

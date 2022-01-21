@@ -1,6 +1,6 @@
 #include "Objets.h"
 
-Objets::Objets(int id, std::string name, ObjetType *type, bool estEmprunte){
+Objets::Objets(int id, QString name, ObjetType *type, bool estEmprunte){
     this->id = id;
     this->type = type;
     this->name = name;

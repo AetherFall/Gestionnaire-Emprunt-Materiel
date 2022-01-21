@@ -1,20 +1,20 @@
 #ifndef DEPARTEMENT_H
 #define DEPARTEMENT_H
 
-#include <string>
+#include <QString>
 
 class Departement
 {
 
 public:
-    Departement(std::string name);
+    Departement(QString name);
     ~Departement();
 
-    std::string getNom();
-    void setNom(std::string nom);
+    QString getNom();
+    void setNom(QString nom);
 
 private:
-    std::string name;
+    QString name;
 };
 
 #endif // DEPARTEMENT_H

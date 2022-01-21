@@ -1,6 +1,6 @@
 #include "ObjetType.h"
 
-ObjetType::ObjetType(int id, std::string name, std::string image) {
+ObjetType::ObjetType(int id, QString name, QString image) {
     this->id = id;
     this->name = name;
     this->image = image;

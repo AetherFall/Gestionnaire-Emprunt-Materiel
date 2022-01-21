@@ -1,11 +1,11 @@
 #include "Departement.h"
 
-Departement::Departement(std::string name){
+Departement::Departement(QString name){
     this->name = name;
 }
 
 Departement::~Departement() {}
 
-std::string Departement::getNom() { return this->name; }
+QString Departement::getNom() { return this->name; }
 
-void Departement::setNom(std::string nom) { this->name = nom; }
+void Departement::setNom(QString nom) { this->name = nom; }

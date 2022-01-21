@@ -35,11 +35,28 @@ CSVBD::~CSVBD() {
     }
 }
 
-void CSVBD::lectureDepartement(string file) {
+void CSVBD::lectureDepartement(QString file) {
     departements.push_back(new Departement("Cours"));
     departements.push_back(new Departement("Peinture"));
 }
 
+
+//Departement Section
 vector<Departement*> CSVBD::getListDepartement() { return departements; }
+
 Departement* CSVBD::getDepartementAt(int i) { return departements.at(i); }
+
 size_t CSVBD::getListDepartementSize() { return departements.size(); }
+
+void CSVBD::addDepartement(QString name){ departements.push_back(new Departement(name)); }
+
+void CSVBD::delDepartement(int id) {
+    delete departements.at(id);
+    departements.erase(departements.begin() + id);
+}
+
+void CSVBD::modDepartement(QString name, int id) {
+    departements.at(id)->setNom(name);
+}
+
+

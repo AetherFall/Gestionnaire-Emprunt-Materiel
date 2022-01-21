@@ -20,13 +20,13 @@ public:
 private:
     Ui::ModificationDepartement *ui;
     CSVBD *BD;
-    QItemSelectionModel *mdlTbl;
 
 private slots:
     void refresh();
     void ajout();
     void suppression();
     void modification();
+    void updateTable();
 };
 
 #endif // MODIFICATIONDEPARTEMENT_H

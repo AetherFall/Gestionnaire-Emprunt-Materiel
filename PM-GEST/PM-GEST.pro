@@ -29,6 +29,7 @@ HEADERS += \
     Employe.h \
     FenPrincipale.h \
     InterfaceGestion.h \
+    Messages.hpp \
     ModificationAppareil.h \
     ModificationDepartement.h \
     ModificationEmploye.h \

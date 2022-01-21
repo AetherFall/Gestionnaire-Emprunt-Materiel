@@ -1,18 +1,18 @@
 #ifndef EMPLOYE_H
 #define EMPLOYE_H
 
-#include <string>
+#include <QString>
 
 class Employe
 {
 
 public:
-    Employe(int id, std::string name, bool gestion);
+    Employe(int id, QString name, bool gestion);
     ~Employe();
 
 private:
     int employeId;
-    std::string employeName;
+    QString employeName;
     bool employeGestion;
 
 
