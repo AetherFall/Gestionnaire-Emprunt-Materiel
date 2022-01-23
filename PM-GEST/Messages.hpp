@@ -21,14 +21,14 @@ enum INFORMATION {
     DEP_DELETE = 0
 };
 
-QString getTitle(enum TITLE type) {
+static QString getTitle(enum TITLE type) {
     switch(type){
         case 0: return "Erreur";
         case 1: return "Information";
     }
 }
 
-QString getError(enum ERROR type){
+static QString getError(enum ERROR type){
     switch(type){
         case 0: return "Veuillez saisir un nom de departement a ajouter";
         case 1: return "Veuillez sélectionner un département a supprimer.";
@@ -39,7 +39,7 @@ QString getError(enum ERROR type){
     }
 }
 
-QString getInfo(enum INFORMATION type){
+static QString getInfo(enum INFORMATION type){
     switch(type){
         case 0: return "Souhaitez-vous vraiment supprimer ce departement?";
     }

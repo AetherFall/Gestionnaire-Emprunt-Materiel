@@ -19,8 +19,9 @@ class CSVBD {
         CSVBD();
         ~CSVBD();
 
-        void addEmploye(int id, QString name, bool gestion);
-        void delEmploye(int id);
+        void addEmploye(int id, QString name, Departement *depart, bool gestion =false);
+        void modEmploye(int i, int id, QString name, Departement *depart, bool gestion =false);
+        void delEmploye(int i);
         void addObjet(QString id, int type, QString name, bool estEmprunte);
         void delObjet(QString id);
         void addTypeObjet(QString typeName, QString ImgfilePath);
@@ -35,6 +36,10 @@ class CSVBD {
         Departement* getDepartementAt(int i);
         size_t getListDepartementSize();
 
+        vector<Employe*> getListEmploye();
+        Employe* getEmployeAt(int i);
+        size_t getListEmployeSize();
+
     private:
         vector<Departement*> departements;
         vector<Employe*> employe;
@@ -43,6 +48,7 @@ class CSVBD {
         vector<ObjetType*> typeObjet;
 
         void lectureDepartement(QString file);
+        void lectureEmploye(QString file);
 
 
 };

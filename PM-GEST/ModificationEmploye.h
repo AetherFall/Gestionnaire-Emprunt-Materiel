@@ -19,6 +19,13 @@ public:
 private:
     Ui::ModificationEmploye *ui;
     CSVBD *BD;
+
+private slots:
+    void refresh();
+    void ajout();
+    void suppression();
+    void modification();
+    void updateTable(int currentRow = -1, int currentCol = -1);
 };
 
 #endif // MODIFICATIONEMPLOYE_H

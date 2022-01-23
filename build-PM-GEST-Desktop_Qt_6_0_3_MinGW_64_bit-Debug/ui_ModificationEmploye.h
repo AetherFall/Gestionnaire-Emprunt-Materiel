@@ -21,7 +21,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QTableView>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -36,7 +36,7 @@ public:
     QWidget *verticalWidget;
     QVBoxLayout *verticalLayout_7;
     QLineEdit *txfRecherche;
-    QTableView *tblEmploye;
+    QTableWidget *tblEmploye;
     QVBoxLayout *verticalLayout;
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout_5;
@@ -95,9 +95,45 @@ public:
 
         verticalLayout_7->addWidget(txfRecherche);
 
-        tblEmploye = new QTableView(verticalWidget);
+        tblEmploye = new QTableWidget(verticalWidget);
         tblEmploye->setObjectName(QString::fromUtf8("tblEmploye"));
-        tblEmploye->setStyleSheet(QString::fromUtf8("border-style:none;"));
+        QFont font;
+        font.setPointSize(11);
+        tblEmploye->setFont(font);
+        tblEmploye->setStyleSheet(QString::fromUtf8("QTableWidget {\n"
+"	alternate-background-color:blue;\n"
+"	background-color:#727171;\n"
+"	border-style:none;\n"
+"	color:black;\n"
+"}\n"
+"\n"
+"QHeaderView::section{\n"
+"background-color:#727171;\n"
+"border-style:none;\n"
+"font: 11pt \"Segoe UI\";\n"
+"}\n"
+"\n"
+"QTableWidget::item{\n"
+"	background-color:#D8D7D7;\n"
+"}\n"
+""));
+        tblEmploye->setFrameShape(QFrame::NoFrame);
+        tblEmploye->setFrameShadow(QFrame::Sunken);
+        tblEmploye->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        tblEmploye->setAutoScroll(true);
+        tblEmploye->setAutoScrollMargin(15);
+        tblEmploye->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        tblEmploye->setProperty("showDropIndicator", QVariant(false));
+        tblEmploye->setDragDropOverwriteMode(false);
+        tblEmploye->setSelectionBehavior(QAbstractItemView::SelectRows);
+        tblEmploye->setShowGrid(false);
+        tblEmploye->setGridStyle(Qt::SolidLine);
+        tblEmploye->horizontalHeader()->setVisible(false);
+        tblEmploye->horizontalHeader()->setDefaultSectionSize(140);
+        tblEmploye->horizontalHeader()->setHighlightSections(true);
+        tblEmploye->horizontalHeader()->setProperty("showSortIndicator", QVariant(false));
+        tblEmploye->horizontalHeader()->setStretchLastSection(false);
+        tblEmploye->verticalHeader()->setVisible(false);
 
         verticalLayout_7->addWidget(tblEmploye);
 
@@ -227,10 +263,10 @@ public:
 
         label_2 = new QLabel(gridFrame);
         label_2->setObjectName(QString::fromUtf8("label_2"));
-        QFont font;
-        font.setFamily(QString::fromUtf8("Segoe UI"));
-        font.setPointSize(13);
-        label_2->setFont(font);
+        QFont font1;
+        font1.setFamily(QString::fromUtf8("Segoe UI"));
+        font1.setPointSize(13);
+        label_2->setFont(font1);
 
         verticalLayout_4->addWidget(label_2);
 
@@ -242,10 +278,10 @@ public:
         sizePolicy.setHeightForWidth(txfEmploye->sizePolicy().hasHeightForWidth());
         txfEmploye->setSizePolicy(sizePolicy);
         txfEmploye->setMinimumSize(QSize(480, 30));
-        QFont font1;
-        font1.setFamily(QString::fromUtf8("Segoe UI"));
-        font1.setPointSize(11);
-        txfEmploye->setFont(font1);
+        QFont font2;
+        font2.setFamily(QString::fromUtf8("Segoe UI"));
+        font2.setPointSize(11);
+        txfEmploye->setFont(font2);
         txfEmploye->setStyleSheet(QString::fromUtf8("QLineEdit{\n"
 "	border: 2px solid rgb(112, 112, 112);\n"
 "	border-radius: 15px;\n"
@@ -266,7 +302,7 @@ public:
         label = new QLabel(gridFrame);
         label->setObjectName(QString::fromUtf8("label"));
         label->setMaximumSize(QSize(16777215, 49));
-        label->setFont(font);
+        label->setFont(font1);
         label->setStyleSheet(QString::fromUtf8(""));
 
         verticalLayout_3->addWidget(label);
@@ -277,7 +313,7 @@ public:
         txfNom->setSizePolicy(sizePolicy);
         txfNom->setMinimumSize(QSize(480, 30));
         txfNom->setMaximumSize(QSize(480, 30));
-        txfNom->setFont(font1);
+        txfNom->setFont(font2);
         txfNom->setStyleSheet(QString::fromUtf8("QLineEdit{\n"
 "	border: 2px solid rgb(112, 112, 112);\n"
 "	border-radius: 15px;\n"
@@ -301,7 +337,7 @@ public:
         label_3 = new QLabel(gridFrame);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setMaximumSize(QSize(16777215, 49));
-        label_3->setFont(font);
+        label_3->setFont(font1);
         label_3->setStyleSheet(QString::fromUtf8(""));
 
         verticalLayout_6->addWidget(label_3);
@@ -310,11 +346,13 @@ public:
         cbxDepartement->setObjectName(QString::fromUtf8("cbxDepartement"));
         cbxDepartement->setMinimumSize(QSize(480, 30));
         cbxDepartement->setMaximumSize(QSize(480, 30));
+        cbxDepartement->setFont(font2);
+        cbxDepartement->setAutoFillBackground(false);
         cbxDepartement->setStyleSheet(QString::fromUtf8("QComboBox{\n"
 "border: 2px solid rgb(112, 112, 112);\n"
 "border-radius: 15px;\n"
-"background-color: white;\n"
 "padding-left:20px;\n"
+"background-color:white;\n"
 "color:black;\n"
 "}\n"
 "\n"
@@ -331,7 +369,16 @@ public:
 "	image: url(:/icons/res/icons/SVG/Autre.svg);\n"
 "	width:19px;\n"
 "	top:2px;\n"
-"}"));
+"}\n"
+"\n"
+"QComboBox QAbstractItemView {\n"
+"    border-style:none;\n"
+"	width:450px;\n"
+"}\n"
+""));
+        cbxDepartement->setEditable(false);
+        cbxDepartement->setFrame(true);
+        cbxDepartement->setModelColumn(0);
 
         verticalLayout_6->addWidget(cbxDepartement);
 
@@ -348,7 +395,7 @@ public:
         label_4 = new QLabel(gridFrame);
         label_4->setObjectName(QString::fromUtf8("label_4"));
         label_4->setMaximumSize(QSize(400, 49));
-        label_4->setFont(font);
+        label_4->setFont(font1);
         label_4->setStyleSheet(QString::fromUtf8(""));
 
         horizontalLayout_4->addWidget(label_4);
@@ -389,11 +436,11 @@ public:
         sizePolicy1.setHeightForWidth(btnQuitter->sizePolicy().hasHeightForWidth());
         btnQuitter->setSizePolicy(sizePolicy1);
         btnQuitter->setMinimumSize(QSize(0, 45));
-        QFont font2;
-        font2.setFamily(QString::fromUtf8("Segoe UI"));
-        font2.setPointSize(16);
-        font2.setBold(false);
-        btnQuitter->setFont(font2);
+        QFont font3;
+        font3.setFamily(QString::fromUtf8("Segoe UI"));
+        font3.setPointSize(16);
+        font3.setBold(false);
+        btnQuitter->setFont(font3);
         btnQuitter->setCursor(QCursor(Qt::PointingHandCursor));
         btnQuitter->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "border-radius:22px;\n"
@@ -420,6 +467,9 @@ public:
 
         retranslateUi(ModificationEmploye);
 
+        cbxDepartement->setCurrentIndex(-1);
+
+
         QMetaObject::connectSlotsByName(ModificationEmploye);
     } // setupUi
 
@@ -436,7 +486,10 @@ public:
         txfEmploye->setText(QString());
         label->setText(QCoreApplication::translate("ModificationEmploye", "Pr\303\251nom et nom de l'employ\303\251", nullptr));
         txfNom->setInputMask(QString());
+        txfNom->setText(QString());
         label_3->setText(QCoreApplication::translate("ModificationEmploye", "D\303\251partement de l'employ\303\251", nullptr));
+        cbxDepartement->setCurrentText(QString());
+        cbxDepartement->setPlaceholderText(QCoreApplication::translate("ModificationEmploye", "D\303\251partement", nullptr));
         label_4->setText(QCoreApplication::translate("ModificationEmploye", "\303\200 acc\303\250s aux outils de gestion de cette application", nullptr));
         chbGestion->setText(QString());
         btnQuitter->setText(QCoreApplication::translate("ModificationEmploye", "Retour \303\240 l'interface de gestion", nullptr));

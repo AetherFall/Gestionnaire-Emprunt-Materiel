@@ -22,17 +22,27 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ModificationEmploye_t {
-    const uint offsetsAndSize[2];
-    char stringdata0[20];
+    const uint offsetsAndSize[18];
+    char stringdata0[94];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_ModificationEmploye_t, stringdata0) + ofs), len 
 static const qt_meta_stringdata_ModificationEmploye_t qt_meta_stringdata_ModificationEmploye = {
     {
-QT_MOC_LITERAL(0, 19) // "ModificationEmploye"
+QT_MOC_LITERAL(0, 19), // "ModificationEmploye"
+QT_MOC_LITERAL(20, 7), // "refresh"
+QT_MOC_LITERAL(28, 0), // ""
+QT_MOC_LITERAL(29, 5), // "ajout"
+QT_MOC_LITERAL(35, 11), // "suppression"
+QT_MOC_LITERAL(47, 12), // "modification"
+QT_MOC_LITERAL(60, 11), // "updateTable"
+QT_MOC_LITERAL(72, 10), // "currentRow"
+QT_MOC_LITERAL(83, 10) // "currentCol"
 
     },
-    "ModificationEmploye"
+    "ModificationEmploye\0refresh\0\0ajout\0"
+    "suppression\0modification\0updateTable\0"
+    "currentRow\0currentCol"
 };
 #undef QT_MOC_LITERAL
 
@@ -42,22 +52,50 @@ static const uint qt_meta_data_ModificationEmploye[] = {
        9,       // revision
        0,       // classname
        0,    0, // classinfo
-       0,    0, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        0,       // signalCount
 
+ // slots: name, argc, parameters, tag, flags, initial metatype offsets
+       1,    0,   56,    2, 0x08,    0 /* Private */,
+       3,    0,   57,    2, 0x08,    1 /* Private */,
+       4,    0,   58,    2, 0x08,    2 /* Private */,
+       5,    0,   59,    2, 0x08,    3 /* Private */,
+       6,    2,   60,    2, 0x08,    4 /* Private */,
+       6,    1,   65,    2, 0x28,    7 /* Private | MethodCloned */,
+       6,    0,   68,    2, 0x28,    9 /* Private | MethodCloned */,
+
+ // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,    7,    8,
+    QMetaType::Void, QMetaType::Int,    7,
+    QMetaType::Void,
+
        0        // eod
 };
 
 void ModificationEmploye::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    (void)_o;
-    (void)_id;
-    (void)_c;
-    (void)_a;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        auto *_t = static_cast<ModificationEmploye *>(_o);
+        (void)_t;
+        switch (_id) {
+        case 0: _t->refresh(); break;
+        case 1: _t->ajout(); break;
+        case 2: _t->suppression(); break;
+        case 3: _t->modification(); break;
+        case 4: _t->updateTable((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 5: _t->updateTable((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 6: _t->updateTable(); break;
+        default: ;
+        }
+    }
 }
 
 const QMetaObject ModificationEmploye::staticMetaObject = { {
@@ -66,7 +104,12 @@ const QMetaObject ModificationEmploye::staticMetaObject = { {
     qt_meta_data_ModificationEmploye,
     qt_static_metacall,
     nullptr,
-    nullptr,
+qt_incomplete_metaTypeArray<qt_meta_stringdata_ModificationEmploye_t
+
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+
+
+>,
     nullptr
 } };
 
@@ -87,6 +130,17 @@ void *ModificationEmploye::qt_metacast(const char *_clname)
 int ModificationEmploye::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 7)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 7;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 7)
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
+        _id -= 7;
+    }
     return _id;
 }
 QT_WARNING_POP

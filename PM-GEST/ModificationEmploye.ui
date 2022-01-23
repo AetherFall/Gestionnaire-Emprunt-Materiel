@@ -82,10 +82,82 @@
           </widget>
          </item>
          <item>
-          <widget class="QTableView" name="tblEmploye">
-           <property name="styleSheet">
-            <string notr="true">border-style:none;</string>
+          <widget class="QTableWidget" name="tblEmploye">
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
            </property>
+           <property name="styleSheet">
+            <string notr="true">QTableWidget {
+	alternate-background-color:blue;
+	background-color:#727171;
+	border-style:none;
+	color:black;
+}
+
+QHeaderView::section{
+background-color:#727171;
+border-style:none;
+font: 11pt &quot;Segoe UI&quot;;
+}
+
+QTableWidget::item{
+	background-color:#D8D7D7;
+}
+</string>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Sunken</enum>
+           </property>
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+           <property name="autoScroll">
+            <bool>true</bool>
+           </property>
+           <property name="autoScrollMargin">
+            <number>15</number>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
+           <property name="showDropIndicator" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="dragDropOverwriteMode">
+            <bool>false</bool>
+           </property>
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectRows</enum>
+           </property>
+           <property name="showGrid">
+            <bool>false</bool>
+           </property>
+           <property name="gridStyle">
+            <enum>Qt::SolidLine</enum>
+           </property>
+           <attribute name="horizontalHeaderVisible">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="horizontalHeaderDefaultSectionSize">
+            <number>140</number>
+           </attribute>
+           <attribute name="horizontalHeaderHighlightSections">
+            <bool>true</bool>
+           </attribute>
+           <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="horizontalHeaderStretchLastSection">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="verticalHeaderVisible">
+            <bool>false</bool>
+           </attribute>
           </widget>
          </item>
         </layout>
@@ -449,6 +521,9 @@ background-color:#D27E35;
                 <property name="inputMask">
                  <string/>
                 </property>
+                <property name="text">
+                 <string/>
+                </property>
                 <property name="frame">
                  <bool>true</bool>
                 </property>
@@ -505,12 +580,21 @@ background-color:#D27E35;
                     <height>30</height>
                    </size>
                   </property>
+                  <property name="font">
+                   <font>
+                    <family>Segoe UI</family>
+                    <pointsize>11</pointsize>
+                   </font>
+                  </property>
+                  <property name="autoFillBackground">
+                   <bool>false</bool>
+                  </property>
                   <property name="styleSheet">
                    <string notr="true">QComboBox{
 border: 2px solid rgb(112, 112, 112);
 border-radius: 15px;
-background-color: white;
 padding-left:20px;
+background-color:white;
 color:black;
 }
 
@@ -527,7 +611,31 @@ QComboBox::down-arrow{
 	image: url(:/icons/res/icons/SVG/Autre.svg);
 	width:19px;
 	top:2px;
-}</string>
+}
+
+QComboBox QAbstractItemView {
+    border-style:none;
+	width:450px;
+}
+</string>
+                  </property>
+                  <property name="editable">
+                   <bool>false</bool>
+                  </property>
+                  <property name="currentText">
+                   <string/>
+                  </property>
+                  <property name="currentIndex">
+                   <number>-1</number>
+                  </property>
+                  <property name="placeholderText">
+                   <string>Département</string>
+                  </property>
+                  <property name="frame">
+                   <bool>true</bool>
+                  </property>
+                  <property name="modelColumn">
+                   <number>0</number>
                   </property>
                  </widget>
                 </item>

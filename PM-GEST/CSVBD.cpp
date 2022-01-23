@@ -4,6 +4,7 @@
 CSVBD::CSVBD() {
     //Lecture des fichiers servant de base de données
     lectureDepartement("..\\PM-GEST\\res\\files\\Departements.csv");
+    lectureEmploye("..\\PM-GEST\\res\\files\\Employe.csv");
 }
 
 CSVBD::~CSVBD() {
@@ -35,13 +36,13 @@ CSVBD::~CSVBD() {
     }
 }
 
+
+//Departement Section
 void CSVBD::lectureDepartement(QString file) {
     departements.push_back(new Departement("Cours"));
     departements.push_back(new Departement("Peinture"));
 }
 
-
-//Departement Section
 vector<Departement*> CSVBD::getListDepartement() { return departements; }
 
 Departement* CSVBD::getDepartementAt(int i) { return departements.at(i); }
@@ -60,3 +61,31 @@ void CSVBD::modDepartement(QString name, int id) {
 }
 
 
+//Employe Section
+void CSVBD::lectureEmploye(QString file){
+    employe.push_back(new Employe(104476, "William Lambert", departements.at(0) ,true));
+    employe.push_back(new Employe(123456, "Robert Deniro", departements.at(1)));
+    employe.push_back(new Employe(895623, "Charle Bartowski", departements.at(0)));
+    employe.push_back(new Employe(986532, "Patrick Singcaster", departements.at(1), true));
+
+}
+
+vector<Employe*> CSVBD::getListEmploye() { return employe; }
+
+Employe* CSVBD::getEmployeAt(int i) { return employe.at(i); }
+
+size_t CSVBD::getListEmployeSize() { return employe.size(); }
+
+void CSVBD::addEmploye(int id, QString name, Departement* depart, bool gestion) { employe.push_back(new Employe(id, name, depart, gestion)); }
+
+void CSVBD::delEmploye(int i) {
+    delete employe.at(i);
+    employe.erase(employe.begin() + i);
+}
+
+void CSVBD::modEmploye(int i, int id, QString name, Departement *depart ,bool gestion) {
+    employe.at(i)->setName(name);
+    employe.at(i)->setId(id);
+    employe.at(i)->setGestion(gestion);
+    employe.at(i)->setDepartement(depart);
+}
