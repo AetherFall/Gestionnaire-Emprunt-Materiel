@@ -35,6 +35,7 @@ class CSVBD {
         vector<Departement*> getListDepartement();
         Departement* getDepartementAt(int i);
         size_t getListDepartementSize();
+        int getDepartementId(Departement *depart);
 
         vector<Employe*> getListEmploye();
         Employe* getEmployeAt(int i);
@@ -49,6 +50,9 @@ class CSVBD {
 
         void lectureDepartement(QString file);
         void lectureEmploye(QString file);
+        void lectureObjets(QString file);
+        void lectureTypeObjets(QString file);
+        void lectureRegistre(QString file);
 
 
 };

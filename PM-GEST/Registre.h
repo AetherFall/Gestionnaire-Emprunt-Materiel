@@ -10,11 +10,22 @@ class Registre
 {
 
 public:
-    Registre(int id, QDate date, Employe *employe, Objets *objet, Departement *departement);
+    Registre(QDate date, Employe *employe, Objets *objet, Departement *departement);
     ~Registre();
 
+    //Getter
+    QDate getDate();
+    Employe* getEmploye();
+    Objets* getObjet();
+    Departement* getDepartement();
+
+    //Setter
+    void setDate(QDate date);
+    void setEmploye(Employe* emp);
+    void setObjet(Objets* obj);
+    void setDepartement(Departement* depart);
+
 private:
-    int id;
     QDate date;
     Employe *employe;
     Objets *objet;

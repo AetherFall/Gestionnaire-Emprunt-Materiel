@@ -13,6 +13,7 @@ SOURCES += \
     Departement.cpp \
     Employe.cpp \
     InterfaceGestion.cpp \
+    ModelItemCustom.cpp \
     ModificationAppareil.cpp \
     ModificationDepartement.cpp \
     ModificationEmploye.cpp \
@@ -30,6 +31,7 @@ HEADERS += \
     FenPrincipale.h \
     InterfaceGestion.h \
     Messages.hpp \
+    ModelItemCustom.h \
     ModificationAppareil.h \
     ModificationDepartement.h \
     ModificationEmploye.h \

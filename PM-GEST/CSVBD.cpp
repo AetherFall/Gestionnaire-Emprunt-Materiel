@@ -60,6 +60,13 @@ void CSVBD::modDepartement(QString name, int id) {
     departements.at(id)->setNom(name);
 }
 
+int CSVBD::getDepartementId(Departement* depart) {
+    for(size_t i = 0; i < departements.size(); i++)
+        if(departements.at(i) == depart)
+            return i;
+    return -1;
+}
+
 
 //Employe Section
 void CSVBD::lectureEmploye(QString file){
@@ -88,4 +95,24 @@ void CSVBD::modEmploye(int i, int id, QString name, Departement *depart ,bool ge
     employe.at(i)->setId(id);
     employe.at(i)->setGestion(gestion);
     employe.at(i)->setDepartement(depart);
+}
+
+void CSVBD::lectureObjets(QString file){
+    objets.push_back(new Objets("CB#01", typeObjet.at(0)));
+    objets.push_back(new Objets("CB#02", typeObjet.at(0)));
+    objets.push_back(new Objets("CB#03", typeObjet.at(0)));
+    objets.push_back(new Objets("CB#04", typeObjet.at(0)));
+    objets.push_back(new Objets("CB#05", typeObjet.at(0)));
+    objets.push_back(new Objets("CB#06", typeObjet.at(0)));
+    objets.push_back(new Objets("CB#07", typeObjet.at(0)));
+    objets.push_back(new Objets("CB#08", typeObjet.at(0)));
+    objets.push_back(new Objets("CB#09", typeObjet.at(0)));
+}
+
+void CSVBD::lectureTypeObjets(QString file){
+    typeObjet.push_back(new ObjetType("CB Radio", ".\\res\\images\\radio.png"));
+}
+
+void CSVBD::lectureRegistre(QString file){
+
 }

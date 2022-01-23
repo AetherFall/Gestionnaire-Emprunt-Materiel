@@ -15,7 +15,8 @@ ModificationEmploye::ModificationEmploye(CSVBD *BD, QWidget *parent) : QWidget(p
     ui->tblEmploye->setAlternatingRowColors(true);
     ui->tblEmploye->setVerticalHeaderLabels(tblHeader);
     ui->tblEmploye->setColumnCount(4);
-    //ui->tblEmploye->setSelectionMode(QAbstr)
+    ui->tblEmploye->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tblEmploye->setSelectionMode(QAbstractItemView::SingleSelection);
 
     for(size_t i = 0; i < BD->getListDepartementSize(); i++)
         ui->cbxDepartement->addItem(BD->getDepartementAt(i)->getNom());
@@ -54,16 +55,20 @@ void ModificationEmploye::updateTable(int currentRow, int currentCol) {
 
         QCheckBox *chbGest = new QCheckBox();
         chbGest->setCheckState(BD->getEmployeAt(i)->getGestion()? Qt::Checked : Qt::Unchecked);
-        chbGest->setCheckable(false);
+        chbGest->setEnabled(false);
 
         ui->tblEmploye->setCellWidget(i, 3, chbGest);
+
 /*
         for(int r =0; r < 5; r++)
             ui->tblEmploye->item(i, r)->setTextAlignment(Qt::AlignCenter);*/
     }
 
     if(currentRow > -1){
-        ui->txfEmploye->setText(BD->getEmployeAt(currentRow)->getName());
+        ui->txfEmploye->setText(QString::fromStdString(to_string(BD->getEmployeAt(currentRow)->getId())));
+        ui->txfNom->setText(BD->getEmployeAt(currentRow)->getName());
+        ui->cbxDepartement->setCurrentIndex(BD->getDepartementId(BD->getEmployeAt(currentRow)->getDepartement()));
+        ui->chbGestion->setCheckState(BD->getEmployeAt(currentRow)->getGestion()? Qt::Checked : Qt::Unchecked);
         ui->tblEmploye->selectRow(currentRow);
     }
 }

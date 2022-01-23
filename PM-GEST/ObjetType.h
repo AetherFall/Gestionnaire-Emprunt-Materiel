@@ -7,11 +7,18 @@ class ObjetType
 {
 
 public:
-    ObjetType(int id, QString name, QString image);
+    ObjetType(QString name, QString image);
     ~ObjetType();
 
+    //Getter
+    QString getName();
+    QString getImage();
+
+    //Setter
+    void setName(QString name);
+    void setImage(QString image);
+
 private:
-    int id;
     QString name;
     QString image;
 };

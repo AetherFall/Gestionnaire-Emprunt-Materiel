@@ -8,11 +8,20 @@ class Objets
 {
 
 public:
-    Objets(int id, QString name, ObjetType* type = nullptr, bool estEmprunte = false);
+    Objets(QString name, ObjetType* type = nullptr, bool estEmprunte = false);
     ~Objets();
 
+    //Getter
+    QString getName();
+    ObjetType* getType();
+    bool isEmprunte();
+
+    //Setter
+    void setName(QString name);
+    void setType(ObjetType* type);
+    void setEmprunte(bool emprunte);
+
 private:
-    int id;
     ObjetType *type;
     QString name;
     bool estEmprunte;
