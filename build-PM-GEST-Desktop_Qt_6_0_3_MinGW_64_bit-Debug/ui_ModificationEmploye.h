@@ -64,10 +64,11 @@ public:
     {
         if (ModificationEmploye->objectName().isEmpty())
             ModificationEmploye->setObjectName(QString::fromUtf8("ModificationEmploye"));
-        ModificationEmploye->resize(1150, 611);
+        ModificationEmploye->resize(1221, 671);
+        ModificationEmploye->setStyleSheet(QString::fromUtf8("background-color:rgb(255, 255, 255);"));
         gridFrame = new QFrame(ModificationEmploye);
         gridFrame->setObjectName(QString::fromUtf8("gridFrame"));
-        gridFrame->setGeometry(QRect(0, 0, 1151, 611));
+        gridFrame->setGeometry(QRect(0, 0, 1221, 671));
         gridLayout = new QGridLayout(gridFrame);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(30, 30, 25, 25);

@@ -57,10 +57,11 @@ public:
     {
         if (ModificationType->objectName().isEmpty())
             ModificationType->setObjectName(QString::fromUtf8("ModificationType"));
-        ModificationType->resize(1150, 611);
+        ModificationType->resize(1221, 671);
+        ModificationType->setStyleSheet(QString::fromUtf8("background-color:rgb(255, 255, 255);"));
         gridFrame = new QFrame(ModificationType);
         gridFrame->setObjectName(QString::fromUtf8("gridFrame"));
-        gridFrame->setGeometry(QRect(0, 0, 1151, 611));
+        gridFrame->setGeometry(QRect(0, 0, 1221, 671));
         gridLayout = new QGridLayout(gridFrame);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(30, 30, 25, 25);

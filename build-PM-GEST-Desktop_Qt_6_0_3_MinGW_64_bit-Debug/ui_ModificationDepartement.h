@@ -52,10 +52,11 @@ public:
     {
         if (ModificationDepartement->objectName().isEmpty())
             ModificationDepartement->setObjectName(QString::fromUtf8("ModificationDepartement"));
-        ModificationDepartement->resize(1150, 611);
+        ModificationDepartement->resize(1221, 671);
+        ModificationDepartement->setStyleSheet(QString::fromUtf8("background-color:rgb(255, 255, 255);"));
         gridFrame = new QFrame(ModificationDepartement);
         gridFrame->setObjectName(QString::fromUtf8("gridFrame"));
-        gridFrame->setGeometry(QRect(0, 0, 1151, 611));
+        gridFrame->setGeometry(QRect(0, 0, 1221, 671));
         gridLayout = new QGridLayout(gridFrame);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(30, 30, 25, 25);
