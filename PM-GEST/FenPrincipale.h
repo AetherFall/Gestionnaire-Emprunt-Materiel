@@ -32,6 +32,7 @@ private:
 private slots:
     void affection();
     void desaffection();
+    void lectureRegistre();
 
 protected:
     bool keyPress(QKeyEvent *keyEvent);

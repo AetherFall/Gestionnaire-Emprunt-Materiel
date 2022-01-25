@@ -12,7 +12,7 @@ class ElementsItem : public QWidget
     Q_GADGET
 
 public:
-    explicit ElementsItem(/*QString tagName, QImage imgLink, QString userName = "", bool actif = false, */);
+    explicit ElementsItem(QString tagName, QString imgLink, QString userName = "", bool actif = false);
     ~ElementsItem();
 
 private:

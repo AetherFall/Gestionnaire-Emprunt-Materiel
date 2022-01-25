@@ -22,14 +22,19 @@ class CSVBD {
         void addEmploye(int id, QString name, Departement *depart, bool gestion =false);
         void modEmploye(int i, int id, QString name, Departement *depart, bool gestion =false);
         void delEmploye(int i);
+
         void addObjet(QString id, int type, QString name, bool estEmprunte);
         void delObjet(QString id);
+
         void addTypeObjet(QString typeName, QString ImgfilePath);
         void delTypeObjet(int id);
+
         void addDepartement(QString name);
         void delDepartement(int id);
         void modDepartement(QString name, int id);
+
         void addToRegistre(QDate date, int empId, int ObjId, int DepartementId, bool estRapporte = false);
+
         void setEstRapporter(int registreId, bool estRapporter);
 
         vector<Departement*> getListDepartement();
@@ -40,6 +45,14 @@ class CSVBD {
         vector<Employe*> getListEmploye();
         Employe* getEmployeAt(int i);
         size_t getListEmployeSize();
+
+        vector<Objets*> getListObjets();
+        Objets* getObjetAt(int i);
+        size_t getListObjetSize();
+
+        vector<Registre*> getListRegistre();
+        Registre* getRegistreAt(int i);
+        size_t getRegistreSize();
 
     private:
         vector<Departement*> departements;

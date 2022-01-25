@@ -4,6 +4,8 @@
 #include <QEvent>
 #include <QImage>
 #include "ElementsItem.h"
+#include "Registre.h"
+#include "Objets.h"
 
 FenPrincipale::FenPrincipale(CSVBD *BD, QWidget *parent): QWidget(parent), ui(new Ui::FenPrincipale) {
     //Paramétrage principal
@@ -25,16 +27,11 @@ FenPrincipale::FenPrincipale(CSVBD *BD, QWidget *parent): QWidget(parent), ui(ne
     for(int j = 0; j < ui->tableWidget->rowCount(); j++)
         ui->tableWidget->setRowHeight(j, ui->tableWidget->height() / 3);
 
-    //elem = new ElementsItem(/*"CB#01", *new QImage("/res/images/radio.png"), "William Lambert", true*/);
-    /*QVBoxLayout *layout = new QVBoxLayout();
-    layout->addWidget(new QLabel("TEST"));
-    QWidget *widg = new QWidget();
-
-    widg->setLayout(layout);*/
-
-    for(int r = 0; r < ui->tableWidget->columnCount(); r++)
+    /*for(int r = 0; r < ui->tableWidget->columnCount(); r++)
         for(int o = 0; o < ui->tableWidget->rowCount(); o++)
-            ui->tableWidget->setCellWidget(o, r, new ElementsItem());
+            ui->tableWidget->setCellWidget(o, r, new ElementsItem("CB#01", ":/images/res/images/radio.png", "William Lambert", false));*/
+
+    lectureRegistre();
 
     //Connection des boutons
     connect(ui->btnQuitter, SIGNAL(clicked()), qApp, SLOT(quit()));
@@ -84,6 +81,24 @@ void FenPrincipale::desaffection() {
     }
 
     //Some code...
+}
+
+void FenPrincipale::lectureRegistre(){
+    int rowChange = 0;
+
+    for(size_t i = 0; i < BD->getListObjetSize(); i++) {
+        QString user = "";
+
+        if(BD->getObjetAt(i)->isEmprunte())
+            for(Registre *in : BD->getListRegistre()){
+                if(in->getObjet() == BD->getObjetAt(i))
+                    user = in->getEmploye()->getName();
+}
+        if(i % ui->tableWidget->columnCount() == 1)
+            rowChange++;
+
+        ui->tableWidget->setCellWidget((int) i /rowChange + 1, rowChange, new ElementsItem(BD->getObjetAt(i)->getName(), BD->getObjetAt(i)->getType()->getImage(), user, BD->getObjetAt(i)->isEmprunte()));
+    }
 }
 
 

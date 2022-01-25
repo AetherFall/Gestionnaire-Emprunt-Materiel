@@ -3,8 +3,11 @@
 
 CSVBD::CSVBD() {
     //Lecture des fichiers servant de base de données
-    lectureDepartement("..\\PM-GEST\\res\\files\\Departements.csv");
-    lectureEmploye("..\\PM-GEST\\res\\files\\Employe.csv");
+    lectureDepartement(":/CSV/res/files/Departements.csv");
+    lectureEmploye(":/CSV/res/files/Employe.csv");
+    lectureTypeObjets(":/CSV/res/files/TypeObjets.csv");
+    lectureObjets(":/CSV/res/files/Objets.csv");
+    lectureRegistre(":/CSV/res/files/Registre.csv");
 }
 
 CSVBD::~CSVBD() {
@@ -98,11 +101,11 @@ void CSVBD::modEmploye(int i, int id, QString name, Departement *depart ,bool ge
 }
 
 void CSVBD::lectureObjets(QString file){
-    objets.push_back(new Objets("CB#01", typeObjet.at(0)));
-    objets.push_back(new Objets("CB#02", typeObjet.at(0)));
-    objets.push_back(new Objets("CB#03", typeObjet.at(0)));
-    objets.push_back(new Objets("CB#04", typeObjet.at(0)));
-    objets.push_back(new Objets("CB#05", typeObjet.at(0)));
+    objets.push_back(new Objets("CB#01", typeObjet.at(0), true));
+    objets.push_back(new Objets("CB#02", typeObjet.at(0), true));
+    objets.push_back(new Objets("CB#03", typeObjet.at(0), true));
+    objets.push_back(new Objets("CB#04", typeObjet.at(0), true));
+    objets.push_back(new Objets("CB#05", typeObjet.at(0), true));
     objets.push_back(new Objets("CB#06", typeObjet.at(0)));
     objets.push_back(new Objets("CB#07", typeObjet.at(0)));
     objets.push_back(new Objets("CB#08", typeObjet.at(0)));
@@ -110,9 +113,27 @@ void CSVBD::lectureObjets(QString file){
 }
 
 void CSVBD::lectureTypeObjets(QString file){
-    typeObjet.push_back(new ObjetType("CB Radio", ".\\res\\images\\radio.png"));
+    typeObjet.push_back(new ObjetType("CB Radio", ":/images/res/images/radio.png"));
 }
 
 void CSVBD::lectureRegistre(QString file){
-
+    registre.push_back(new Registre(QDate().currentDate(), employe.at(0), objets.at(0), departements.at(0)));
+    registre.push_back(new Registre(QDate().currentDate(), employe.at(1), objets.at(1), departements.at(0)));
+    registre.push_back(new Registre(QDate().currentDate(), employe.at(2), objets.at(2), departements.at(0)));
+    registre.push_back(new Registre(QDate().currentDate(), employe.at(3), objets.at(3), departements.at(0)));
+    registre.push_back(new Registre(QDate().currentDate(), employe.at(0), objets.at(4), departements.at(0)));
 }
+
+
+vector<Objets *> CSVBD::getListObjets() { return objets; }
+
+Objets *CSVBD::getObjetAt(int i){ return objets.at(i); }
+
+size_t CSVBD::getListObjetSize(){ return objets.size(); }
+
+vector<Registre *> CSVBD::getListRegistre() { return registre; }
+
+Registre *CSVBD::getRegistreAt(int i) { return registre.at(i); }
+
+size_t CSVBD::getRegistreSize() { return registre.size(); }
+
