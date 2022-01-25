@@ -11,9 +11,9 @@ CONFIG += c++11
 SOURCES += \
     CSVBD.cpp \
     Departement.cpp \
+    ElementsItem.cpp \
     Employe.cpp \
     InterfaceGestion.cpp \
-    ModelItemCustom.cpp \
     ModificationAppareil.cpp \
     ModificationDepartement.cpp \
     ModificationEmploye.cpp \
@@ -27,11 +27,11 @@ SOURCES += \
 HEADERS += \
     CSVBD.h \
     Departement.h \
+    ElementsItem.h \
     Employe.h \
     FenPrincipale.h \
     InterfaceGestion.h \
     Messages.hpp \
-    ModelItemCustom.h \
     ModificationAppareil.h \
     ModificationDepartement.h \
     ModificationEmploye.h \
@@ -41,6 +41,7 @@ HEADERS += \
     Registre.h
 
 FORMS += \
+    ElementsItem.ui \
     FenPrincipale.ui \
     InterfaceGestion.ui \
     ModificationAppareil.ui \

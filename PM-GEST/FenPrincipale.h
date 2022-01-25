@@ -7,6 +7,7 @@
 #include <iostream>
 #include "CSVBD.h"
 #include <QEvent>
+#include "ElementsItem.h"
 
 using namespace std;
 
@@ -26,6 +27,7 @@ private:
     Ui::FenPrincipale *ui;
     InterfaceGestion *itGest;
     CSVBD *BD;
+    ElementsItem *elem;
 
 private slots:
     void affection();

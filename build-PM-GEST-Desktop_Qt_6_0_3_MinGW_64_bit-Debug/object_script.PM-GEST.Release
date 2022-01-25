@@ -1,5 +1,6 @@
 release/CSVBD.o
 release/Departement.o
+release/ElementsItem.o
 release/Employe.o
 release/InterfaceGestion.o
 release/ModificationAppareil.o
@@ -12,6 +13,7 @@ release/Registre.o
 release/main.o
 release/FenPrincipale.o
 release/qrc_ressources.o
+release/moc_ElementsItem.o
 release/moc_FenPrincipale.o
 release/moc_InterfaceGestion.o
 release/moc_ModificationAppareil.o

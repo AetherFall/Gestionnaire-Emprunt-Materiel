@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1141</width>
-    <height>598</height>
+    <width>1212</width>
+    <height>661</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -28,8 +28,8 @@ color:black;</string>
     <rect>
      <x>-10</x>
      <y>-10</y>
-     <width>1151</width>
-     <height>611</height>
+     <width>1221</width>
+     <height>671</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -51,18 +51,101 @@ color:black;</string>
        <number>25</number>
       </property>
       <item>
-       <widget class="QGraphicsView" name="backgroundTab">
-        <property name="enabled">
-         <bool>false</bool>
+       <widget class="QTableWidget" name="tableWidget">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>710</width>
+          <height>620</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>685</width>
+          <height>620</height>
+         </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color:rgb(235, 235, 235);
-border-radius:25px;</string>
+         <string notr="true">QTableWidget {
+	background-color:#D8D7D7;
+	border-style:none;
+	border-radius:40px;
+	color:black;
+}
+
+QTableWidget::item:selected{
+	border-style:none;
+	background-color: rgba(0, 0, 0, 0);
+}
+
+  QScrollBar::handle:vertical {
+        background-color:rgba(127, 127, 127, 0);
+    }
+
+QScrollBar{
+	width:0px;
+	background-color:rgba(193, 193, 193, 0);
+}
+
+QScrollBar::handle{
+	border-radius:5px;
+}
+
+    QScrollBar::add-line:vertical {
+        height: 0px;
+        subcontrol-position: bottom;
+        subcontrol-origin: margin;
+    }
+    QScrollBar::sub-line:vertical {
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+        stop: 0  rgb(32, 47, 130), stop: 0.5 rgb(32, 47, 130),  stop:1 rgb(32, 47, 130));
+        height: 0 px;
+        subcontrol-position: top;
+        subcontrol-origin: margin;
+    }</string>
         </property>
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QAbstractScrollArea::AdjustToContents</enum>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <property name="tabKeyNavigation">
+         <bool>false</bool>
+        </property>
+        <property name="showDropIndicator" stdset="0">
+         <bool>false</bool>
+        </property>
+        <property name="dragDropOverwriteMode">
+         <bool>false</bool>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::NoSelection</enum>
+        </property>
+        <property name="showGrid">
+         <bool>false</bool>
+        </property>
+        <property name="gridStyle">
+         <enum>Qt::NoPen</enum>
+        </property>
+        <attribute name="horizontalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
        </widget>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout">
+       <layout class="QVBoxLayout" name="vertiL">
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <property name="spacing">
@@ -106,14 +189,14 @@ border-radius:25px;</string>
               <item>
                <widget class="QLineEdit" name="txfEmploye">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
                 <property name="minimumSize">
                  <size>
-                  <width>480</width>
+                  <width>300</width>
                   <height>30</height>
                  </size>
                 </property>
@@ -171,14 +254,14 @@ border-radius:25px;</string>
               <item>
                <widget class="QLineEdit" name="txfObjet">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
                 <property name="minimumSize">
                  <size>
-                  <width>480</width>
+                  <width>300</width>
                   <height>30</height>
                  </size>
                 </property>

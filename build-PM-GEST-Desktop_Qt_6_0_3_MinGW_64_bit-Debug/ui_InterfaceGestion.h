@@ -11,11 +11,11 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QColumnView>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -27,7 +27,7 @@ public:
     QFrame *gridFrame;
     QGridLayout *gridLayout;
     QHBoxLayout *horizontalLayout_2;
-    QColumnView *columnView;
+    QSpacerItem *horizontalSpacer;
     QVBoxLayout *verticalLayout;
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout_5;
@@ -41,23 +41,20 @@ public:
     {
         if (InterfaceGestion->objectName().isEmpty())
             InterfaceGestion->setObjectName(QString::fromUtf8("InterfaceGestion"));
-        InterfaceGestion->resize(1151, 611);
+        InterfaceGestion->resize(1221, 671);
         gridFrame = new QFrame(InterfaceGestion);
         gridFrame->setObjectName(QString::fromUtf8("gridFrame"));
-        gridFrame->setGeometry(QRect(0, 0, 1151, 611));
+        gridFrame->setGeometry(QRect(0, 0, 1221, 671));
         gridLayout = new QGridLayout(gridFrame);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(30, 30, 25, 25);
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(25);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        columnView = new QColumnView(gridFrame);
-        columnView->setObjectName(QString::fromUtf8("columnView"));
-        columnView->setStyleSheet(QString::fromUtf8("background-color:#EBEBEB;\n"
-"border-style:none;\n"
-"border-radius:30px;"));
+        horizontalLayout_2->setContentsMargins(-1, 10, -1, 10);
+        horizontalSpacer = new QSpacerItem(715, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
 
-        horizontalLayout_2->addWidget(columnView);
+        horizontalLayout_2->addItem(horizontalSpacer);
 
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));

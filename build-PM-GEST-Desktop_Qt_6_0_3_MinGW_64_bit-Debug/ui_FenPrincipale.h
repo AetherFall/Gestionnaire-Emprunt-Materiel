@@ -12,12 +12,13 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QFrame>
-#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -29,8 +30,8 @@ public:
     QFrame *gridFrame;
     QGridLayout *gridLayout;
     QHBoxLayout *horizontalLayout_2;
-    QGraphicsView *backgroundTab;
-    QVBoxLayout *verticalLayout;
+    QTableWidget *tableWidget;
+    QVBoxLayout *vertiL;
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout_5;
     QVBoxLayout *verticalLayout_4;
@@ -48,7 +49,7 @@ public:
     {
         if (FenPrincipale->objectName().isEmpty())
             FenPrincipale->setObjectName(QString::fromUtf8("FenPrincipale"));
-        FenPrincipale->resize(1141, 598);
+        FenPrincipale->resize(1212, 661);
         QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -58,23 +59,75 @@ public:
 "color:black;"));
         gridFrame = new QFrame(FenPrincipale);
         gridFrame->setObjectName(QString::fromUtf8("gridFrame"));
-        gridFrame->setGeometry(QRect(-10, -10, 1151, 611));
+        gridFrame->setGeometry(QRect(-10, -10, 1221, 671));
         gridLayout = new QGridLayout(gridFrame);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(30, 30, 25, 25);
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(25);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        backgroundTab = new QGraphicsView(gridFrame);
-        backgroundTab->setObjectName(QString::fromUtf8("backgroundTab"));
-        backgroundTab->setEnabled(false);
-        backgroundTab->setStyleSheet(QString::fromUtf8("background-color:rgb(235, 235, 235);\n"
-"border-radius:25px;"));
+        tableWidget = new QTableWidget(gridFrame);
+        tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
+        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(tableWidget->sizePolicy().hasHeightForWidth());
+        tableWidget->setSizePolicy(sizePolicy1);
+        tableWidget->setMinimumSize(QSize(710, 620));
+        tableWidget->setMaximumSize(QSize(685, 620));
+        tableWidget->setStyleSheet(QString::fromUtf8("QTableWidget {\n"
+"	background-color:#D8D7D7;\n"
+"	border-style:none;\n"
+"	border-radius:40px;\n"
+"	color:black;\n"
+"}\n"
+"\n"
+"QTableWidget::item:selected{\n"
+"	border-style:none;\n"
+"	background-color: rgba(0, 0, 0, 0);\n"
+"}\n"
+"\n"
+"  QScrollBar::handle:vertical {\n"
+"        background-color:rgba(127, 127, 127, 0);\n"
+"    }\n"
+"\n"
+"QScrollBar{\n"
+"	width:0px;\n"
+"	background-color:rgba(193, 193, 193, 0);\n"
+"}\n"
+"\n"
+"QScrollBar::handle{\n"
+"	border-radius:5px;\n"
+"}\n"
+"\n"
+"    QScrollBar::add-line:vertical {\n"
+"        height: 0px;\n"
+"        subcontrol-position: bottom;\n"
+"        subcontrol-origin: margin;\n"
+"    }\n"
+"    QScrollBar::sub-line:vertical {\n"
+"        background: qlineargradient(x1:0, y1:0, x2:1, y2:0,\n"
+"        stop: 0  rgb(32, 47, 130), stop: 0.5 rgb(32, 47, 130),  stop:1 rgb(32, 47, 130));\n"
+"        height: 0 px;\n"
+"        subcontrol-position: top;\n"
+"        subcontrol-origin: margin;\n"
+"    }"));
+        tableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        tableWidget->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
+        tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        tableWidget->setTabKeyNavigation(false);
+        tableWidget->setProperty("showDropIndicator", QVariant(false));
+        tableWidget->setDragDropOverwriteMode(false);
+        tableWidget->setSelectionMode(QAbstractItemView::NoSelection);
+        tableWidget->setShowGrid(false);
+        tableWidget->setGridStyle(Qt::NoPen);
+        tableWidget->horizontalHeader()->setVisible(false);
+        tableWidget->verticalHeader()->setVisible(false);
 
-        horizontalLayout_2->addWidget(backgroundTab);
+        horizontalLayout_2->addWidget(tableWidget);
 
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        vertiL = new QVBoxLayout();
+        vertiL->setObjectName(QString::fromUtf8("vertiL"));
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setSpacing(0);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
@@ -98,12 +151,12 @@ public:
 
         txfEmploye = new QLineEdit(gridFrame);
         txfEmploye->setObjectName(QString::fromUtf8("txfEmploye"));
-        QSizePolicy sizePolicy1(QSizePolicy::Maximum, QSizePolicy::Maximum);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(txfEmploye->sizePolicy().hasHeightForWidth());
-        txfEmploye->setSizePolicy(sizePolicy1);
-        txfEmploye->setMinimumSize(QSize(480, 30));
+        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Maximum);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(txfEmploye->sizePolicy().hasHeightForWidth());
+        txfEmploye->setSizePolicy(sizePolicy2);
+        txfEmploye->setMinimumSize(QSize(300, 30));
         QFont font1;
         font1.setFamily(QString::fromUtf8("Segoe UI"));
         font1.setPointSize(11);
@@ -135,9 +188,9 @@ public:
 
         txfObjet = new QLineEdit(gridFrame);
         txfObjet->setObjectName(QString::fromUtf8("txfObjet"));
-        sizePolicy1.setHeightForWidth(txfObjet->sizePolicy().hasHeightForWidth());
-        txfObjet->setSizePolicy(sizePolicy1);
-        txfObjet->setMinimumSize(QSize(480, 30));
+        sizePolicy2.setHeightForWidth(txfObjet->sizePolicy().hasHeightForWidth());
+        txfObjet->setSizePolicy(sizePolicy2);
+        txfObjet->setMinimumSize(QSize(300, 30));
         txfObjet->setFont(font1);
         txfObjet->setStyleSheet(QString::fromUtf8("QLineEdit{\n"
 "	border: 2px solid rgb(112, 112, 112);\n"
@@ -159,11 +212,11 @@ public:
         horizontalLayout_3->setContentsMargins(-1, 40, -1, -1);
         btnAffect = new QPushButton(gridFrame);
         btnAffect->setObjectName(QString::fromUtf8("btnAffect"));
-        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Maximum);
-        sizePolicy2.setHorizontalStretch(30);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(btnAffect->sizePolicy().hasHeightForWidth());
-        btnAffect->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy3(QSizePolicy::Minimum, QSizePolicy::Maximum);
+        sizePolicy3.setHorizontalStretch(30);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(btnAffect->sizePolicy().hasHeightForWidth());
+        btnAffect->setSizePolicy(sizePolicy3);
         btnAffect->setMinimumSize(QSize(0, 45));
         btnAffect->setMaximumSize(QSize(16777215, 16777215));
         QFont font2;
@@ -186,8 +239,8 @@ public:
 
         btnDeAffect = new QPushButton(gridFrame);
         btnDeAffect->setObjectName(QString::fromUtf8("btnDeAffect"));
-        sizePolicy2.setHeightForWidth(btnDeAffect->sizePolicy().hasHeightForWidth());
-        btnDeAffect->setSizePolicy(sizePolicy2);
+        sizePolicy3.setHeightForWidth(btnDeAffect->sizePolicy().hasHeightForWidth());
+        btnDeAffect->setSizePolicy(sizePolicy3);
         btnDeAffect->setMinimumSize(QSize(0, 45));
         QFont font3;
         font3.setFamily(QString::fromUtf8("Segoe UI"));
@@ -214,11 +267,8 @@ public:
 
         btnQuitter = new QPushButton(gridFrame);
         btnQuitter->setObjectName(QString::fromUtf8("btnQuitter"));
-        QSizePolicy sizePolicy3(QSizePolicy::Minimum, QSizePolicy::Maximum);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(btnQuitter->sizePolicy().hasHeightForWidth());
-        btnQuitter->setSizePolicy(sizePolicy3);
+        sizePolicy2.setHeightForWidth(btnQuitter->sizePolicy().hasHeightForWidth());
+        btnQuitter->setSizePolicy(sizePolicy2);
         btnQuitter->setMinimumSize(QSize(0, 45));
         QFont font4;
         font4.setFamily(QString::fromUtf8("Segoe UI"));
@@ -240,10 +290,10 @@ public:
         verticalLayout_2->addWidget(btnQuitter);
 
 
-        verticalLayout->addLayout(verticalLayout_2);
+        vertiL->addLayout(verticalLayout_2);
 
 
-        horizontalLayout_2->addLayout(verticalLayout);
+        horizontalLayout_2->addLayout(vertiL);
 
 
         gridLayout->addLayout(horizontalLayout_2, 0, 0, 1, 1);

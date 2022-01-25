@@ -8,7 +8,7 @@ class ModelItemCustom : public QAbstractItemModel
     Q_OBJECT
 
 public:
-    explicit ModelItemCustom(QString name, QImage image, QRect roundPatch, QObject *parent = nullptr);
+    explicit ModelItemCustom(QObject *parent = nullptr);
 
     // Header:
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
@@ -19,14 +19,12 @@ public:
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+    QVector<ModelItemCustom> items() const;
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
 private:
-    QImage *image;
-    QString *name;
-    QRect *roundPatch;
-    QString *empName;
+    ModelItemCustom *mModel;
 
 
 
