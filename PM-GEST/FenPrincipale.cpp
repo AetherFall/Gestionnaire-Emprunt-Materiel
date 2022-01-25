@@ -17,9 +17,10 @@ FenPrincipale::FenPrincipale(CSVBD *BD, QWidget *parent): QWidget(parent), ui(ne
 
 
     ui->tableWidget->setColumnCount(5);
-    ui->tableWidget->setRowCount(4);
+    ui->tableWidget->setRowCount(1);
     ui->tableWidget->setFocusPolicy(Qt::NoFocus);
 
+    lectureRegistre();
 
     for(int i = 0; i < ui->tableWidget->columnCount(); i++)
         ui->tableWidget->setColumnWidth(i, ui->tableWidget->width() / ui->tableWidget->columnCount());
@@ -31,7 +32,7 @@ FenPrincipale::FenPrincipale(CSVBD *BD, QWidget *parent): QWidget(parent), ui(ne
         for(int o = 0; o < ui->tableWidget->rowCount(); o++)
             ui->tableWidget->setCellWidget(o, r, new ElementsItem("CB#01", ":/images/res/images/radio.png", "William Lambert", false));*/
 
-    lectureRegistre();
+
 
     //Connection des boutons
     connect(ui->btnQuitter, SIGNAL(clicked()), qApp, SLOT(quit()));
@@ -85,19 +86,25 @@ void FenPrincipale::desaffection() {
 
 void FenPrincipale::lectureRegistre(){
     int rowChange = 0;
+    int colChange = 0;
 
-    for(size_t i = 0; i < BD->getListObjetSize(); i++) {
+    for(int i = 0; i < BD->getListObjetSize(); i++) {
         QString user = "";
 
         if(BD->getObjetAt(i)->isEmprunte())
-            for(Registre *in : BD->getListRegistre()){
+            for(Registre *in : BD->getListRegistre())
                 if(in->getObjet() == BD->getObjetAt(i))
                     user = in->getEmploye()->getName();
-}
-        if(i % ui->tableWidget->columnCount() == 1)
-            rowChange++;
 
-        ui->tableWidget->setCellWidget((int) i /rowChange + 1, rowChange, new ElementsItem(BD->getObjetAt(i)->getName(), BD->getObjetAt(i)->getType()->getImage(), user, BD->getObjetAt(i)->isEmprunte()));
+        ui->tableWidget->setCellWidget(rowChange, colChange, new ElementsItem(BD->getObjetAt(i)->getName(), BD->getObjetAt(i)->getType()->getImage(), user, BD->getObjetAt(i)->isEmprunte()));
+
+        if(i > 0 && i % ui->tableWidget->columnCount() == 0){
+            colChange = 0;
+            ui->tableWidget->insertRow(1);
+            rowChange++;
+        }
+        else
+            colChange++;
     }
 }
 
