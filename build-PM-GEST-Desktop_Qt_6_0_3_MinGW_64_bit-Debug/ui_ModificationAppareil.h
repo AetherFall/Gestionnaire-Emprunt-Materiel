@@ -433,9 +433,9 @@ public:
         btnAdd->setText(QString());
         btnDel->setText(QString());
         btnMod->setText(QString());
-        label_2->setText(QCoreApplication::translate("ModificationAppareil", "Code de l'employ\303\251", nullptr));
+        label_2->setText(QCoreApplication::translate("ModificationAppareil", "Code barre de l'appareil", nullptr));
         txfEmploye->setText(QString());
-        label->setText(QCoreApplication::translate("ModificationAppareil", "Pr\303\251nom et nom de l'employ\303\251", nullptr));
+        label->setText(QCoreApplication::translate("ModificationAppareil", "Nom de l'appareil", nullptr));
         txfNom->setInputMask(QString());
         label_3->setText(QCoreApplication::translate("ModificationAppareil", "Type d'appareil", nullptr));
         label_4->setText(QCoreApplication::translate("ModificationAppareil", "En cours d'utilisation", nullptr));

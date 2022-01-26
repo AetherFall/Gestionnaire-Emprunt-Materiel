@@ -110,6 +110,17 @@ void CSVBD::lectureObjets(QString file){
     objets.push_back(new Objets("CB#07", typeObjet.at(0)));
     objets.push_back(new Objets("CB#08", typeObjet.at(0)));
     objets.push_back(new Objets("CB#09", typeObjet.at(0)));
+    objets.push_back(new Objets("CB#10", typeObjet.at(0)));
+    objets.push_back(new Objets("CB#11", typeObjet.at(0)));
+    objets.push_back(new Objets("CB#12", typeObjet.at(0)));
+    objets.push_back(new Objets("CB#13", typeObjet.at(0)));
+    objets.push_back(new Objets("CB#14", typeObjet.at(0)));
+    objets.push_back(new Objets("CB#15", typeObjet.at(0)));
+    /*objets.push_back(new Objets("CB#16", typeObjet.at(0)));
+    objets.push_back(new Objets("CB#17", typeObjet.at(0)));
+    objets.push_back(new Objets("CB#18", typeObjet.at(0)));
+    objets.push_back(new Objets("CB#19", typeObjet.at(0)));
+    objets.push_back(new Objets("CB#20", typeObjet.at(0)));*/
 }
 
 void CSVBD::lectureTypeObjets(QString file){

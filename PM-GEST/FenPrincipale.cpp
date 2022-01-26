@@ -96,16 +96,22 @@ void FenPrincipale::lectureRegistre(){
                 if(in->getObjet() == BD->getObjetAt(i))
                     user = in->getEmploye()->getName();
 
-        ui->tableWidget->setCellWidget(rowChange, colChange, new ElementsItem(BD->getObjetAt(i)->getName(), BD->getObjetAt(i)->getType()->getImage(), user, BD->getObjetAt(i)->isEmprunte()));
-
-        if(i > 0 && i % ui->tableWidget->columnCount() == 0){
-            colChange = 0;
+        if(i && i % ui->tableWidget->columnCount() == 0){
             ui->tableWidget->insertRow(1);
+            colChange = 0;
             rowChange++;
         }
+        else if(!i)
+            colChange = 0;
         else
             colChange++;
+
+        std::cout << rowChange << " : " << colChange << std::endl;
+        //ui->tableWidget->setCellWidget(rowChange, colChange, new QLabel("Here"));
+        ui->tableWidget->setCellWidget(rowChange, colChange, new ElementsItem(BD->getObjetAt(i)->getName(), BD->getObjetAt(i)->getType()->getImage(), user, BD->getObjetAt(i)->isEmprunte()));
     }
+
+    std::cout<< ui->tableWidget->rowCount() << std::endl;
 }
 
 

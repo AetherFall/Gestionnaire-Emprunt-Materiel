@@ -75,7 +75,7 @@ public:
         tableWidget->setSizePolicy(sizePolicy1);
         tableWidget->setMinimumSize(QSize(710, 620));
         tableWidget->setMaximumSize(QSize(685, 620));
-        tableWidget->setStyleSheet(QString::fromUtf8("QTableWidget {\n"
+        tableWidget->setStyleSheet(QString::fromUtf8("/*QTableWidget {\n"
 "	background-color:#D8D7D7;\n"
 "	border-style:none;\n"
 "	border-radius:40px;\n"
@@ -111,7 +111,7 @@ public:
 "        height: 0 px;\n"
 "        subcontrol-position: top;\n"
 "        subcontrol-origin: margin;\n"
-"    }"));
+"    }*/"));
         tableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         tableWidget->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
         tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);

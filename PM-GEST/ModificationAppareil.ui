@@ -343,7 +343,7 @@ background-color:#D27E35;
                  </font>
                 </property>
                 <property name="text">
-                 <string>Code de l'employé</string>
+                 <string>Code barre de l'appareil</string>
                 </property>
                </widget>
               </item>
@@ -411,7 +411,7 @@ background-color:#D27E35;
                  <string notr="true"/>
                 </property>
                 <property name="text">
-                 <string>Prénom et nom de l'employé</string>
+                 <string>Nom de l'appareil</string>
                 </property>
                </widget>
               </item>
