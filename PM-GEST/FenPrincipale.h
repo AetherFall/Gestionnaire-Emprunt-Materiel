@@ -8,6 +8,7 @@
 #include "CSVBD.h"
 #include <QEvent>
 #include "ElementsItem.h"
+#include <QLineEdit>
 
 using namespace std;
 
@@ -33,6 +34,12 @@ private slots:
     void affection();
     void desaffection();
     void lectureRegistre();
+    void updateTable();
+    void verification(QString text, QLineEdit* edit);
+    void focusChange(QWidget* a = nullptr, QWidget* b = nullptr);
+
+signals:
+    void verificationTextField(QString text, QLineEdit* edit);
 
 protected:
     bool keyPress(QKeyEvent *keyEvent);

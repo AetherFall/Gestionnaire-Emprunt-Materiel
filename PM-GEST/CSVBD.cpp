@@ -100,27 +100,37 @@ void CSVBD::modEmploye(int i, int id, QString name, Departement *depart ,bool ge
     employe.at(i)->setDepartement(depart);
 }
 
+void CSVBD::addObjet(QString id, QString name, ObjetType *type, bool estEmprunte) {
+    objets.push_back(new Objets(id, name, type, estEmprunte));
+}
+
+void CSVBD::delObjet(int i) {
+    delete objets.at(i);
+    objets.erase(objets.begin() + i);
+}
+
 void CSVBD::lectureObjets(QString file){
-    objets.push_back(new Objets("CB#01", typeObjet.at(0), true));
-    objets.push_back(new Objets("CB#02", typeObjet.at(0), true));
-    objets.push_back(new Objets("CB#03", typeObjet.at(0), true));
-    objets.push_back(new Objets("CB#04", typeObjet.at(0), true));
-    objets.push_back(new Objets("CB#05", typeObjet.at(0), true));
-    objets.push_back(new Objets("CB#06", typeObjet.at(0)));
-    objets.push_back(new Objets("CB#07", typeObjet.at(0)));
-    objets.push_back(new Objets("CB#08", typeObjet.at(0)));
-    objets.push_back(new Objets("CB#09", typeObjet.at(0)));
-    objets.push_back(new Objets("CB#10", typeObjet.at(0)));
-    objets.push_back(new Objets("CB#11", typeObjet.at(0)));
-    objets.push_back(new Objets("CB#12", typeObjet.at(0)));
-    objets.push_back(new Objets("CB#13", typeObjet.at(0)));
-    objets.push_back(new Objets("CB#14", typeObjet.at(0)));
-    objets.push_back(new Objets("CB#15", typeObjet.at(0)));
-    /*objets.push_back(new Objets("CB#16", typeObjet.at(0)));
-    objets.push_back(new Objets("CB#17", typeObjet.at(0)));
-    objets.push_back(new Objets("CB#18", typeObjet.at(0)));
-    objets.push_back(new Objets("CB#19", typeObjet.at(0)));
-    objets.push_back(new Objets("CB#20", typeObjet.at(0)));*/
+    objets.push_back(new Objets("6542", "CB#01", typeObjet.at(0), true));
+    objets.push_back(new Objets("812", "CB#02", typeObjet.at(0), true));
+    objets.push_back(new Objets("6578956", "CB#03", typeObjet.at(0), true));
+    objets.push_back(new Objets("iuyft654", "CB#04", typeObjet.at(0), true));
+    objets.push_back(new Objets("ilugyuhtf53641", "CB#05", typeObjet.at(0), true));
+    objets.push_back(new Objets("65451643", "CB#06", typeObjet.at(0)));
+    objets.push_back(new Objets("9875631", "CB#07", typeObjet.at(0)));
+    objets.push_back(new Objets("32586", "CB#08", typeObjet.at(0)));
+    objets.push_back(new Objets("74123", "CB#09", typeObjet.at(0)));
+    objets.push_back(new Objets("32147", "CB#10", typeObjet.at(0)));
+    objets.push_back(new Objets("96541", "CB#11", typeObjet.at(0)));
+    objets.push_back(new Objets("14236", "CB#12", typeObjet.at(0)));
+    objets.push_back(new Objets("3259874", "CB#13", typeObjet.at(0)));
+    objets.push_back(new Objets("65219874", "CB#14", typeObjet.at(0)));
+    objets.push_back(new Objets("3256452", "CB#15", typeObjet.at(0)));
+    objets.push_back(new Objets("85296", "CB#16", typeObjet.at(0)));
+    objets.push_back(new Objets("142596", "CB#17", typeObjet.at(0)));
+    objets.push_back(new Objets("258741", "CB#18", typeObjet.at(0)));
+    objets.push_back(new Objets("326594", "CB#19", typeObjet.at(0)));
+    objets.push_back(new Objets("126598", "CB#20", typeObjet.at(0)));
+    objets.push_back(new Objets("1223567", "CB#21", typeObjet.at(0)));
 }
 
 void CSVBD::lectureTypeObjets(QString file){
@@ -147,4 +157,18 @@ vector<Registre *> CSVBD::getListRegistre() { return registre; }
 Registre *CSVBD::getRegistreAt(int i) { return registre.at(i); }
 
 size_t CSVBD::getRegistreSize() { return registre.size(); }
+
+
+//TypeObjets
+vector<ObjetType *> CSVBD::getListType(){ return typeObjet; }
+
+ObjetType* CSVBD::getTypeAt(int i){ return typeObjet.at(i); }
+
+size_t CSVBD::getListTypeSize(){ return typeObjet.size(); }
+
+int CSVBD::getTypeId(ObjetType *type){
+    for(size_t i = 0; i < typeObjet.size(); i++)
+        if(typeObjet.at(i) == type)
+            return i;
+    return -1;}
 

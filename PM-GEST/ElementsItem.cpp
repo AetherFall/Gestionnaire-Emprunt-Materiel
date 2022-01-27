@@ -18,3 +18,8 @@ ElementsItem::ElementsItem(QString tagName, QString imgLink, QString userName, b
 ElementsItem::~ElementsItem() {
     delete ui;
 }
+
+QString ElementsItem::getTagName()
+{
+    return ui->labTagName->text();
+}

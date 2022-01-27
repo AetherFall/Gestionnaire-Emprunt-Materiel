@@ -19,6 +19,14 @@ public:
 private:
     Ui::ModificationAppareil *ui;
     CSVBD *BD;
+
+private slots:
+    void refresh();
+    void ajout();
+    void suppression();
+    void modification();
+    void updateTable(int currentRow = -1, int currentCol = -1);
+    void onCloseAction();
 };
 
 #endif // MODIFICATIONAPPAREIL_H

@@ -15,6 +15,8 @@ public:
     explicit ElementsItem(QString tagName, QString imgLink, QString userName = "", bool actif = false);
     ~ElementsItem();
 
+    QString getTagName();
+
 private:
     Ui::ElementsItem *ui;
 };

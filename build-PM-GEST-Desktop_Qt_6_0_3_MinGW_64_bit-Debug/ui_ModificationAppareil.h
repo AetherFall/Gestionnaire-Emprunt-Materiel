@@ -21,7 +21,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QTableView>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -36,7 +36,7 @@ public:
     QWidget *verticalWidget;
     QVBoxLayout *verticalLayout_7;
     QLineEdit *txfRecherche;
-    QTableView *tblEmploye;
+    QTableWidget *tblEmploye;
     QVBoxLayout *verticalLayout;
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout_5;
@@ -80,8 +80,9 @@ public:
         verticalWidget->setStyleSheet(QString::fromUtf8("background-color:#EBEBEB;\n"
 ""));
         verticalLayout_7 = new QVBoxLayout(verticalWidget);
+        verticalLayout_7->setSpacing(6);
         verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
-        verticalLayout_7->setContentsMargins(-1, 10, -1, -1);
+        verticalLayout_7->setContentsMargins(0, 9, 0, -1);
         txfRecherche = new QLineEdit(verticalWidget);
         txfRecherche->setObjectName(QString::fromUtf8("txfRecherche"));
         txfRecherche->setMinimumSize(QSize(0, 25));
@@ -91,14 +92,42 @@ public:
 "	border-radius: 12px;\n"
 "	background-color: #B9B9B9;\n"
 "	padding-left:20px;\n"
+"	margin-left:9px;\n"
 "	color:black;\n"
 "}"));
 
         verticalLayout_7->addWidget(txfRecherche);
 
-        tblEmploye = new QTableView(verticalWidget);
+        tblEmploye = new QTableWidget(verticalWidget);
         tblEmploye->setObjectName(QString::fromUtf8("tblEmploye"));
-        tblEmploye->setStyleSheet(QString::fromUtf8("border-style:none;"));
+        tblEmploye->setMinimumSize(QSize(650, 0));
+        tblEmploye->setMaximumSize(QSize(650, 16777215));
+        tblEmploye->setStyleSheet(QString::fromUtf8("QTableWidget {\n"
+"	alternate-background-color:blue;\n"
+"	background-color:#727171;\n"
+"	border-style:none;\n"
+"	color:black;\n"
+"}\n"
+"\n"
+"QHeaderView::section{\n"
+"background-color:#727171;\n"
+"border-style:none;\n"
+"font: 11pt \"Segoe UI\";\n"
+"}\n"
+"\n"
+"QTableWidget::item{\n"
+"	background-color:#D8D7D7;\n"
+"}\n"
+""));
+        tblEmploye->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        tblEmploye->setAlternatingRowColors(true);
+        tblEmploye->setSelectionMode(QAbstractItemView::SingleSelection);
+        tblEmploye->setSelectionBehavior(QAbstractItemView::SelectRows);
+        tblEmploye->setShowGrid(false);
+        tblEmploye->horizontalHeader()->setVisible(true);
+        tblEmploye->horizontalHeader()->setHighlightSections(false);
+        tblEmploye->verticalHeader()->setVisible(false);
+        tblEmploye->verticalHeader()->setHighlightSections(false);
 
         verticalLayout_7->addWidget(tblEmploye);
 
@@ -438,6 +467,7 @@ public:
         label->setText(QCoreApplication::translate("ModificationAppareil", "Nom de l'appareil", nullptr));
         txfNom->setInputMask(QString());
         label_3->setText(QCoreApplication::translate("ModificationAppareil", "Type d'appareil", nullptr));
+        cbxDepartement->setPlaceholderText(QString());
         label_4->setText(QCoreApplication::translate("ModificationAppareil", "En cours d'utilisation", nullptr));
         chbGestion->setText(QString());
         btnQuitter->setText(QCoreApplication::translate("ModificationAppareil", "Retour \303\240 l'interface de gestion", nullptr));

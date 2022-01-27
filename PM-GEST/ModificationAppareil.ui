@@ -50,8 +50,17 @@
 </string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_7">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
          <property name="topMargin">
-          <number>10</number>
+          <number>9</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
          </property>
          <item>
           <widget class="QLineEdit" name="txfRecherche">
@@ -73,6 +82,7 @@
 	border-radius: 12px;
 	background-color: #B9B9B9;
 	padding-left:20px;
+	margin-left:9px;
 	color:black;
 }</string>
            </property>
@@ -85,10 +95,65 @@
           </widget>
          </item>
          <item>
-          <widget class="QTableView" name="tblEmploye">
-           <property name="styleSheet">
-            <string notr="true">border-style:none;</string>
+          <widget class="QTableWidget" name="tblEmploye">
+           <property name="minimumSize">
+            <size>
+             <width>650</width>
+             <height>0</height>
+            </size>
            </property>
+           <property name="maximumSize">
+            <size>
+             <width>650</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QTableWidget {
+	alternate-background-color:blue;
+	background-color:#727171;
+	border-style:none;
+	color:black;
+}
+
+QHeaderView::section{
+background-color:#727171;
+border-style:none;
+font: 11pt &quot;Segoe UI&quot;;
+}
+
+QTableWidget::item{
+	background-color:#D8D7D7;
+}
+</string>
+           </property>
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+           <property name="alternatingRowColors">
+            <bool>true</bool>
+           </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::SingleSelection</enum>
+           </property>
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectRows</enum>
+           </property>
+           <property name="showGrid">
+            <bool>false</bool>
+           </property>
+           <attribute name="horizontalHeaderVisible">
+            <bool>true</bool>
+           </attribute>
+           <attribute name="horizontalHeaderHighlightSections">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="verticalHeaderVisible">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="verticalHeaderHighlightSections">
+            <bool>false</bool>
+           </attribute>
           </widget>
          </item>
         </layout>
@@ -531,6 +596,9 @@ QComboBox::down-arrow{
 	width:19px;
 	top:2px;
 }</string>
+                  </property>
+                  <property name="placeholderText">
+                   <string/>
                   </property>
                  </widget>
                 </item>

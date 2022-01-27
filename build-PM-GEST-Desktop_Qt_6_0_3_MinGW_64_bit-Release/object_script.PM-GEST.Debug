@@ -1,5 +1,6 @@
 debug/CSVBD.o
 debug/Departement.o
+debug/ElementsItem.o
 debug/Employe.o
 debug/InterfaceGestion.o
 debug/ModificationAppareil.o
@@ -12,6 +13,7 @@ debug/Registre.o
 debug/main.o
 debug/FenPrincipale.o
 debug/qrc_ressources.o
+debug/moc_ElementsItem.o
 debug/moc_FenPrincipale.o
 debug/moc_InterfaceGestion.o
 debug/moc_ModificationAppareil.o

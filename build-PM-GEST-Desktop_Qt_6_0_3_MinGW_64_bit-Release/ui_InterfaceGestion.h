@@ -11,11 +11,11 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QColumnView>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -27,7 +27,8 @@ public:
     QFrame *gridFrame;
     QGridLayout *gridLayout;
     QHBoxLayout *horizontalLayout_2;
-    QColumnView *columnView;
+    QSpacerItem *horizontalSpacer;
+    QFrame *frame;
     QVBoxLayout *verticalLayout;
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout_5;
@@ -41,25 +42,25 @@ public:
     {
         if (InterfaceGestion->objectName().isEmpty())
             InterfaceGestion->setObjectName(QString::fromUtf8("InterfaceGestion"));
-        InterfaceGestion->resize(1151, 611);
+        InterfaceGestion->resize(1221, 671);
         gridFrame = new QFrame(InterfaceGestion);
         gridFrame->setObjectName(QString::fromUtf8("gridFrame"));
-        gridFrame->setGeometry(QRect(0, 0, 1151, 611));
+        gridFrame->setGeometry(QRect(0, 0, 1221, 671));
         gridLayout = new QGridLayout(gridFrame);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(30, 30, 25, 25);
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(25);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        columnView = new QColumnView(gridFrame);
-        columnView->setObjectName(QString::fromUtf8("columnView"));
-        columnView->setStyleSheet(QString::fromUtf8("background-color:#EBEBEB;\n"
-"border-style:none;\n"
-"border-radius:30px;"));
+        horizontalLayout_2->setContentsMargins(-1, 10, -1, 10);
+        horizontalSpacer = new QSpacerItem(715, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
 
-        horizontalLayout_2->addWidget(columnView);
+        horizontalLayout_2->addItem(horizontalSpacer);
 
-        verticalLayout = new QVBoxLayout();
+        frame = new QFrame(gridFrame);
+        frame->setObjectName(QString::fromUtf8("frame"));
+        frame->setStyleSheet(QString::fromUtf8("background-color:rgb(255, 255, 255);"));
+        verticalLayout = new QVBoxLayout(frame);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setSpacing(0);
@@ -69,7 +70,7 @@ public:
         verticalLayout_5->setSpacing(100);
         verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
         verticalLayout_5->setContentsMargins(-1, -1, -1, 350);
-        btnLstEmp = new QPushButton(gridFrame);
+        btnLstEmp = new QPushButton(frame);
         btnLstEmp->setObjectName(QString::fromUtf8("btnLstEmp"));
         QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
         sizePolicy.setHorizontalStretch(0);
@@ -96,7 +97,7 @@ public:
 
         verticalLayout_5->addWidget(btnLstEmp);
 
-        btnLstObjets = new QPushButton(gridFrame);
+        btnLstObjets = new QPushButton(frame);
         btnLstObjets->setObjectName(QString::fromUtf8("btnLstObjets"));
         sizePolicy.setHeightForWidth(btnLstObjets->sizePolicy().hasHeightForWidth());
         btnLstObjets->setSizePolicy(sizePolicy);
@@ -116,7 +117,7 @@ public:
 
         verticalLayout_5->addWidget(btnLstObjets);
 
-        btnLstDepartement = new QPushButton(gridFrame);
+        btnLstDepartement = new QPushButton(frame);
         btnLstDepartement->setObjectName(QString::fromUtf8("btnLstDepartement"));
         sizePolicy.setHeightForWidth(btnLstDepartement->sizePolicy().hasHeightForWidth());
         btnLstDepartement->setSizePolicy(sizePolicy);
@@ -136,7 +137,7 @@ public:
 
         verticalLayout_5->addWidget(btnLstDepartement);
 
-        btnLstTypeObjets = new QPushButton(gridFrame);
+        btnLstTypeObjets = new QPushButton(frame);
         btnLstTypeObjets->setObjectName(QString::fromUtf8("btnLstTypeObjets"));
         sizePolicy.setHeightForWidth(btnLstTypeObjets->sizePolicy().hasHeightForWidth());
         btnLstTypeObjets->setSizePolicy(sizePolicy);
@@ -159,7 +160,7 @@ public:
 
         verticalLayout_2->addLayout(verticalLayout_5);
 
-        btnQuitter = new QPushButton(gridFrame);
+        btnQuitter = new QPushButton(frame);
         btnQuitter->setObjectName(QString::fromUtf8("btnQuitter"));
         sizePolicy.setHeightForWidth(btnQuitter->sizePolicy().hasHeightForWidth());
         btnQuitter->setSizePolicy(sizePolicy);
@@ -187,7 +188,7 @@ public:
         verticalLayout->addLayout(verticalLayout_2);
 
 
-        horizontalLayout_2->addLayout(verticalLayout);
+        horizontalLayout_2->addWidget(frame);
 
 
         gridLayout->addLayout(horizontalLayout_2, 0, 0, 1, 1);

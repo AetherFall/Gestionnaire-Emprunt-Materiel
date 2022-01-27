@@ -1,6 +1,7 @@
 #include "InterfaceGestion.h"
 #include "ui_InterfaceGestion.h"
 #include "ModificationEmploye.h"
+#include "FenPrincipale.h"
 
 InterfaceGestion::InterfaceGestion(CSVBD *BD, QWidget *parent): QWidget(parent), ui(new Ui::InterfaceGestion) {
     //Paramétrage principal
@@ -9,11 +10,18 @@ InterfaceGestion::InterfaceGestion(CSVBD *BD, QWidget *parent): QWidget(parent),
     setWindowFlags(Qt::Widget | Qt::MSWindowsFixedSizeDialogHint);
     setWindowTitle("Interface de gestion de l'application");
 
-    connect(ui->btnQuitter, SIGNAL(clicked()), this, SLOT(close()));
+    connect(ui->btnQuitter, SIGNAL(clicked()), this, SLOT(onCloseAction()));
     connect(ui->btnLstEmp, SIGNAL(clicked()), this, SLOT(ouvertureInterfaceEmp()));
     connect(ui->btnLstDepartement, SIGNAL(clicked()), this, SLOT(ouvertureInterfaceDepart()));
     connect(ui->btnLstObjets, SIGNAL(clicked()), this, SLOT(ouvertureInterfaceObj()));
     connect(ui->btnLstTypeObjets, SIGNAL(clicked()), this, SLOT(ouvertureInterfaceType()));
+
+}
+
+void InterfaceGestion::onCloseAction() {
+    //Revoir l'émission: Nouveau signal dans qApp est possible?
+    emit qApp->applicationVersionChanged();
+    this->close();
 }
 
 InterfaceGestion::~InterfaceGestion() {

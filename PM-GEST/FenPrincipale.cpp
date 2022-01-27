@@ -22,24 +22,13 @@ FenPrincipale::FenPrincipale(CSVBD *BD, QWidget *parent): QWidget(parent), ui(ne
 
     lectureRegistre();
 
-    for(int i = 0; i < ui->tableWidget->columnCount(); i++)
-        ui->tableWidget->setColumnWidth(i, ui->tableWidget->width() / ui->tableWidget->columnCount());
-
-    for(int j = 0; j < ui->tableWidget->rowCount(); j++)
-        ui->tableWidget->setRowHeight(j, ui->tableWidget->height() / 3);
-
-    /*for(int r = 0; r < ui->tableWidget->columnCount(); r++)
-        for(int o = 0; o < ui->tableWidget->rowCount(); o++)
-            ui->tableWidget->setCellWidget(o, r, new ElementsItem("CB#01", ":/images/res/images/radio.png", "William Lambert", false));*/
-
-
-
     //Connection des boutons
     connect(ui->btnQuitter, SIGNAL(clicked()), qApp, SLOT(quit()));
     connect(ui->btnAffect, SIGNAL(clicked()), this, SLOT(affection()));
     connect(ui->btnDeAffect, SIGNAL(clicked()), this, SLOT(desaffection()));
-
-    //Ajout ActionListener
+    connect(qApp, SIGNAL(applicationVersionChanged()), this, SLOT(updateTable()));
+    connect(this, SIGNAL(verificationTextField(QString, QLineEdit*)), this, SLOT(verification(QString, QLineEdit*)));
+    connect(qApp, SIGNAL(focusChanged(QWidget*, QWidget*)), this, SLOT(focusChange(QWidget*, QWidget*)));
 
 }
 
@@ -47,6 +36,28 @@ FenPrincipale::~FenPrincipale() {
     delete ui;
     delete itGest;
     delete BD;
+}
+
+void FenPrincipale::updateTable() {
+    lectureRegistre();
+    ui->txfEmploye->clear();
+    ui->txfObjet->clear();
+}
+
+void FenPrincipale::focusChange(QWidget* a, QWidget* b){
+    if(!ui->txfEmploye->hasFocus())
+        emit verificationTextField(ui->txfEmploye->text(), ui->txfEmploye);
+    if(!ui->txfObjet->hasFocus())
+        emit verificationTextField(ui->txfObjet->text(), ui->txfObjet);
+}
+
+void FenPrincipale::verification(QString text, QLineEdit *edit) {
+    if(text.contains('|', Qt::CaseInsensitive)){
+        edit->clear();
+
+        for (QString item : text.split('|'))
+            edit->setText(edit->text().append(item));
+    }
 }
 
 void FenPrincipale::affection(){
@@ -64,6 +75,7 @@ void FenPrincipale::affection(){
     QString codeObjAdmin = "104476";
 
     if(codeEmploye == codeAdmin && codeObjet == codeObjAdmin){
+
         //Acces à l'interface de gestion
         itGest = new InterfaceGestion(BD, this);
         itGest->setStyleSheet("background-color:rgba(255,255,255,20);");
@@ -73,6 +85,8 @@ void FenPrincipale::affection(){
     else {
         //Code pour l'affectation de l'objet. Sauf si Emp
     }
+
+    lectureRegistre();
 }
 
 void FenPrincipale::desaffection() {
@@ -82,12 +96,22 @@ void FenPrincipale::desaffection() {
     }
 
     //Some code...
+    lectureRegistre();
 }
 
 void FenPrincipale::lectureRegistre(){
+    //Réinitialisation tableau
+    ui->tableWidget->clearContents();
+    ui->tableWidget->setRowCount(0);
+
     int rowChange = 0;
     int colChange = 0;
 
+    //Row Insertion
+    int addRow = (BD->getListObjetSize() % ui->tableWidget->columnCount())? 1 : 0;
+    ui->tableWidget->setRowCount(BD->getListObjetSize() / ui->tableWidget->columnCount() + addRow);
+
+    //Object Add
     for(int i = 0; i < BD->getListObjetSize(); i++) {
         QString user = "";
 
@@ -97,7 +121,6 @@ void FenPrincipale::lectureRegistre(){
                     user = in->getEmploye()->getName();
 
         if(i && i % ui->tableWidget->columnCount() == 0){
-            ui->tableWidget->insertRow(1);
             colChange = 0;
             rowChange++;
         }
@@ -106,12 +129,15 @@ void FenPrincipale::lectureRegistre(){
         else
             colChange++;
 
-        std::cout << rowChange << " : " << colChange << std::endl;
-        //ui->tableWidget->setCellWidget(rowChange, colChange, new QLabel("Here"));
         ui->tableWidget->setCellWidget(rowChange, colChange, new ElementsItem(BD->getObjetAt(i)->getName(), BD->getObjetAt(i)->getType()->getImage(), user, BD->getObjetAt(i)->isEmprunte()));
     }
 
-    std::cout<< ui->tableWidget->rowCount() << std::endl;
+    //Set Row and Col size
+    for(int i = 0; i < ui->tableWidget->columnCount(); i++)
+        ui->tableWidget->setColumnWidth(i, ui->tableWidget->width() / ui->tableWidget->columnCount());
+
+    for(int j = 0; j < ui->tableWidget->rowCount(); j++)
+        ui->tableWidget->setRowHeight(j, ui->tableWidget->height() / 3);
 }
 
 

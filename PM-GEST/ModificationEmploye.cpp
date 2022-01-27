@@ -9,14 +9,9 @@ ModificationEmploye::ModificationEmploye(CSVBD *BD, QWidget *parent) : QWidget(p
     //Paramétrages
     ui->setupUi(this);
     this->BD = BD;
-    QStringList tblHeader;
-    tblHeader << "Identifiant" << "Nom" << "Département" << "Gestion";
 
     ui->tblEmploye->setAlternatingRowColors(true);
-    ui->tblEmploye->setVerticalHeaderLabels(tblHeader);
     ui->tblEmploye->setColumnCount(4);
-    ui->tblEmploye->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->tblEmploye->setSelectionMode(QAbstractItemView::SingleSelection);
 
     for(size_t i = 0; i < BD->getListDepartementSize(); i++)
         ui->cbxDepartement->addItem(BD->getDepartementAt(i)->getNom());
@@ -46,6 +41,13 @@ ModificationEmploye::~ModificationEmploye() {
 void ModificationEmploye::updateTable(int currentRow, int currentCol) {
     ui->tblEmploye->clearContents();
     ui->tblEmploye->setRowCount(0);
+
+    QStringList tblHeader;
+    tblHeader << "Identifiant" << "Nom" << "Département" << "Gestion";
+    ui->tblEmploye->setVerticalHeaderLabels(tblHeader);
+
+    for(int i = 0; i < ui->tblEmploye->columnCount(); i++)
+        ui->tblEmploye->setColumnWidth(i, ui->tblEmploye->width() / ui->tblEmploye->columnCount());
 
     for(size_t i = 0; i < BD->getListEmployeSize(); i++){
         ui->tblEmploye->insertRow(i);

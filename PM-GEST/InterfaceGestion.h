@@ -33,6 +33,7 @@ private slots:
     void ouvertureInterfaceObj();
     void ouvertureInterfaceType();
     void ouvertureInterfaceDepart();
+    void onCloseAction();
 };
 
 #endif // INTERFACEGESTION_H
