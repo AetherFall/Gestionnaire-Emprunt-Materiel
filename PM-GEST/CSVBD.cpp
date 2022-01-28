@@ -3,11 +3,11 @@
 
 CSVBD::CSVBD() {
     //Lecture des fichiers servant de base de données
-    lectureDepartement("../PM-GEST/res/files/Departements.csv");
-    lectureEmploye("../PM-GEST/res/files/Employe.csv");
-    lectureTypeObjets("../PM-GEST/res/files/TypeObjets.csv");
-    lectureObjets("../PM-GEST/res/files/Objets.csv");
-    lectureRegistre("../PM-GEST/res/files/Registre.csv");
+    lectureDepartement("./res/files/Departements.csv"); //"./res/files/Departements.csv"
+    lectureEmploye("./res/files/Employe.csv");
+    lectureTypeObjets("./res/files/TypeObjets.csv");
+    lectureObjets("./res/files/Objets.csv");
+    lectureRegistre("./res/files/Registre.csv");
 }
 
 CSVBD::~CSVBD() {
