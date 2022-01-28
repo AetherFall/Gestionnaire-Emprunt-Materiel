@@ -22,12 +22,18 @@ ModificationEmploye::ModificationEmploye(CSVBD *BD, QWidget *parent) : QWidget(p
     updateTable();
 
     //Connection
-    connect(ui->btnQuitter, SIGNAL(clicked()), this, SLOT(close()));
+    connect(ui->btnQuitter, SIGNAL(clicked()), this, SLOT(onCloseAction()));
     connect(ui->btnRefresh, SIGNAL(clicked()), this, SLOT(refresh()));
     connect(ui->btnAdd, SIGNAL(clicked()), this, SLOT(ajout()));
     connect(ui->btnDel, SIGNAL(clicked()), this, SLOT(suppression()));
     connect(ui->btnMod, SIGNAL(clicked()), this, SLOT(modification()));
     connect(ui->tblEmploye, SIGNAL(cellClicked(int,int)), this, SLOT(updateTable(int,int)));
+
+    ui->btnQuitter->setFocusPolicy(Qt::NoFocus);
+    ui->btnAdd->setFocusPolicy(Qt::NoFocus);
+    ui->btnMod->setFocusPolicy(Qt::NoFocus);
+    ui->btnDel->setFocusPolicy(Qt::NoFocus);
+    ui->btnRefresh->setFocusPolicy(Qt::NoFocus);
 
 }
 
@@ -36,7 +42,10 @@ ModificationEmploye::~ModificationEmploye() {
     delete BD;
 }
 
-
+void ModificationEmploye::onCloseAction() {
+    emit qApp->applicationVersionChanged();
+    this->close();
+}
 
 void ModificationEmploye::updateTable(int currentRow, int currentCol) {
     ui->tblEmploye->clearContents();

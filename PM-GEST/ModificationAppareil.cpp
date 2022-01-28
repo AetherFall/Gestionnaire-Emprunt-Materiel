@@ -8,11 +8,12 @@ ModificationAppareil::ModificationAppareil(CSVBD *BD, QWidget *parent) : QWidget
     //Paramétrages
     ui->setupUi(this);
     this->BD = BD;
+
     QStringList tblHeader;
     tblHeader << "Identifiant" << "Nom" << "Type d'appareil" << "En cours d'utilisation";
 
-    ui->tblEmploye->setVerticalHeaderLabels(tblHeader);
     ui->tblEmploye->setColumnCount(4);
+    ui->tblEmploye->setVerticalHeaderLabels(tblHeader);
 
     for(size_t i = 0; i < BD->getListTypeSize(); i++)
         ui->cbxDepartement->addItem(BD->getTypeAt(i)->getName());
@@ -24,12 +25,17 @@ ModificationAppareil::ModificationAppareil(CSVBD *BD, QWidget *parent) : QWidget
 
     //Connection
     connect(ui->btnQuitter, SIGNAL(clicked()), this, SLOT(onCloseAction()));
-
     connect(ui->btnRefresh, SIGNAL(clicked()), this, SLOT(refresh()));
     connect(ui->btnAdd, SIGNAL(clicked()), this, SLOT(ajout()));
     connect(ui->btnDel, SIGNAL(clicked()), this, SLOT(suppression()));
     connect(ui->btnMod, SIGNAL(clicked()), this, SLOT(modification()));
     connect(ui->tblEmploye, SIGNAL(cellClicked(int,int)), this, SLOT(updateTable(int,int)));
+
+    ui->btnQuitter->setFocusPolicy(Qt::NoFocus);
+    ui->btnAdd->setFocusPolicy(Qt::NoFocus);
+    ui->btnMod->setFocusPolicy(Qt::NoFocus);
+    ui->btnDel->setFocusPolicy(Qt::NoFocus);
+    ui->btnRefresh->setFocusPolicy(Qt::NoFocus);
 }
 
 ModificationAppareil::~ModificationAppareil() {
@@ -57,8 +63,8 @@ void ModificationAppareil::updateTable(int currentRow, int currentCol) {
         ui->tblEmploye->setCellWidget(i, 3, chbUse);
 
 
-        for(int r =0; r < 5; r++)
-            ui->tblEmploye->item(i, r)->setTextAlignment(Qt::AlignCenter);
+        /*for(int r =0; r < 5; r++)
+            ui->tblEmploye->item(i, r)->setTextAlignment(Qt::AlignCenter);*/
     }
 
     if(currentRow > -1){
@@ -71,6 +77,7 @@ void ModificationAppareil::updateTable(int currentRow, int currentCol) {
 }
 
 void ModificationAppareil::onCloseAction() {
+    emit qApp->applicationVersionChanged();
     this->close();
 }
 

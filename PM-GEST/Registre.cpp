@@ -7,11 +7,7 @@ Registre::Registre(QDate date, Employe *employe, Objets *objet, Departement *dep
     this->departement = departement;
 }
 
-Registre::~Registre(){
-    delete employe;
-    delete objet;
-    delete departement;
-}
+Registre::~Registre(){}
 
 QDate Registre::getDate() { return this->date; }
 

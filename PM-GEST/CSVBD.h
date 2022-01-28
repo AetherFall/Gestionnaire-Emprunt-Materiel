@@ -45,10 +45,12 @@ class CSVBD {
         vector<Employe*> getListEmploye();
         Employe* getEmployeAt(int i);
         size_t getListEmployeSize();
+        int getEmployeId(Employe *emp);
 
         vector<Objets*> getListObjets();
         Objets* getObjetAt(int i);
         size_t getListObjetSize();
+        int getObjetId(Objets *obj);
 
         vector<Registre*> getListRegistre();
         Registre* getRegistreAt(int i);
@@ -66,12 +68,16 @@ class CSVBD {
         vector<Registre*> registre;
         vector<ObjetType*> typeObjet;
 
-        void lectureDepartement(QString file);
-        void lectureEmploye(QString file);
-        void lectureObjets(QString file);
-        void lectureTypeObjets(QString file);
-        void lectureRegistre(QString file);
-
+        void lectureDepartement(const QString& file);
+        void lectureEmploye(const QString& file);
+        void lectureObjets(const QString& file);
+        void lectureTypeObjets(const QString& file);
+        void lectureRegistre(const QString& file);
+        void writingDepartement(const QString& file);
+        void writingEmploye(const QString& file);
+        void writingObjets(const QString& file);
+        void writingTypeObjets(const QString& file);
+        void writingRegistre(const QString& file);
 
 };
 

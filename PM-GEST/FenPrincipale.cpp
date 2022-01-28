@@ -30,6 +30,9 @@ FenPrincipale::FenPrincipale(CSVBD *BD, QWidget *parent): QWidget(parent), ui(ne
     connect(this, SIGNAL(verificationTextField(QString, QLineEdit*)), this, SLOT(verification(QString, QLineEdit*)));
     connect(qApp, SIGNAL(focusChanged(QWidget*, QWidget*)), this, SLOT(focusChange(QWidget*, QWidget*)));
 
+    ui->btnQuitter->setFocusPolicy(Qt::NoFocus);
+    ui->btnAffect->setFocusPolicy(Qt::NoFocus);
+    ui->btnDeAffect->setFocusPolicy(Qt::NoFocus);
 }
 
 FenPrincipale::~FenPrincipale() {
@@ -39,6 +42,7 @@ FenPrincipale::~FenPrincipale() {
 }
 
 void FenPrincipale::updateTable() {
+
     lectureRegistre();
     ui->txfEmploye->clear();
     ui->txfObjet->clear();
@@ -95,7 +99,6 @@ void FenPrincipale::desaffection() {
         return;
     }
 
-    //Some code...
     lectureRegistre();
 }
 

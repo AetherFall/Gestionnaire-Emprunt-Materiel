@@ -7,9 +7,7 @@ Objets::Objets(QString id, QString name, ObjetType *type, bool estEmprunte){
     this->estEmprunte = estEmprunte;
 }
 
-Objets::~Objets() {
-    delete type;
-}
+Objets::~Objets() {}
 
 QString Objets::getId() { return this->id; }
 

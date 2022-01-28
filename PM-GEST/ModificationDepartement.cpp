@@ -17,18 +17,30 @@ ModificationDepartement::ModificationDepartement(CSVBD *BD, QWidget *parent) : Q
     updateTable();
 
     //Connection
-    connect(ui->btnQuitter, SIGNAL(clicked()), this, SLOT(close()));
+    connect(ui->btnQuitter, SIGNAL(clicked()), this, SLOT(onCloseAction()));
     connect(ui->btnRefresh, SIGNAL(clicked()), this, SLOT(refresh()));
     connect(ui->btnAdd, SIGNAL(clicked()), this, SLOT(ajout()));
     connect(ui->btnDel, SIGNAL(clicked()), this, SLOT(suppression()));
     connect(ui->btnMod, SIGNAL(clicked()), this, SLOT(modification()));
     connect(ui->tblDepartement, SIGNAL(currentRowChanged(int)), this, SLOT(updateTable(int)));
+
+    ui->btnQuitter->setFocusPolicy(Qt::NoFocus);
+    ui->btnAdd->setFocusPolicy(Qt::NoFocus);
+    ui->btnMod->setFocusPolicy(Qt::NoFocus);
+    ui->btnDel->setFocusPolicy(Qt::NoFocus);
+    ui->btnRefresh->setFocusPolicy(Qt::NoFocus);
 }
 
 ModificationDepartement::~ModificationDepartement() {
     delete ui;
     delete BD;
 }
+
+void ModificationDepartement::onCloseAction() {
+    emit qApp->applicationVersionChanged();
+    this->close();
+}
+
 
 void ModificationDepartement::updateTable(int currentRow) {
     ui->tblDepartement->clear();

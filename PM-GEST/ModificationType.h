@@ -19,6 +19,9 @@ public:
 private:
     Ui::ModificationType *ui;
     CSVBD *BD;
+
+private slots:
+    void onCloseAction();
 };
 
 #endif // MODIFICATIONTYPE_H

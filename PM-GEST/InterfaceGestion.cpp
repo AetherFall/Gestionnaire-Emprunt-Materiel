@@ -16,6 +16,11 @@ InterfaceGestion::InterfaceGestion(CSVBD *BD, QWidget *parent): QWidget(parent),
     connect(ui->btnLstObjets, SIGNAL(clicked()), this, SLOT(ouvertureInterfaceObj()));
     connect(ui->btnLstTypeObjets, SIGNAL(clicked()), this, SLOT(ouvertureInterfaceType()));
 
+    ui->btnQuitter->setFocusPolicy(Qt::NoFocus);
+    ui->btnLstDepartement->setFocusPolicy(Qt::NoFocus);
+    ui->btnLstEmp->setFocusPolicy(Qt::NoFocus);
+    ui->btnLstObjets->setFocusPolicy(Qt::NoFocus);
+    ui->btnLstTypeObjets->setFocusPolicy(Qt::NoFocus);
 }
 
 void InterfaceGestion::onCloseAction() {

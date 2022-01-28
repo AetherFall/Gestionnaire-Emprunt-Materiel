@@ -27,6 +27,7 @@ private slots:
     void suppression();
     void modification();
     void updateTable(int currentRow = -1);
+    void onCloseAction();
 };
 
 #endif // MODIFICATIONDEPARTEMENT_H
