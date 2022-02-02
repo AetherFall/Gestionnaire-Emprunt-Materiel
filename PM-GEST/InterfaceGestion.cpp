@@ -6,6 +6,7 @@
 InterfaceGestion::InterfaceGestion(CSVBD *BD, QWidget *parent): QWidget(parent), ui(new Ui::InterfaceGestion) {
     //Paramétrage principal
     this->BD = BD;
+
     ui->setupUi(this);
     setWindowFlags(Qt::Widget | Qt::MSWindowsFixedSizeDialogHint);
     setWindowTitle("Interface de gestion de l'application");
@@ -31,11 +32,6 @@ void InterfaceGestion::onCloseAction() {
 
 InterfaceGestion::~InterfaceGestion() {
     delete ui;
-    delete empScreen;
-    delete objScreen;
-    delete departScreen;
-    delete typeScreen;
-    delete BD;
 }
 
 void InterfaceGestion::ouvertureInterfaceEmp(){

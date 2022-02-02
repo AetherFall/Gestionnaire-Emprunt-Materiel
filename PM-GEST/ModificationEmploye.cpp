@@ -39,7 +39,6 @@ ModificationEmploye::ModificationEmploye(CSVBD *BD, QWidget *parent) : QWidget(p
 
 ModificationEmploye::~ModificationEmploye() {
     delete ui;
-    delete BD;
 }
 
 void ModificationEmploye::onCloseAction() {
@@ -69,10 +68,6 @@ void ModificationEmploye::updateTable(int currentRow, int currentCol) {
         chbGest->setEnabled(false);
 
         ui->tblEmploye->setCellWidget(i, 3, chbGest);
-
-/*
-        for(int r =0; r < 5; r++)
-            ui->tblEmploye->item(i, r)->setTextAlignment(Qt::AlignCenter);*/
     }
 
     if(currentRow > -1){
@@ -103,7 +98,7 @@ void ModificationEmploye::ajout() {
         //TODO MSGBOX
     }
     else
-        QMessageBox::critical(this,"Erreur", getError(DEP_CHAMPVIDE_TOADD));
+        QMessageBox::critical(this, getTitle(ERROR), getError(EMP_CHAMPVIDE_TOADD));
 
     //TODO Ajouter une verification si un autre departement a le meme nom.
 }
@@ -111,21 +106,24 @@ void ModificationEmploye::ajout() {
 void ModificationEmploye::suppression() {
     if(ui->tblEmploye->rowCount()){
         if(ui->tblEmploye->selectionModel()->hasSelection()){
-            int rep = QMessageBox::information(this, getTitle(INFORMATION), getInfo(DEP_DELETE), QMessageBox::Yes, QMessageBox::No);
+            QModelIndexList indexList = ui->tblEmploye->selectionModel()->selectedIndexes();
 
-            if(rep == QMessageBox::Yes){
-                QModelIndexList indexList = ui->tblEmploye->selectionModel()->selectedIndexes();
-                BD->delDepartement(indexList.at(0).row());
+            //Vérification contre les erreurs d'intégrités référentielle
+            if(!BD->isThisEmployeInUse(indexList.at(0).row())){
+                if(QMessageBox::information(this, getTitle(INFORMATION), getInfo(EMP_DELETE), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes){
+                    BD->delEmploye(indexList.at(0).row());
 
-                updateTable();
+                    updateTable();
+                }
             }
+            else
+                QMessageBox::critical(this, getTitle(INTEGRITE_REFERENTIELLE), getError(EMP_INTEGRITE_REFERENTIELLE));
         }
-
         else
-            QMessageBox::critical(this, getTitle(ERROR), getError(DEP_NOSELECTION_TODELETE));
+            QMessageBox::critical(this, getTitle(ERROR), getError(EMP_NOSELECTION_TODELETE));
     }
     else
-        QMessageBox::critical(this, getTitle(ERROR), getError(DEP_NOITEM_TODELETE));
+        QMessageBox::critical(this, getTitle(ERROR), getError(EMP_NOITEM_TODELETE));
 }
 
 void ModificationEmploye::modification() {
@@ -134,20 +132,29 @@ void ModificationEmploye::modification() {
             if(ui->tblEmploye->selectionModel()->hasSelection()){
                 QModelIndexList indexList = ui->tblEmploye->selectionModel()->selectedIndexes();
 
-                if(ui->txfEmploye->text() != BD->getDepartementAt(indexList.at(0).row())->getNom()) {
-                    BD->getDepartementAt(indexList.at(0).row())->setNom(ui->txfEmploye->text());
-                    updateTable();
-                }
+                if(ui->txfNom->text() != BD->getEmployeAt(indexList.at(0).row())->getName())
+                    BD->getEmployeAt(indexList.at(0).row())->setName(ui->txfNom->text());
+
+                if(ui->txfEmploye->text() != QString::fromStdString(to_string(BD->getEmployeAt(indexList.at(0).row())->getId())))
+                    BD->getEmployeAt(indexList.at(0).row())->setId(ui->txfEmploye->text().toInt());
+
+                if(BD->getDepartementAt(ui->cbxDepartement->currentIndex()) != BD->getEmployeAt(indexList.at(0).row())->getDepartement())
+                    BD->getEmployeAt(indexList.at(0).row())->setDepartement(BD->getDepartementAt(ui->cbxDepartement->currentIndex()));
+
+                if(ui->chbGestion->isChecked() != BD->getEmployeAt(indexList.at(0).row())->getGestion())
+                    BD->getEmployeAt(indexList.at(0).row())->setGestion(ui->chbGestion->isChecked());
+
+                updateTable(indexList.at(0).row());
             }
             else
-                QMessageBox::critical(this, getTitle(ERROR), getError(DEP_CHAMPVIDE_TOMOD));
+                QMessageBox::critical(this, getTitle(ERROR), getError(EMP_NOSELECTION_TOMODIFY));
         }
 
         else
-            QMessageBox::critical(this, getTitle(ERROR), getError(DEP_CHAMPVIDE_TOMOD));
+            QMessageBox::critical(this, getTitle(ERROR), getError(EMP_CHAMPVIDE_TOMOD));
     }
 
     else
-        QMessageBox::critical(this, getTitle(ERROR), getError(DEP_NOITEM_TOMODIFY));
+        QMessageBox::critical(this, getTitle(ERROR), getError(EMP_NOITEM_TOMODIFY));
 
 }

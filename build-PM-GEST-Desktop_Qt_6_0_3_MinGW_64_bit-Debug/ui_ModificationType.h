@@ -17,7 +17,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QListView>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -33,7 +33,7 @@ public:
     QWidget *verticalWidget;
     QVBoxLayout *verticalLayout_7;
     QLineEdit *txfRecherche;
-    QListView *tblEmploye;
+    QListWidget *tblEmploye;
     QVBoxLayout *verticalLayout;
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout_5;
@@ -47,10 +47,10 @@ public:
     QLabel *label_2;
     QLineEdit *txfEmploye;
     QVBoxLayout *verticalLayout_6;
-    QLabel *label;
+    QLabel *labImage;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label_3;
-    QPushButton *btnQuitter_2;
+    QPushButton *btnRecherche;
     QPushButton *btnQuitter;
 
     void setupUi(QWidget *ModificationType)
@@ -74,7 +74,7 @@ public:
 ""));
         verticalLayout_7 = new QVBoxLayout(verticalWidget);
         verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
-        verticalLayout_7->setContentsMargins(-1, 10, -1, -1);
+        verticalLayout_7->setContentsMargins(0, 10, 0, -1);
         txfRecherche = new QLineEdit(verticalWidget);
         txfRecherche->setObjectName(QString::fromUtf8("txfRecherche"));
         txfRecherche->setMinimumSize(QSize(0, 25));
@@ -84,14 +84,32 @@ public:
 "	border-radius: 12px;\n"
 "	background-color: #B9B9B9;\n"
 "	padding-left:20px;\n"
+"	margin-left:9px;\n"
 "	color:black;\n"
 "}"));
 
         verticalLayout_7->addWidget(txfRecherche);
 
-        tblEmploye = new QListView(verticalWidget);
+        tblEmploye = new QListWidget(verticalWidget);
         tblEmploye->setObjectName(QString::fromUtf8("tblEmploye"));
-        tblEmploye->setStyleSheet(QString::fromUtf8("border-style:none;"));
+        tblEmploye->setStyleSheet(QString::fromUtf8("QListView{\n"
+"border-style:none;\n"
+"color:black;\n"
+"}\n"
+"\n"
+"QListView::item{\n"
+"background-color:#D8D7D7;\n"
+"}\n"
+"\n"
+"\n"
+"QListView::item:alternate{\n"
+"	background-color:#B2B2B2;\n"
+"}\n"
+"\n"
+"QListWidget::item:selected {\n"
+"	background-color:#727171;\n"
+"	color:white;\n"
+"}"));
 
         verticalLayout_7->addWidget(tblEmploye);
 
@@ -136,7 +154,7 @@ public:
         btnRefresh->setIcon(icon);
         btnRefresh->setIconSize(QSize(30, 30));
 #if QT_CONFIG(shortcut)
-        btnRefresh->setShortcut(QString::fromUtf8(""));
+        btnRefresh->setShortcut(QString::fromUtf8("F5"));
 #endif // QT_CONFIG(shortcut)
 
         horizontalLayout->addWidget(btnRefresh);
@@ -161,7 +179,7 @@ public:
         btnAdd->setIcon(icon1);
         btnAdd->setIconSize(QSize(30, 30));
 #if QT_CONFIG(shortcut)
-        btnAdd->setShortcut(QString::fromUtf8(""));
+        btnAdd->setShortcut(QString::fromUtf8("F6"));
 #endif // QT_CONFIG(shortcut)
 
         horizontalLayout->addWidget(btnAdd);
@@ -185,9 +203,6 @@ public:
         icon2.addFile(QString::fromUtf8(":/icons/res/icons/SVG/Delete2.svg"), QSize(), QIcon::Normal, QIcon::On);
         btnDel->setIcon(icon2);
         btnDel->setIconSize(QSize(35, 35));
-#if QT_CONFIG(shortcut)
-        btnDel->setShortcut(QString::fromUtf8(""));
-#endif // QT_CONFIG(shortcut)
 
         horizontalLayout->addWidget(btnDel);
 
@@ -211,7 +226,7 @@ public:
         btnMod->setIcon(icon3);
         btnMod->setIconSize(QSize(30, 30));
 #if QT_CONFIG(shortcut)
-        btnMod->setShortcut(QString::fromUtf8(""));
+        btnMod->setShortcut(QString::fromUtf8("Ctrl+S"));
 #endif // QT_CONFIG(shortcut)
 
         horizontalLayout->addWidget(btnMod);
@@ -268,17 +283,17 @@ public:
         verticalLayout_6->setSpacing(2);
         verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
         verticalLayout_6->setContentsMargins(-1, 20, -1, 100);
-        label = new QLabel(gridFrame);
-        label->setObjectName(QString::fromUtf8("label"));
-        label->setMaximumSize(QSize(16777215, 10));
+        labImage = new QLabel(gridFrame);
+        labImage->setObjectName(QString::fromUtf8("labImage"));
+        labImage->setMaximumSize(QSize(480, 17));
         QFont font2;
         font2.setFamily(QString::fromUtf8("Segoe UI"));
         font2.setItalic(true);
-        label->setFont(font2);
-        label->setStyleSheet(QString::fromUtf8("padding-left:150px;\n"
+        labImage->setFont(font2);
+        labImage->setStyleSheet(QString::fromUtf8("padding-left:150px;\n"
 "color:black;"));
 
-        verticalLayout_6->addWidget(label);
+        verticalLayout_6->addWidget(labImage);
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(30);
@@ -292,22 +307,22 @@ public:
 
         horizontalLayout_3->addWidget(label_3);
 
-        btnQuitter_2 = new QPushButton(gridFrame);
-        btnQuitter_2->setObjectName(QString::fromUtf8("btnQuitter_2"));
+        btnRecherche = new QPushButton(gridFrame);
+        btnRecherche->setObjectName(QString::fromUtf8("btnRecherche"));
         QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Maximum);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(btnQuitter_2->sizePolicy().hasHeightForWidth());
-        btnQuitter_2->setSizePolicy(sizePolicy2);
-        btnQuitter_2->setMinimumSize(QSize(0, 30));
-        btnQuitter_2->setMaximumSize(QSize(200, 30));
+        sizePolicy2.setHeightForWidth(btnRecherche->sizePolicy().hasHeightForWidth());
+        btnRecherche->setSizePolicy(sizePolicy2);
+        btnRecherche->setMinimumSize(QSize(0, 30));
+        btnRecherche->setMaximumSize(QSize(200, 30));
         QFont font3;
         font3.setFamily(QString::fromUtf8("Segoe UI"));
         font3.setPointSize(16);
         font3.setBold(false);
-        btnQuitter_2->setFont(font3);
-        btnQuitter_2->setCursor(QCursor(Qt::PointingHandCursor));
-        btnQuitter_2->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+        btnRecherche->setFont(font3);
+        btnRecherche->setCursor(QCursor(Qt::PointingHandCursor));
+        btnRecherche->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "border-radius:15px;\n"
 "background-color: #1D43DB;\n"
 "color:white;\n"
@@ -318,7 +333,7 @@ public:
 "}\n"
 ""));
 
-        horizontalLayout_3->addWidget(btnQuitter_2);
+        horizontalLayout_3->addWidget(btnRecherche);
 
 
         verticalLayout_6->addLayout(horizontalLayout_3);
@@ -366,18 +381,24 @@ public:
 
     void retranslateUi(QWidget *ModificationType)
     {
-        ModificationType->setWindowTitle(QCoreApplication::translate("ModificationType", "Form", nullptr));
+        ModificationType->setWindowTitle(QCoreApplication::translate("ModificationType", "ModificationType", nullptr));
         txfRecherche->setText(QString());
         txfRecherche->setPlaceholderText(QCoreApplication::translate("ModificationType", "Rechercher...", nullptr));
         btnRefresh->setText(QString());
         btnAdd->setText(QString());
         btnDel->setText(QString());
+#if QT_CONFIG(shortcut)
+        btnDel->setShortcut(QCoreApplication::translate("ModificationType", "Del", nullptr));
+#endif // QT_CONFIG(shortcut)
         btnMod->setText(QString());
         label_2->setText(QCoreApplication::translate("ModificationType", "Nom du type d'appareil", nullptr));
         txfEmploye->setText(QString());
-        label->setText(QCoreApplication::translate("ModificationType", "Lien image", nullptr));
+        labImage->setText(QCoreApplication::translate("ModificationType", "Lien image", nullptr));
         label_3->setText(QCoreApplication::translate("ModificationType", "Image descriptive de l'appareil", nullptr));
-        btnQuitter_2->setText(QCoreApplication::translate("ModificationType", "Rechercher...", nullptr));
+        btnRecherche->setText(QCoreApplication::translate("ModificationType", "Rechercher...", nullptr));
+#if QT_CONFIG(shortcut)
+        btnRecherche->setShortcut(QCoreApplication::translate("ModificationType", "Ctrl+R", nullptr));
+#endif // QT_CONFIG(shortcut)
         btnQuitter->setText(QCoreApplication::translate("ModificationType", "Retour \303\240 l'interface de gestion", nullptr));
     } // retranslateUi
 

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>ModificationType</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color:rgb(255, 255, 255);</string>
@@ -50,8 +50,14 @@
 </string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_7">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
          <property name="topMargin">
           <number>10</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
          </property>
          <item>
           <widget class="QLineEdit" name="txfRecherche">
@@ -73,6 +79,7 @@
 	border-radius: 12px;
 	background-color: #B9B9B9;
 	padding-left:20px;
+	margin-left:9px;
 	color:black;
 }</string>
            </property>
@@ -85,9 +92,26 @@
           </widget>
          </item>
          <item>
-          <widget class="QListView" name="tblEmploye">
+          <widget class="QListWidget" name="tblEmploye">
            <property name="styleSheet">
-            <string notr="true">border-style:none;</string>
+            <string notr="true">QListView{
+border-style:none;
+color:black;
+}
+
+QListView::item{
+background-color:#D8D7D7;
+}
+
+
+QListView::item:alternate{
+	background-color:#B2B2B2;
+}
+
+QListWidget::item:selected {
+	background-color:#727171;
+	color:white;
+}</string>
            </property>
           </widget>
          </item>
@@ -184,7 +208,7 @@ background-color:#2323A4;
                    </size>
                   </property>
                   <property name="shortcut">
-                   <string notr="true"/>
+                   <string notr="true">F5</string>
                   </property>
                  </widget>
                 </item>
@@ -232,7 +256,7 @@ background-color:#0E8522;
                    </size>
                   </property>
                   <property name="shortcut">
-                   <string notr="true"/>
+                   <string notr="true">F6</string>
                   </property>
                  </widget>
                 </item>
@@ -280,7 +304,7 @@ background-color:#CE0038;
                    </size>
                   </property>
                   <property name="shortcut">
-                   <string notr="true"/>
+                   <string>Del</string>
                   </property>
                  </widget>
                 </item>
@@ -328,7 +352,7 @@ background-color:#D27E35;
                    </size>
                   </property>
                   <property name="shortcut">
-                   <string notr="true"/>
+                   <string notr="true">Ctrl+S</string>
                   </property>
                  </widget>
                 </item>
@@ -416,11 +440,11 @@ background-color:#D27E35;
                <number>100</number>
               </property>
               <item>
-               <widget class="QLabel" name="label">
+               <widget class="QLabel" name="labImage">
                 <property name="maximumSize">
                  <size>
-                  <width>16777215</width>
-                  <height>10</height>
+                  <width>480</width>
+                  <height>17</height>
                  </size>
                 </property>
                 <property name="font">
@@ -472,7 +496,7 @@ color:black;</string>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="btnQuitter_2">
+                 <widget class="QPushButton" name="btnRecherche">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
                     <horstretch>0</horstretch>
@@ -516,6 +540,9 @@ background-color:#2323A4;
                   </property>
                   <property name="text">
                    <string>Rechercher...</string>
+                  </property>
+                  <property name="shortcut">
+                   <string>Ctrl+R</string>
                   </property>
                  </widget>
                 </item>

@@ -345,6 +345,9 @@ background-color:rgb(22, 50, 162);
                 <property name="text">
                  <string>Affecter</string>
                 </property>
+                <property name="shortcut">
+                 <string>Enter</string>
+                </property>
                </widget>
               </item>
               <item>
@@ -383,6 +386,9 @@ background-color:rgb(22, 50, 162);
                 </property>
                 <property name="text">
                  <string>Désaffecter</string>
+                </property>
+                <property name="shortcut">
+                 <string>Ctrl+Return</string>
                 </property>
                </widget>
               </item>
@@ -429,6 +435,9 @@ background-color:rgb(176, 103, 76);
             </property>
             <property name="text">
              <string>Quitter</string>
+            </property>
+            <property name="shortcut">
+             <string>Ctrl+Q</string>
             </property>
            </widget>
           </item>

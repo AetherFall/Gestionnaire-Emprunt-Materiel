@@ -11,9 +11,6 @@ ModificationDepartement::ModificationDepartement(CSVBD *BD, QWidget *parent) : Q
     ui->setupUi(this);
     this->BD = BD;
 
-    if(ui->tblDepartement->count())
-        ui->tblDepartement->setCurrentRow(0);
-
     updateTable();
 
     //Connection
@@ -22,7 +19,7 @@ ModificationDepartement::ModificationDepartement(CSVBD *BD, QWidget *parent) : Q
     connect(ui->btnAdd, SIGNAL(clicked()), this, SLOT(ajout()));
     connect(ui->btnDel, SIGNAL(clicked()), this, SLOT(suppression()));
     connect(ui->btnMod, SIGNAL(clicked()), this, SLOT(modification()));
-    connect(ui->tblDepartement, SIGNAL(currentRowChanged(int)), this, SLOT(updateTable(int)));
+    connect(ui->tblDepartement, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(updateTable(QListWidgetItem*)));
 
     ui->btnQuitter->setFocusPolicy(Qt::NoFocus);
     ui->btnAdd->setFocusPolicy(Qt::NoFocus);
@@ -33,7 +30,6 @@ ModificationDepartement::ModificationDepartement(CSVBD *BD, QWidget *parent) : Q
 
 ModificationDepartement::~ModificationDepartement() {
     delete ui;
-    delete BD;
 }
 
 void ModificationDepartement::onCloseAction() {
@@ -42,7 +38,8 @@ void ModificationDepartement::onCloseAction() {
 }
 
 
-void ModificationDepartement::updateTable(int currentRow) {
+void ModificationDepartement::updateTable(QListWidgetItem* item) {
+    int currentRow = ui->tblDepartement->indexFromItem(item).row();
     ui->tblDepartement->clear();
 
     for(size_t i = 0; i < BD->getListDepartementSize(); i++){
@@ -50,8 +47,10 @@ void ModificationDepartement::updateTable(int currentRow) {
         ui->tblDepartement->item(i)->setTextAlignment(Qt::AlignCenter);
     }
 
-    if(currentRow > -1)
+    if(item){
         ui->txfEmploye->setText(BD->getDepartementAt(currentRow)->getNom());
+        ui->tblDepartement->setCurrentRow(currentRow);
+    }
     else
         ui->txfEmploye->setText("");
 }
@@ -63,31 +62,33 @@ void ModificationDepartement::refresh() {
 }
 
 void ModificationDepartement::ajout() {
-    if(ui->txfEmploye->text().isEmpty()) {
-        QMessageBox::critical(this,"Erreur", getError(DEP_CHAMPVIDE_TOADD));
-        return;
+    if(!ui->txfEmploye->text().isEmpty()) {
+            BD->addDepartement(ui->txfEmploye->text());
+            updateTable();
     }
+    else
+        QMessageBox::critical(this,"Erreur", getError(DEP_CHAMPVIDE_TOADD));
 
     //TODO Ajouter une verification si un autre departement a le meme nom.
     //TODO Mettre toute les erreures dans une classe d'erreur
 
-    BD->addDepartement(ui->txfEmploye->text());
-    updateTable(ui->tblDepartement->count() - 1);
+    updateTable();
 }
 
 void ModificationDepartement::suppression() {
     if(ui->tblDepartement->count()){
         if(ui->tblDepartement->selectionModel()->hasSelection()){
-            int rep = QMessageBox::information(this, getTitle(INFORMATION), getInfo(DEP_DELETE), QMessageBox::Yes, QMessageBox::No);
 
-            if(rep == QMessageBox::Yes){
-                QModelIndexList indexList = ui->tblDepartement->selectionModel()->selectedIndexes();
-                BD->delDepartement(indexList.at(0).row());
-
-                updateTable();
+            //Vérification contre les erreurs d'intégritée référentielle
+            if(!BD->isThisDepartementInUse(ui->tblDepartement->currentRow())){
+                if(QMessageBox::information(this, getTitle(INFORMATION), getInfo(DEP_DELETE), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes){
+                    BD->delDepartement(ui->tblDepartement->currentRow());
+                    updateTable();
+                }
             }
+            else
+                QMessageBox::critical(this, getTitle(INTEGRITE_REFERENTIELLE), getError(DEP_INTEGRITE_REFERENTIELLE));
         }
-
         else
             QMessageBox::critical(this, getTitle(ERROR), getError(DEP_NOSELECTION_TODELETE));
     }
@@ -103,7 +104,7 @@ void ModificationDepartement::modification() {
 
                 if(ui->txfEmploye->text() != BD->getDepartementAt(indexList.at(0).row())->getNom()) {
                     BD->getDepartementAt(indexList.at(0).row())->setNom(ui->txfEmploye->text());
-                    updateTable();
+                    updateTable(ui->tblDepartement->currentItem());
                 }
             }
             else

@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "CSVBD.h"
+#include <QListWidgetItem>
 
 namespace Ui {
 class ModificationType;
@@ -21,7 +22,14 @@ private:
     CSVBD *BD;
 
 private slots:
+    void refresh();
+    void ajout();
+    void suppression();
+    void modification();
+    void updateTable(QListWidgetItem* item = nullptr);
     void onCloseAction();
+    void fileSearch();
+
 };
 
 #endif // MODIFICATIONTYPE_H

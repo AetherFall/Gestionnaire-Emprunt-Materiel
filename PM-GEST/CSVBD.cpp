@@ -1,65 +1,53 @@
 #include "CSVBD.h"
 #include <fstream>
 
+#define LINK_REGISTRE "../PM-GEST/res/files/Registre.csv"
+#define LINK_DEPARTEMENT "../PM-GEST/res/files/Departements.csv"
+#define LINK_EMPLOYES "../PM-GEST/res/files/Employe.csv"
+#define LINK_TYPEOBJETS "../PM-GEST/res/files/TypeObjets.csv"
+#define LINK_OBJETS "../PM-GEST/res/files/Objets.csv"
+
 CSVBD::CSVBD() {
     //Lecture des fichiers servant de base de données
-    lectureDepartement("./res/files/Departements.csv"); //"./res/files/Departements.csv"
-    lectureEmploye("./res/files/Employe.csv");
-    lectureTypeObjets("./res/files/TypeObjets.csv");
-    lectureObjets("./res/files/Objets.csv");
-    lectureRegistre("./res/files/Registre.csv");
+    lectureDepartement(LINK_DEPARTEMENT); //"./res/files/Departements.csv"
+    lectureEmploye(LINK_EMPLOYES);
+    lectureTypeObjets(LINK_TYPEOBJETS);
+    lectureObjets(LINK_OBJETS);
+    lectureRegistre(LINK_REGISTRE);
 }
 
 CSVBD::~CSVBD() {
-    size_t i;
+    writingRegistre(LINK_REGISTRE);
+    writingObjets(LINK_OBJETS);
+    writingTypeObjets(LINK_TYPEOBJETS);
+    writingDepartement(LINK_DEPARTEMENT);
+    writingEmploye(LINK_EMPLOYES);
 
-    for(i = 0; i < employe.size(); i++){
+    size_t i, r;
+
+    r = employe.size();
+    for(i = 0; i < r; i++)
         delete employe.at(i);
-        employe.erase(employe.begin());
-    }
 
-    for(i = 0; i < objets.size(); i++){
+    r = objets.size();
+    for(i = 0; i < r; i++)
         delete objets.at(i);
-        objets.erase(objets.begin());
-    }
 
-    for(i = 0; i < typeObjet.size(); i++){
+    r = typeObjet.size();
+    for(i = 0; i < r; i++)
         delete typeObjet.at(i);
-        typeObjet.erase(typeObjet.begin());
-    }
 
-    for(i = 0; i < departements.size(); i++){
+    r = departements.size();
+    for(i = 0; i < r; i++)
         delete departements.at(i);
-        departements.erase(departements.begin());
-    }
 
-    for(i = 0; i < registre.size(); i++){
+    r = registre.size();
+    for(i = 0; i < r; i++)
         delete registre.at(i);
-        registre.erase(registre.begin());
-    }
 }
 
 
-//Departement Section
-void CSVBD::lectureDepartement(const QString& file) {
-    ifstream fluxDepartement(file.toStdString().c_str());
-    if(fluxDepartement){
-        string line;
-
-        while(getline(fluxDepartement, line)){
-            line = QString::fromStdString(line).split(",")[0].toStdString();
-            departements.push_back(new Departement(QString::fromStdString(line)));
-        }
-
-        fluxDepartement.close();
-    }
-
-    //Pas de fichier, alors on en crée un
-    else {
-        ofstream createFile(file.toStdString().c_str());
-        createFile.close();
-    }
-}
+// ----------------------------------------------------------------------------------METHODE DÉPARTEMENTS
 
 vector<Departement*> CSVBD::getListDepartement() { return departements; }
 
@@ -85,19 +73,23 @@ int CSVBD::getDepartementId(Departement* depart) {
     return -1;
 }
 
+bool CSVBD::isThisDepartementInUse(int id){
+    //Seul les employés utilisent l'objet département.
+    for(size_t i = 0; i < employe.size(); i++)
+        if(getDepartementId(employe.at(i)->getDepartement()) == id)
+            return true;
+    return false;
+}
 
-//Employe Section
-void CSVBD::lectureEmploye(const QString& file){
-    ifstream fluxEmploye(file.toStdString().c_str());
-    if(fluxEmploye){
-        string lineConvert;
+void CSVBD::lectureDepartement(const QString& file) {
+    ifstream fluxDepartement(file.toStdString().c_str());
+    if(fluxDepartement){
+        string line;
 
-        while(getline(fluxEmploye, lineConvert)){
-            QList<QString> line = QString::fromStdString(lineConvert).split(",");
-            employe.push_back(new Employe(line[0].toInt(), line[1], getDepartementAt(line[2].toInt()), (line[3] == "true")));
-        }
+        while(getline(fluxDepartement, line))
+            departements.push_back(new Departement(QString::fromStdString(line)));
 
-        fluxEmploye.close();
+        fluxDepartement.close();
     }
 
     //Pas de fichier, alors on en crée un
@@ -106,6 +98,20 @@ void CSVBD::lectureEmploye(const QString& file){
         createFile.close();
     }
 }
+
+void CSVBD::writingDepartement(const QString &file) {
+    ofstream fluxDepartement(file.toStdString().c_str());
+
+    if(fluxDepartement){
+        for(size_t i = 0; i < departements.size(); i++)
+            fluxDepartement << departements.at(i)->getNom().toStdString() << std::endl;
+
+        fluxDepartement.close();
+    }
+}
+
+
+// ----------------------------------------------------------------------------------METHODE EMPLOYÉS
 
 vector<Employe*> CSVBD::getListEmploye() { return employe; }
 
@@ -135,6 +141,65 @@ int CSVBD::getEmployeId(Employe *emp){
     return -1;
 }
 
+int CSVBD::getEmployeIndexOfThisId(int id){
+    for(size_t i = 0; i < employe.size(); i++)
+        if(employe.at(i)->getId() == id)
+            return i;
+
+    return -1;
+}
+
+bool CSVBD::isThisEmployeInUse(int id){
+    //Seul le registre utilise l'objet Employe.
+    for(size_t i = 0; i < registre.size(); i++)
+        if(getEmployeId(registre.at(i)->getEmploye()) == id)
+            return true;
+    return false;
+}
+
+void CSVBD::lectureEmploye(const QString& file){
+    ifstream fluxEmploye(file.toStdString().c_str());
+    if(fluxEmploye){
+        string lineConvert;
+
+        while(getline(fluxEmploye, lineConvert)){
+            QList<QString> line = QString::fromStdString(lineConvert).split(",");
+            employe.push_back(new Employe(line[0].toInt(), line[1], getDepartementAt(line[2].toInt()), line[3].toInt()));
+        }
+
+        fluxEmploye.close();
+    }
+
+    //Pas de fichier, alors on en crée un
+    else {
+        ofstream createFile(file.toStdString().c_str());
+        createFile.close();
+    }
+}
+
+void CSVBD::writingEmploye(const QString &file) {
+    ofstream fluxEmploye(file.toStdString().c_str());
+
+    if(fluxEmploye){
+        for(size_t i = 0; i < employe.size(); i++)
+            fluxEmploye << employe.at(i)->getId() << ','
+                        << employe.at(i)->getName().toStdString() << ','
+                        << getDepartementId(employe.at(i)->getDepartement()) << ','
+                        << employe.at(i)->getGestion() << std::endl;
+
+        fluxEmploye.close();
+    }
+}
+
+
+// ----------------------------------------------------------------------------------METHODE OBJETS
+
+vector<Objets *> CSVBD::getListObjets() { return objets; }
+
+Objets *CSVBD::getObjetAt(int i){ return objets.at(i); }
+
+size_t CSVBD::getListObjetSize(){ return objets.size(); }
+
 void CSVBD::addObjet(QString id, QString name, ObjetType *type, bool estEmprunte) {
     objets.push_back(new Objets(id, name, type, estEmprunte));
 }
@@ -151,6 +216,22 @@ int CSVBD::getObjetId(Objets *obj){
     return -1;
 }
 
+int CSVBD::getObjetIndexOfThisId(QString id) {
+    for(size_t i = 0; i < objets.size(); i++)
+        if(objets.at(i)->getId() == id)
+            return i;
+
+    return -1;
+}
+
+bool CSVBD::isThisObjetInUse(int id){
+    //Seul le registre utilise l'objet Objet.
+    for(size_t i = 0; i < registre.size(); i++)
+        if(getObjetId(registre.at(i)->getObjet()) == id)
+            return true;
+    return false;
+}
+
 void CSVBD::lectureObjets(const QString& file){
     ifstream fluxObjets(file.toStdString().c_str());
     if(fluxObjets){
@@ -158,7 +239,7 @@ void CSVBD::lectureObjets(const QString& file){
 
         while(getline(fluxObjets, lineConvert)){
             QList<QString> line = QString::fromStdString(lineConvert).split(",");
-            objets.push_back(new Objets(line[0], line[1], getTypeAt(line[2].toInt()), (line[3] == "true")));
+            objets.push_back(new Objets(line[0], line[1], getTypeAt(line[2].toInt()), line[3].toInt()));
         }
 
         fluxObjets.close();
@@ -169,6 +250,108 @@ void CSVBD::lectureObjets(const QString& file){
         ofstream createFile(file.toStdString().c_str());
         createFile.close();
     }
+}
+
+void CSVBD::writingObjets(const QString &file) {
+    ofstream fluxObjets(file.toStdString().c_str());
+
+    if(fluxObjets){
+        for(size_t i = 0; i < objets.size(); i++)
+            fluxObjets << objets.at(i)->getId().toStdString() << ',' << objets.at(i)->getName().toStdString() << ',' << getTypeId(objets.at(i)->getType()) << ',' << objets.at(i)->isEmprunte() << std::endl;
+
+        fluxObjets.close();
+    }
+}
+
+
+// ----------------------------------------------------------------------------------METHODE REGISTRE
+
+vector<Registre *> CSVBD::getListRegistre() { return registre; }
+
+Registre *CSVBD::getRegistreAt(int i) { return registre.at(i); }
+
+size_t CSVBD::getRegistreSize() { return registre.size(); }
+
+void CSVBD::addToRegistre(QDate date, Employe *employe, Objets *objet){
+    registre.push_back(new Registre(date, employe, objet));
+}
+
+void CSVBD::delFromRegistre(int i) {
+    delete registre.at(i);
+    registre.erase(registre.begin() + i);
+}
+
+int CSVBD::getRegistreOfThisObject(Objets* object){
+    for(size_t i = 0; i < registre.size(); i++)
+        if(registre.at(i)->getObjet() == object)
+            return i;
+    return -1;
+}
+
+void CSVBD::lectureRegistre(const QString& file){
+    ifstream fluxRegistre(file.toStdString().c_str());
+    if(fluxRegistre){
+        string lineConvert;
+
+        while(getline(fluxRegistre, lineConvert)){
+            QList<QString> line = QString::fromStdString(lineConvert).split(",");
+            registre.push_back(new Registre(QDate::fromString(line[0], "yyyy-MM-dd"), getEmployeAt(line[1].toInt()), getObjetAt(line[2].toInt())));
+        }
+
+        fluxRegistre.close();
+    }
+
+    //Pas de fichier, alors on en crée un
+    else {
+        ofstream createFile(file.toStdString().c_str());
+        createFile.close();
+    }
+}
+
+void CSVBD::writingRegistre(const QString &file) {
+    ofstream fluxRegistre(file.toStdString().c_str());
+
+    if(fluxRegistre){
+        for(size_t i = 0; i < registre.size(); i++)
+            fluxRegistre << registre.at(i)->getDate().toString("yyyy-MM-dd").toStdString() << ','
+                         << to_string(getEmployeId(registre.at(i)->getEmploye())) << ','
+                         << to_string(getObjetId(registre.at(i)->getObjet())) << std::endl;
+
+        fluxRegistre.close();
+    }
+}
+
+
+// ----------------------------------------------------------------------------------METHODE TYPE OBJET
+
+vector<ObjetType *> CSVBD::getListType(){ return typeObjet; }
+
+ObjetType* CSVBD::getTypeAt(int i){ return typeObjet.at(i); }
+
+size_t CSVBD::getListTypeSize(){ return typeObjet.size(); }
+
+int CSVBD::getTypeId(ObjetType *type){
+    for(size_t i = 0; i < typeObjet.size(); i++)
+        if(typeObjet.at(i) == type)
+            return i;
+    return -1;
+}
+
+void CSVBD::addTypeObjet(QString typeName, QString ImgfilePath){
+    typeObjet.push_back(new ObjetType(typeName, ImgfilePath));
+}
+
+void CSVBD::delTypeObjet(int id) {
+    delete typeObjet.at(id);
+    typeObjet.erase(typeObjet.begin() + id);
+}
+
+bool CSVBD::isThisTypeInUse(int id){
+    //Seul les objets utilise l'objet TypeObjet.
+    for(size_t i = 0; i < objets.size(); i++)
+        if(getTypeId(objets.at(i)->getType()) == id)
+            return true;
+    return false;
 }
 
 void CSVBD::lectureTypeObjets(const QString& file){
@@ -191,83 +374,13 @@ void CSVBD::lectureTypeObjets(const QString& file){
     }
 }
 
-void CSVBD::lectureRegistre(const QString& file){
-    ifstream fluxRegistre(file.toStdString().c_str());
-    if(fluxRegistre){
-        string lineConvert;
-
-        while(getline(fluxRegistre, lineConvert)){
-            QList<QString> line = QString::fromStdString(lineConvert).split(",");
-            registre.push_back(new Registre(QDate::fromString(line[0]), getEmployeAt(line[1].toInt()), getObjetAt(line[2].toInt()), getDepartementAt(line[3].toInt())));
-        }
-
-        fluxRegistre.close();
-    }
-
-    //Pas de fichier, alors on en crée un
-    else {
-        ofstream createFile(file.toStdString().c_str());
-        createFile.close();
-    }
-}
-
-
-vector<Objets *> CSVBD::getListObjets() { return objets; }
-
-Objets *CSVBD::getObjetAt(int i){ return objets.at(i); }
-
-size_t CSVBD::getListObjetSize(){ return objets.size(); }
-
-vector<Registre *> CSVBD::getListRegistre() { return registre; }
-
-Registre *CSVBD::getRegistreAt(int i) { return registre.at(i); }
-
-size_t CSVBD::getRegistreSize() { return registre.size(); }
-
-
-//TypeObjets
-vector<ObjetType *> CSVBD::getListType(){ return typeObjet; }
-
-ObjetType* CSVBD::getTypeAt(int i){ return typeObjet.at(i); }
-
-size_t CSVBD::getListTypeSize(){ return typeObjet.size(); }
-
-int CSVBD::getTypeId(ObjetType *type){
-    for(size_t i = 0; i < typeObjet.size(); i++)
-        if(typeObjet.at(i) == type)
-            return i;
-    return -1;
-}
-
-void CSVBD::writingDepartement(const QString &file) {
-
-}
-
-void CSVBD::writingEmploye(const QString &file) {
-
-}
-
-void CSVBD::writingObjets(const QString &file) {
-
-}
-
 void CSVBD::writingTypeObjets(const QString &file) {
+    ofstream fluxType(file.toStdString().c_str());
 
-}
+    if(fluxType){
+        for(size_t i = 0; i < typeObjet.size(); i++)
+            fluxType << typeObjet.at(i)->getName().toStdString() << ',' << typeObjet.at(i)->getImage().toStdString() << std::endl;
 
-void CSVBD::writingRegistre(const QString &file) {
-   /* ofstream fluxRegistre(file.toStdString().c_str());
-
-    if(fluxRegistre){
-        for(int i = 0; i < registre.size(); i++) {
-            fluxRegistre << registre.at(i)->getDate().toString() << ',' << to_string(getEmployeId(registre.at(i)->getEmploye()));
-        }
-
-        while(getline(fluxRegistre, lineConvert)){
-            QList<QString> line = QString::fromStdString(lineConvert).split(",");
-            registre.push_back(new Registre(QDate::fromString(line[0]), getEmployeAt(line[1].toInt()), getObjetAt(line[2].toInt()), getDepartementAt(line[3].toInt())));
-        }
-
-        fluxRegistre.close();
-    }*/
+        fluxType.close();
+    }
 }

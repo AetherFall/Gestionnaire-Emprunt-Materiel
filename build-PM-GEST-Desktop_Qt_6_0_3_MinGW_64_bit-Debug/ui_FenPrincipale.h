@@ -311,8 +311,17 @@ public:
         label->setText(QCoreApplication::translate("FenPrincipale", "Veuillez scanner le code barre de l'objet", nullptr));
         txfObjet->setInputMask(QString());
         btnAffect->setText(QCoreApplication::translate("FenPrincipale", "Affecter", nullptr));
+#if QT_CONFIG(shortcut)
+        btnAffect->setShortcut(QCoreApplication::translate("FenPrincipale", "Enter", nullptr));
+#endif // QT_CONFIG(shortcut)
         btnDeAffect->setText(QCoreApplication::translate("FenPrincipale", "D\303\251saffecter", nullptr));
+#if QT_CONFIG(shortcut)
+        btnDeAffect->setShortcut(QCoreApplication::translate("FenPrincipale", "Ctrl+Return", nullptr));
+#endif // QT_CONFIG(shortcut)
         btnQuitter->setText(QCoreApplication::translate("FenPrincipale", "Quitter", nullptr));
+#if QT_CONFIG(shortcut)
+        btnQuitter->setShortcut(QCoreApplication::translate("FenPrincipale", "Ctrl+Q", nullptr));
+#endif // QT_CONFIG(shortcut)
     } // retranslateUi
 
 };

@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QItemSelectionModel>
 #include "CSVBD.h"
+#include <QListWidgetItem>
 
 namespace Ui {
 class ModificationDepartement;
@@ -26,7 +27,7 @@ private slots:
     void ajout();
     void suppression();
     void modification();
-    void updateTable(int currentRow = -1);
+    void updateTable(QListWidgetItem* item = nullptr);
     void onCloseAction();
 };
 

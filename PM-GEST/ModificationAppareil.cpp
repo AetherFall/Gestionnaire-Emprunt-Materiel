@@ -3,6 +3,7 @@
 #include <QMessageBox>
 #include "Messages.hpp"
 #include "FenPrincipale.h"
+#include <QKeySequence>
 
 ModificationAppareil::ModificationAppareil(CSVBD *BD, QWidget *parent) : QWidget(parent), ui(new Ui::ModificationAppareil) {
     //Paramétrages
@@ -36,11 +37,16 @@ ModificationAppareil::ModificationAppareil(CSVBD *BD, QWidget *parent) : QWidget
     ui->btnMod->setFocusPolicy(Qt::NoFocus);
     ui->btnDel->setFocusPolicy(Qt::NoFocus);
     ui->btnRefresh->setFocusPolicy(Qt::NoFocus);
+
+    ui->btnRefresh->setShortcut(QKeySequence(Qt::Key_F5));
+    ui->btnAdd->setShortcut(QKeySequence(Qt::Key_F6));
+    ui->btnAdd->setShortcut(QKeySequence(Qt::Key_F7));
+    ui->btnAdd->setShortcut(QKeySequence(Qt::Key_F8));
+    ui->btnAdd->setShortcut(QKeySequence(Qt::Key_F9));
 }
 
 ModificationAppareil::~ModificationAppareil() {
     delete ui;
-    delete BD;
 }
 
 void ModificationAppareil::updateTable(int currentRow, int currentCol) {
@@ -61,10 +67,6 @@ void ModificationAppareil::updateTable(int currentRow, int currentCol) {
         chbUse->setEnabled(false);
 
         ui->tblEmploye->setCellWidget(i, 3, chbUse);
-
-
-        /*for(int r =0; r < 5; r++)
-            ui->tblEmploye->item(i, r)->setTextAlignment(Qt::AlignCenter);*/
     }
 
     if(currentRow > -1){
@@ -100,7 +102,7 @@ void ModificationAppareil::ajout() {
         //TODO MSGBOX
     }
     else
-        QMessageBox::critical(this,"Erreur", getError(DEP_CHAMPVIDE_TOADD));
+        QMessageBox::critical(this, getTitle(ERROR), getError(OBJ_CHAMPVIDE_TOADD));
 
     //TODO Ajouter une verification si un autre departement a le meme nom.
 }
@@ -108,21 +110,25 @@ void ModificationAppareil::ajout() {
 void ModificationAppareil::suppression() {
     if(ui->tblEmploye->rowCount()){
         if(ui->tblEmploye->selectionModel()->hasSelection()){
-            int rep = QMessageBox::information(this, getTitle(INFORMATION), getInfo(DEP_DELETE), QMessageBox::Yes, QMessageBox::No);
+            QModelIndexList indexList = ui->tblEmploye->selectionModel()->selectedIndexes();
 
-            if(rep == QMessageBox::Yes){
-                QModelIndexList indexList = ui->tblEmploye->selectionModel()->selectedIndexes();
-                BD->delObjet(indexList.at(0).row());
+            //Vérification contre les erreurs d'intégritée référentielle
+            if(!BD->isThisObjetInUse(indexList.at(0).row())){
+                if(QMessageBox::information(this, getTitle(INFORMATION), getInfo(OBJ_DELETE), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes){
+                    BD->delObjet(indexList.at(0).row());
 
-                updateTable();
+                    updateTable();
+                }
             }
+            else
+                QMessageBox::critical(this, getTitle(INTEGRITE_REFERENTIELLE), getError(OBJ_INTEGRITE_REFERENTIELLE));
         }
 
         else
-            QMessageBox::critical(this, getTitle(ERROR), getError(DEP_NOSELECTION_TODELETE));
+            QMessageBox::critical(this, getTitle(ERROR), getError(OBJ_NOSELECTION_TODELETE));
     }
     else
-        QMessageBox::critical(this, getTitle(ERROR), getError(DEP_NOITEM_TODELETE));
+        QMessageBox::critical(this, getTitle(ERROR), getError(OBJ_NOITEM_TODELETE));
 }
 
 void ModificationAppareil::modification() {
@@ -146,14 +152,14 @@ void ModificationAppareil::modification() {
                 updateTable();
             }
             else
-                QMessageBox::critical(this, getTitle(ERROR), getError(DEP_CHAMPVIDE_TOMOD));
+                QMessageBox::critical(this, getTitle(ERROR), getError(OBJ_NOSELECTION_TOMODIFY));
         }
 
         else
-            QMessageBox::critical(this, getTitle(ERROR), getError(DEP_CHAMPVIDE_TOMOD));
+            QMessageBox::critical(this, getTitle(ERROR), getError(OBJ_CHAMPVIDE_TOMOD));
     }
 
     else
-        QMessageBox::critical(this, getTitle(ERROR), getError(DEP_NOITEM_TOMODIFY));
+        QMessageBox::critical(this, getTitle(ERROR), getError(OBJ_NOITEM_TOMODIFY));
 }
 
