@@ -19,7 +19,7 @@ CXXFLAGS      = -fno-keep-inline-dllexport -O2 -std=gnu++1z -Wall -Wextra -Wextr
 INCPATH       = -I../PM-GEST -I. -IC:/Qt/6.0.3/mingw81_64/include -IC:/Qt/6.0.3/mingw81_64/include/QtWidgets -IC:/Qt/6.0.3/mingw81_64/include/QtGui -IC:/Qt/6.0.3/mingw81_64/include/QtCore -Irelease -I. -IC:/VulkanSDK/1.0.51.0/Include -IC:/Qt/6.0.3/mingw81_64/mkspecs/win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-s -Wl,-subsystem,windows -mthreads
-LIBS        =        C:\Qt\6.0.3\mingw81_64\lib\libQt6Widgets.a C:\Qt\6.0.3\mingw81_64\lib\libQt6Gui.a C:\Qt\6.0.3\mingw81_64\lib\libQt6Core.a -lmingw32 C:\Qt\6.0.3\mingw81_64\lib\libQt6EntryPoint.a -lshell32  
+LIBS        =        C:\Qt\6.0.3\mingw81_64\lib\libQt6Widgets.a C:\Qt\6.0.3\mingw81_64\lib\libQt6Gui.a C:\Qt\6.0.3\mingw81_64\lib\libQt6Core.a release\PM-GEST_resource_res.o -lmingw32 C:\Qt\6.0.3\mingw81_64\lib\libQt6EntryPoint.a -lshell32  
 QMAKE         = C:\Qt\6.0.3\mingw81_64\bin\qmake.exe
 DEL_FILE      = del
 CHK_DIR_EXISTS= if not exist
@@ -40,7 +40,7 @@ IDC           = idc
 IDL           = midl
 ZIP           = zip -r -9
 DEF_FILE      = 
-RES_FILE      = 
+RES_FILE      = release\PM-GEST_resource_res.o
 SED           = $(QMAKE) -install sed
 MOVE          = move
 
@@ -186,8 +186,11 @@ DESTDIR_TARGET = release\PM-GEST.exe
 first: all
 all: Makefile.Release  release/PM-GEST.exe
 
-release/PM-GEST.exe: C:/Qt/6.0.3/mingw81_64/lib/libQt6Widgets.a C:/Qt/6.0.3/mingw81_64/lib/libQt6Gui.a C:/Qt/6.0.3/mingw81_64/lib/libQt6Core.a C:/Qt/6.0.3/mingw81_64/lib/libQt6EntryPoint.a ui_ElementsItem.h ui_FenPrincipale.h ui_InterfaceGestion.h ui_ModificationAppareil.h ui_ModificationDepartement.h ui_ModificationEmploye.h ui_ModificationType.h $(OBJECTS) 
+release/PM-GEST.exe: C:/Qt/6.0.3/mingw81_64/lib/libQt6Widgets.a C:/Qt/6.0.3/mingw81_64/lib/libQt6Gui.a C:/Qt/6.0.3/mingw81_64/lib/libQt6Core.a C:/Qt/6.0.3/mingw81_64/lib/libQt6EntryPoint.a ui_ElementsItem.h ui_FenPrincipale.h ui_InterfaceGestion.h ui_ModificationAppareil.h ui_ModificationDepartement.h ui_ModificationEmploye.h ui_ModificationType.h $(OBJECTS) release/PM-GEST_resource_res.o
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) @object_script.PM-GEST.Release  $(LIBS)
+
+release/PM-GEST_resource_res.o: PM-GEST_resource.rc
+	windres -i PM-GEST_resource.rc -o release\PM-GEST_resource_res.o --include-dir=. $(DEFINES)
 
 qmake: FORCE
 	@$(QMAKE) -o Makefile.Release ..\PM-GEST\PM-GEST.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
@@ -199,6 +202,7 @@ dist:
 
 clean: compiler_clean 
 	-$(DEL_FILE) release\CSVBD.o release\Departement.o release\ElementsItem.o release\Employe.o release\InterfaceGestion.o release\ModificationAppareil.o release\ModificationDepartement.o release\ModificationEmploye.o release\ModificationType.o release\ObjetType.o release\Objets.o release\Registre.o release\main.o release\FenPrincipale.o release\qrc_ressources.o release\moc_ElementsItem.o release\moc_FenPrincipale.o release\moc_InterfaceGestion.o release\moc_ModificationAppareil.o release\moc_ModificationDepartement.o release\moc_ModificationEmploye.o release\moc_ModificationType.o
+	-$(DEL_FILE) release\PM-GEST_resource_res.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash
@@ -226,6 +230,8 @@ release/qrc_ressources.cpp: ../PM-GEST/ressources.qrc \
 		../PM-GEST/res/files/TypeObjets.csv \
 		../PM-GEST/res/files/Registre.csv \
 		../PM-GEST/res/images/radio.png \
+		../PM-GEST/res/images/tablette.png \
+		../PM-GEST/res/icons/SVG/BasicIcon.svg \
 		../PM-GEST/res/icons/SVG/Ajout.svg \
 		../PM-GEST/res/icons/SVG/Check.svg \
 		../PM-GEST/res/icons/SVG/Refresh.svg \
@@ -525,9 +531,32 @@ release/moc_FenPrincipale.cpp: ../PM-GEST/FenPrincipale.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/QItemSelectionModel \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/qitemselectionmodel.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QListWidgetItem \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlistwidget.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlistview.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractitemview.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qframe.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qstyleoption.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractspinbox.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qvalidator.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtCore/qregularexpression.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qslider.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractslider.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qstyle.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtabbar.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtabwidget.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qrubberband.h \
 		../PM-GEST/ModificationType.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/QEvent \
 		../PM-GEST/ElementsItem.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QLineEdit \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlineedit.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qtextcursor.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qtextformat.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qpen.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qtextoption.h \
 		release/moc_predefs.h \
 		C:/Qt/6.0.3/mingw81_64/bin/moc.exe
 	C:\Qt\6.0.3\mingw81_64\bin\moc.exe $(DEFINES) --include C:/Users/xterm/OneDrive/Bureau/PM-PROJ-[GEST.EMRUNT]/build-PM-GEST-Desktop_Qt_6_0_3_MinGW_64_bit-Release/release/moc_predefs.h -IC:/Qt/6.0.3/mingw81_64/mkspecs/win32-g++ -IC:/Users/xterm/OneDrive/Bureau/PM-PROJ-[GEST.EMRUNT]/PM-GEST -IC:/Qt/6.0.3/mingw81_64/include -IC:/Qt/6.0.3/mingw81_64/include/QtWidgets -IC:/Qt/6.0.3/mingw81_64/include/QtGui -IC:/Qt/6.0.3/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\PM-GEST\FenPrincipale.h -o release\moc_FenPrincipale.cpp
@@ -677,6 +706,24 @@ release/moc_InterfaceGestion.cpp: ../PM-GEST/InterfaceGestion.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/QItemSelectionModel \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/qitemselectionmodel.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QListWidgetItem \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlistwidget.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlistview.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractitemview.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qframe.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qstyleoption.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractspinbox.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qvalidator.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtCore/qregularexpression.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qicon.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qslider.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractslider.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qstyle.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtabbar.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtabwidget.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qrubberband.h \
 		../PM-GEST/ModificationType.h \
 		release/moc_predefs.h \
 		C:/Qt/6.0.3/mingw81_64/bin/moc.exe
@@ -967,6 +1014,24 @@ release/moc_ModificationDepartement.cpp: ../PM-GEST/ModificationDepartement.h \
 		../PM-GEST/Objets.h \
 		../PM-GEST/ObjetType.h \
 		../PM-GEST/Registre.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QListWidgetItem \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlistwidget.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlistview.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractitemview.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qframe.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qstyleoption.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractspinbox.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qvalidator.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtCore/qregularexpression.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qicon.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qslider.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractslider.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qstyle.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtabbar.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtabwidget.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qrubberband.h \
 		release/moc_predefs.h \
 		C:/Qt/6.0.3/mingw81_64/bin/moc.exe
 	C:\Qt\6.0.3\mingw81_64\bin\moc.exe $(DEFINES) --include C:/Users/xterm/OneDrive/Bureau/PM-PROJ-[GEST.EMRUNT]/build-PM-GEST-Desktop_Qt_6_0_3_MinGW_64_bit-Release/release/moc_predefs.h -IC:/Qt/6.0.3/mingw81_64/mkspecs/win32-g++ -IC:/Users/xterm/OneDrive/Bureau/PM-PROJ-[GEST.EMRUNT]/PM-GEST -IC:/Qt/6.0.3/mingw81_64/include -IC:/Qt/6.0.3/mingw81_64/include/QtWidgets -IC:/Qt/6.0.3/mingw81_64/include/QtGui -IC:/Qt/6.0.3/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\PM-GEST\ModificationDepartement.h -o release\moc_ModificationDepartement.cpp
@@ -1253,6 +1318,26 @@ release/moc_ModificationType.cpp: ../PM-GEST/ModificationType.h \
 		../PM-GEST/Objets.h \
 		../PM-GEST/ObjetType.h \
 		../PM-GEST/Registre.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QListWidgetItem \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlistwidget.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlistview.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractitemview.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qframe.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtCore/qitemselectionmodel.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qstyleoption.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractspinbox.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qvalidator.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtCore/qregularexpression.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qicon.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qslider.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractslider.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qstyle.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtabbar.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtabwidget.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qrubberband.h \
 		release/moc_predefs.h \
 		C:/Qt/6.0.3/mingw81_64/bin/moc.exe
 	C:\Qt\6.0.3\mingw81_64\bin\moc.exe $(DEFINES) --include C:/Users/xterm/OneDrive/Bureau/PM-PROJ-[GEST.EMRUNT]/build-PM-GEST-Desktop_Qt_6_0_3_MinGW_64_bit-Release/release/moc_predefs.h -IC:/Qt/6.0.3/mingw81_64/mkspecs/win32-g++ -IC:/Users/xterm/OneDrive/Bureau/PM-PROJ-[GEST.EMRUNT]/PM-GEST -IC:/Qt/6.0.3/mingw81_64/include -IC:/Qt/6.0.3/mingw81_64/include/QtWidgets -IC:/Qt/6.0.3/mingw81_64/include/QtGui -IC:/Qt/6.0.3/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\PM-GEST\ModificationType.h -o release\moc_ModificationType.cpp
@@ -1570,7 +1655,33 @@ release/ElementsItem.o: ../PM-GEST/ElementsItem.cpp ../PM-GEST/ElementsItem.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/QSize \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/QSizeF \
 		C:/Qt/6.0.3/mingw81_64/include/QtGui/QTransform \
-		ui_ElementsItem.h
+		ui_ElementsItem.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtCore/QVariant \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QApplication \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qapplication.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtCore/qcoreapplication.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtCore/qeventloop.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qguiapplication.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qinputmethod.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtCore/qlocale.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QGraphicsView \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qgraphicsview.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qpainter.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qtextoption.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qpen.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qscrollarea.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qframe.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qgraphicsscene.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QHBoxLayout \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qboxlayout.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlayout.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlayoutitem.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qgridlayout.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QLabel \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlabel.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qpicture.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QVBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\ElementsItem.o ..\PM-GEST\ElementsItem.cpp
 
 release/Employe.o: ../PM-GEST/Employe.cpp ../PM-GEST/Employe.h \
@@ -1765,17 +1876,9 @@ release/InterfaceGestion.o: ../PM-GEST/InterfaceGestion.cpp ../PM-GEST/Interface
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/QItemSelectionModel \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/qitemselectionmodel.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/qabstractitemmodel.h \
-		../PM-GEST/ModificationType.h \
-		ui_InterfaceGestion.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtCore/QVariant \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QApplication \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qapplication.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtCore/qcoreapplication.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtCore/qeventloop.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtGui/qguiapplication.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtGui/qinputmethod.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QColumnView \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qcolumnview.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QListWidgetItem \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlistwidget.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlistview.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractitemview.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qframe.h \
@@ -1791,6 +1894,15 @@ release/InterfaceGestion.o: ../PM-GEST/InterfaceGestion.cpp ../PM-GEST/Interface
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtabbar.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtabwidget.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qrubberband.h \
+		../PM-GEST/ModificationType.h \
+		ui_InterfaceGestion.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtCore/QVariant \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QApplication \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qapplication.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtCore/qcoreapplication.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtCore/qeventloop.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qguiapplication.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QFrame \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QGridLayout \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qgridlayout.h \
@@ -1801,10 +1913,17 @@ release/InterfaceGestion.o: ../PM-GEST/InterfaceGestion.cpp ../PM-GEST/Interface
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QPushButton \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qpushbutton.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractbutton.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QSpacerItem \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QVBoxLayout \
 		../PM-GEST/FenPrincipale.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/QEvent \
-		../PM-GEST/ElementsItem.h
+		../PM-GEST/ElementsItem.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QLineEdit \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlineedit.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qtextcursor.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qtextformat.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qpen.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qtextoption.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\InterfaceGestion.o ..\PM-GEST\InterfaceGestion.cpp
 
 release/ModificationAppareil.o: ../PM-GEST/ModificationAppareil.cpp ../PM-GEST/ModificationAppareil.h \
@@ -1997,7 +2116,8 @@ release/ModificationAppareil.o: ../PM-GEST/ModificationAppareil.cpp ../PM-GEST/M
 		C:/Qt/6.0.3/mingw81_64/include/QtGui/qtextoption.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QPushButton \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qpushbutton.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QTableView \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QTableWidget \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtablewidget.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtableview.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QVBoxLayout \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QMessageBox \
@@ -2009,9 +2129,13 @@ release/ModificationAppareil.o: ../PM-GEST/ModificationAppareil.cpp ../PM-GEST/M
 		../PM-GEST/ModificationEmploye.h \
 		../PM-GEST/ModificationDepartement.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/QItemSelectionModel \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QListWidgetItem \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlistwidget.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlistview.h \
 		../PM-GEST/ModificationType.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/QEvent \
-		../PM-GEST/ElementsItem.h
+		../PM-GEST/ElementsItem.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/QKeySequence
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\ModificationAppareil.o ..\PM-GEST\ModificationAppareil.cpp
 
 release/ModificationDepartement.o: ../PM-GEST/ModificationDepartement.cpp ../PM-GEST/ModificationDepartement.h \
@@ -2156,10 +2280,27 @@ release/ModificationDepartement.o: ../PM-GEST/ModificationDepartement.cpp ../PM-
 		../PM-GEST/Objets.h \
 		../PM-GEST/ObjetType.h \
 		../PM-GEST/Registre.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QListWidgetItem \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlistwidget.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlistview.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractitemview.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qframe.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qstyleoption.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractspinbox.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qvalidator.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtCore/qregularexpression.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qicon.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qslider.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractslider.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qstyle.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtabbar.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtabwidget.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qrubberband.h \
 		ui_ModificationDepartement.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/QVariant \
 		C:/Qt/6.0.3/mingw81_64/include/QtGui/QIcon \
-		C:/Qt/6.0.3/mingw81_64/include/QtGui/qicon.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QApplication \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qapplication.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/qcoreapplication.h \
@@ -2167,7 +2308,6 @@ release/ModificationDepartement.o: ../PM-GEST/ModificationDepartement.cpp ../PM-
 		C:/Qt/6.0.3/mingw81_64/include/QtGui/qguiapplication.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QFrame \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qframe.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QGridLayout \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qgridlayout.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlayout.h \
@@ -2183,21 +2323,7 @@ release/ModificationDepartement.o: ../PM-GEST/ModificationDepartement.cpp ../PM-
 		C:/Qt/6.0.3/mingw81_64/include/QtGui/qtextformat.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtGui/qpen.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QListView \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlistview.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractitemview.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qstyleoption.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractspinbox.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtGui/qvalidator.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtCore/qregularexpression.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qslider.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractslider.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qstyle.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtabbar.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtabwidget.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qrubberband.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QListWidget \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QPushButton \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qpushbutton.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractbutton.h \
@@ -2398,7 +2524,8 @@ release/ModificationEmploye.o: ../PM-GEST/ModificationEmploye.cpp ../PM-GEST/Mod
 		C:/Qt/6.0.3/mingw81_64/include/QtGui/qtextoption.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QPushButton \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qpushbutton.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QTableView \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QTableWidget \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtablewidget.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtableview.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QVBoxLayout \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QMessageBox \
@@ -2546,10 +2673,29 @@ release/ModificationType.o: ../PM-GEST/ModificationType.cpp ../PM-GEST/Modificat
 		../PM-GEST/Objets.h \
 		../PM-GEST/ObjetType.h \
 		../PM-GEST/Registre.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QListWidgetItem \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlistwidget.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlistview.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractitemview.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qframe.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtCore/qitemselectionmodel.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qstyleoption.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractspinbox.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qvalidator.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtCore/qregularexpression.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qicon.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qslider.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractslider.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qstyle.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtabbar.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtabwidget.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qrubberband.h \
 		ui_ModificationType.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/QVariant \
 		C:/Qt/6.0.3/mingw81_64/include/QtGui/QIcon \
-		C:/Qt/6.0.3/mingw81_64/include/QtGui/qicon.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QApplication \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qapplication.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/qcoreapplication.h \
@@ -2557,7 +2703,6 @@ release/ModificationType.o: ../PM-GEST/ModificationType.cpp ../PM-GEST/Modificat
 		C:/Qt/6.0.3/mingw81_64/include/QtGui/qguiapplication.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QFrame \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qframe.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QGridLayout \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qgridlayout.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlayout.h \
@@ -2573,27 +2718,21 @@ release/ModificationType.o: ../PM-GEST/ModificationType.cpp ../PM-GEST/Modificat
 		C:/Qt/6.0.3/mingw81_64/include/QtGui/qtextformat.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtGui/qpen.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QListView \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlistview.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractitemview.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtCore/qabstractitemmodel.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtCore/qitemselectionmodel.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qstyleoption.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractspinbox.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtGui/qvalidator.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtCore/qregularexpression.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qslider.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractslider.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qstyle.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtabbar.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtabwidget.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qrubberband.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QListWidget \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QPushButton \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qpushbutton.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractbutton.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QVBoxLayout
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QVBoxLayout \
+		../PM-GEST/Messages.hpp \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QMessageBox \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qmessagebox.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qdialog.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QFileDialog \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qfiledialog.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtCore/qdir.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtCore/qfile.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtCore/qfiledevice.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtCore/qfileinfo.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\ModificationType.o ..\PM-GEST\ModificationType.cpp
 
 release/ObjetType.o: ../PM-GEST/ObjetType.cpp ../PM-GEST/ObjetType.h \
@@ -2930,9 +3069,32 @@ release/main.o: ../PM-GEST/main.cpp ../PM-GEST/FenPrincipale.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/QItemSelectionModel \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/qitemselectionmodel.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QListWidgetItem \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlistwidget.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlistview.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractitemview.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qframe.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qstyleoption.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractspinbox.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qvalidator.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtCore/qregularexpression.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qslider.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractslider.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qstyle.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtabbar.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtabwidget.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qrubberband.h \
 		../PM-GEST/ModificationType.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/QEvent \
 		../PM-GEST/ElementsItem.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QLineEdit \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlineedit.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qtextcursor.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qtextformat.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qpen.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qtextoption.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QApplication \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qapplication.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/qcoreapplication.h \
@@ -3091,9 +3253,32 @@ release/FenPrincipale.o: ../PM-GEST/FenPrincipale.cpp ../PM-GEST/FenPrincipale.h
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/QItemSelectionModel \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/qitemselectionmodel.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QListWidgetItem \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlistwidget.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlistview.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractitemview.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qframe.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qstyleoption.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractspinbox.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qvalidator.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtCore/qregularexpression.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qslider.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractslider.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qstyle.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtabbar.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtabwidget.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qrubberband.h \
 		../PM-GEST/ModificationType.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/QEvent \
 		../PM-GEST/ElementsItem.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QLineEdit \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlineedit.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qtextcursor.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qtextformat.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qpen.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/qtextoption.h \
 		ui_FenPrincipale.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtCore/QVariant \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QApplication \
@@ -3103,33 +3288,26 @@ release/FenPrincipale.o: ../PM-GEST/FenPrincipale.cpp ../PM-GEST/FenPrincipale.h
 		C:/Qt/6.0.3/mingw81_64/include/QtGui/qguiapplication.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QFrame \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qframe.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QGraphicsView \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qgraphicsview.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtGui/qpainter.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtGui/qpen.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qscrollarea.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qgraphicsscene.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QGridLayout \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qgridlayout.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlayout.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlayoutitem.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qboxlayout.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QHBoxLayout \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QHeaderView \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qheaderview.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QLabel \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlabel.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtGui/qpicture.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QLineEdit \
-		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qlineedit.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtGui/qtextcursor.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtGui/qtextformat.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QTableWidget \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtablewidget.h \
+		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qtableview.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QVBoxLayout \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/QMessageBox \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qmessagebox.h \
 		C:/Qt/6.0.3/mingw81_64/include/QtWidgets/qdialog.h \
-		C:/Qt/6.0.3/mingw81_64/include/QtGui/QImage
+		C:/Qt/6.0.3/mingw81_64/include/QtGui/QImage \
+		../PM-GEST/Messages.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\FenPrincipale.o ..\PM-GEST\FenPrincipale.cpp
 
 release/qrc_ressources.o: release/qrc_ressources.cpp 

@@ -1,7 +1,7 @@
 #include "CSVBD.h"
 #include <fstream>
 
-#define LINK_REGISTRE "./res/files/Departements.csv" //"../PM-GEST/res/files/Registre.csv"
+#define LINK_REGISTRE "./res/files/Registre.csv" //"../PM-GEST/res/files/Registre.csv"
 #define LINK_DEPARTEMENT "./res/files/Departements.csv"
 #define LINK_EMPLOYES "./res/files/Employe.csv"
 #define LINK_TYPEOBJETS "./res/files/TypeObjets.csv"

@@ -19,5 +19,7 @@
         <file>res/files/Registre.csv</file>
         <file>res/files/TypeObjets.csv</file>
     </qresource>
-    <qresource prefix="/"/>
+    <qresource prefix="/">
+        <file>myappico.ico</file>
+    </qresource>
 </RCC>
