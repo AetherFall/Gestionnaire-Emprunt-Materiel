@@ -67,7 +67,7 @@ void ModificationDepartement::ajout() {
             updateTable();
     }
     else
-        QMessageBox::critical(this,"Erreur", getError(DEP_CHAMPVIDE_TOADD));
+        QMessageBox::critical(this, getTitle(ERROR), getError(DEP_CHAMPVIDE_TOADD));
 
     //TODO Ajouter une verification si un autre departement a le meme nom.
     //TODO Mettre toute les erreures dans une classe d'erreur

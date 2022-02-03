@@ -6,6 +6,7 @@
         <file>res/icons/SVG/Delete2.svg</file>
         <file>res/icons/SVG/Autre.svg</file>
         <file>res/icons/SVG/Check.svg</file>
+        <file>res/icons/SVG/BasicIcon.svg</file>
     </qresource>
     <qresource prefix="/images">
         <file>res/images/radio.png</file>

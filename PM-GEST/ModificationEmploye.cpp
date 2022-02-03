@@ -92,15 +92,28 @@ void ModificationEmploye::refresh() {
 void ModificationEmploye::ajout() {
     if(!ui->txfEmploye->text().isEmpty() || !ui->txfNom->text().isEmpty()) {
         if(ui->cbxDepartement->currentIndex() > -1){
-            BD->addEmploye(std::stoi(ui->txfEmploye->text().toStdString()), ui->txfNom->text(), BD->getDepartementAt(ui->cbxDepartement->currentIndex()), ui->chbGestion->isChecked());
-            updateTable();
+            //Vérification si le ID est unique.
+            if(!BD->isAnotherEmploye(ui->txfEmploye->text().toInt())){
+                QString name = ui->txfNom->text();
+                int count = 0;
+
+                while (BD->isAnotherEmployeName(name)) {
+                    count++;
+                    name = ui->txfNom->text().append(QString::fromStdString('(' + to_string(count) + ')'));
+                }
+
+                BD->addEmploye(std::stoi(ui->txfEmploye->text().toStdString()), name, BD->getDepartementAt(ui->cbxDepartement->currentIndex()), ui->chbGestion->isChecked());
+                updateTable();
+            }
+            else
+               QMessageBox::critical(this, getTitle(ERROR), getError(EMP_EXISTANT_TOADD));
         }
-        //TODO MSGBOX
+        else
+             QMessageBox::critical(this, getTitle(ERROR), getError(EMP_COMBOBOX_VIDE));
     }
     else
         QMessageBox::critical(this, getTitle(ERROR), getError(EMP_CHAMPVIDE_TOADD));
 
-    //TODO Ajouter une verification si un autre departement a le meme nom.
 }
 
 void ModificationEmploye::suppression() {

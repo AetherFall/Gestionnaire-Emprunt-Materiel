@@ -15,6 +15,7 @@ int main(int argc, char *argv[]) {
     app.setApplicationName("Gestionnaire des emprunts matériel");
     app.setApplicationVersion("1.0");
     app.setApplicationDisplayName(app.applicationName());
+    app.setWindowIcon(QIcon(":/icons/res/icons/SVG/BasicIcon.svg"));
 
     Q_CLASSINFO("Version", "1.0.0")
     Q_CLASSINFO("Author", "William-Benoit Lambert")

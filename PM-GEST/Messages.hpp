@@ -45,7 +45,9 @@ enum ERROR{
     DEP_EXISTANT_TOMOD = 27,
     EMP_EXISTANT_TOMOD = 28,
     TYP_EXISTANT_TOMOD = 29,
-    OBJ_EXISTANT_TOMOD = 30
+    OBJ_EXISTANT_TOMOD = 30,
+    EMP_COMBOBOX_VIDE = 31,
+    OBJ_COMBOBOX_VIDE = 32
 };
 
 enum TITLE{
@@ -102,6 +104,8 @@ static QString getError(enum ERROR type){
         case 28: return "Les modifications que vous tentez d'apporter existe déjà dans un autre employé";
         case 29: return "Les modifications que vous tentez d'apporter existe déjà dans un autre type d'appareil";
         case 30: return "Les modifications que vous tentez d'apporter existe déjà dans un autre appareil";
+        case 31: return "Veuillez sélectionner un département principal auquel l'employé appartient.";
+        case 32: return "Veuillez sélectionner un type d'appareil auquel cet appareil appartient.";
     }
 }
 

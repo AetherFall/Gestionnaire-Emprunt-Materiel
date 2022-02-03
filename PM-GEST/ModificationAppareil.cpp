@@ -4,6 +4,7 @@
 #include "Messages.hpp"
 #include "FenPrincipale.h"
 #include <QKeySequence>
+#include <string>
 
 ModificationAppareil::ModificationAppareil(CSVBD *BD, QWidget *parent) : QWidget(parent), ui(new Ui::ModificationAppareil) {
     //Paramétrages
@@ -96,15 +97,29 @@ void ModificationAppareil::refresh() {
 void ModificationAppareil::ajout() {
     if(!ui->txfEmploye->text().isEmpty() || !ui->txfNom->text().isEmpty()) {
         if(ui->cbxDepartement->currentIndex() > -1){
-            BD->addObjet(ui->txfEmploye->text(), ui->txfNom->text(), BD->getTypeAt(ui->cbxDepartement->currentIndex()), ui->chbGestion->isChecked());
-            updateTable();
+
+            //Vérification si le ID est unique.
+            if(!BD->isAnotherObjet(ui->txfEmploye->text())){
+                QString name = ui->txfNom->text();
+                int count = 0;
+
+                while (BD->HowManyAnotherObjetName(name)) {
+                    count++;
+                    name = ui->txfNom->text().append(QString::fromStdString('(' + to_string(count) + ')'));
+                }
+
+
+                BD->addObjet(ui->txfEmploye->text(), name, BD->getTypeAt(ui->cbxDepartement->currentIndex()), ui->chbGestion->isChecked());
+                updateTable();
+            }
+            else
+                QMessageBox::critical(this, getTitle(ERROR), getError(OBJ_EXISTANT_TOADD));
         }
-        //TODO MSGBOX
+        else
+            QMessageBox::critical(this, getTitle(ERROR), getError(OBJ_COMBOBOX_VIDE));
     }
     else
         QMessageBox::critical(this, getTitle(ERROR), getError(OBJ_CHAMPVIDE_TOADD));
-
-    //TODO Ajouter une verification si un autre departement a le meme nom.
 }
 
 void ModificationAppareil::suppression() {
@@ -117,6 +132,7 @@ void ModificationAppareil::suppression() {
                 if(QMessageBox::information(this, getTitle(INFORMATION), getInfo(OBJ_DELETE), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes){
                     BD->delObjet(indexList.at(0).row());
 
+                    refresh();
                     updateTable();
                 }
             }

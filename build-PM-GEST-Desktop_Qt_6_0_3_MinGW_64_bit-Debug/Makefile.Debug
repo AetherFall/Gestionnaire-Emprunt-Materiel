@@ -227,6 +227,7 @@ debug/qrc_ressources.cpp: ../PM-GEST/ressources.qrc \
 		../PM-GEST/res/files/Registre.csv \
 		../PM-GEST/res/images/radio.png \
 		../PM-GEST/res/images/tablette.png \
+		../PM-GEST/res/icons/SVG/BasicIcon.svg \
 		../PM-GEST/res/icons/SVG/Ajout.svg \
 		../PM-GEST/res/icons/SVG/Check.svg \
 		../PM-GEST/res/icons/SVG/Refresh.svg \

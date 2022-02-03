@@ -1,15 +1,17 @@
 #include "CSVBD.h"
 #include <fstream>
 
-#define LINK_REGISTRE "../PM-GEST/res/files/Registre.csv"
-#define LINK_DEPARTEMENT "../PM-GEST/res/files/Departements.csv"
-#define LINK_EMPLOYES "../PM-GEST/res/files/Employe.csv"
-#define LINK_TYPEOBJETS "../PM-GEST/res/files/TypeObjets.csv"
-#define LINK_OBJETS "../PM-GEST/res/files/Objets.csv"
+#define LINK_REGISTRE "./res/files/Departements.csv" //"../PM-GEST/res/files/Registre.csv"
+#define LINK_DEPARTEMENT "./res/files/Departements.csv"
+#define LINK_EMPLOYES "./res/files/Employe.csv"
+#define LINK_TYPEOBJETS "./res/files/TypeObjets.csv"
+#define LINK_OBJETS "./res/files/Objets.csv"
+
+
 
 CSVBD::CSVBD() {
     //Lecture des fichiers servant de base de données
-    lectureDepartement(LINK_DEPARTEMENT); //"./res/files/Departements.csv"
+    lectureDepartement(LINK_DEPARTEMENT);
     lectureEmploye(LINK_EMPLOYES);
     lectureTypeObjets(LINK_TYPEOBJETS);
     lectureObjets(LINK_OBJETS);
@@ -62,15 +64,18 @@ void CSVBD::delDepartement(int id) {
     departements.erase(departements.begin() + id);
 }
 
-void CSVBD::modDepartement(QString name, int id) {
-    departements.at(id)->setNom(name);
-}
-
 int CSVBD::getDepartementId(Departement* depart) {
     for(size_t i = 0; i < departements.size(); i++)
         if(departements.at(i) == depart)
             return i;
     return -1;
+}
+
+bool CSVBD::isAnotherDepartement(QString name){
+    for(size_t i = 0; i < departements.size(); i++)
+        if(departements.at(i)->getNom() == name)
+            return true;
+    return false;
 }
 
 bool CSVBD::isThisDepartementInUse(int id){
@@ -126,14 +131,6 @@ void CSVBD::delEmploye(int i) {
     employe.erase(employe.begin() + i);
 }
 
-void CSVBD::modEmploye(int i, int id, QString name, Departement *depart ,bool gestion) {
-    employe.at(i)->setName(name);
-    employe.at(i)->setId(id);
-    employe.at(i)->setGestion(gestion);
-    employe.at(i)->setDepartement(depart);
-}
-
-
 int CSVBD::getEmployeId(Employe *emp){
     for(size_t i = 0; i < employe.size(); i++)
         if(employe.at(i) == emp)
@@ -155,6 +152,23 @@ bool CSVBD::isThisEmployeInUse(int id){
         if(getEmployeId(registre.at(i)->getEmploye()) == id)
             return true;
     return false;
+}
+
+
+bool CSVBD::isAnotherEmploye(int id){
+    for(size_t i = 0; i < employe.size(); i++)
+        if(employe.at(i)->getId() == id)
+            return true;
+    return false;
+}
+
+int CSVBD::isAnotherEmployeName(QString name) {
+    int count = 0;
+
+    for(size_t i = 0; i < employe.size(); i++)
+        if(employe.at(i)->getName() == name)
+            count++;
+    return count;
 }
 
 void CSVBD::lectureEmploye(const QString& file){
@@ -230,6 +244,23 @@ bool CSVBD::isThisObjetInUse(int id){
         if(getObjetId(registre.at(i)->getObjet()) == id)
             return true;
     return false;
+}
+
+bool CSVBD::isAnotherObjet(QString id){
+    for(size_t i = 0; i < objets.size(); i++)
+        if(objets.at(i)->getId() == id)
+            return true;
+    return false;
+}
+
+int CSVBD::HowManyAnotherObjetName(QString name){
+    int compt =0;
+
+    for(size_t i = 0; i < objets.size(); i++)
+        if(objets.at(i)->getName() == name)
+            compt++;
+
+    return compt;
 }
 
 void CSVBD::lectureObjets(const QString& file){
@@ -350,6 +381,13 @@ bool CSVBD::isThisTypeInUse(int id){
     //Seul les objets utilise l'objet TypeObjet.
     for(size_t i = 0; i < objets.size(); i++)
         if(getTypeId(objets.at(i)->getType()) == id)
+            return true;
+    return false;
+}
+
+bool CSVBD::isAnotherType(QString name){
+    for(size_t i = 0; i < typeObjet.size(); i++)
+        if(typeObjet.at(i)->getName() == name)
             return true;
     return false;
 }
