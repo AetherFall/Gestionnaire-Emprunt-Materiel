@@ -13,6 +13,10 @@ ModificationEmploye::ModificationEmploye(CSVBD *BD, QWidget *parent) : QWidget(p
     ui->tblEmploye->setAlternatingRowColors(true);
     ui->tblEmploye->setColumnCount(4);
 
+    QStringList tblHeader;
+    tblHeader << "Identifiant" << "Nom" << "Département" << "Gestion";
+    ui->tblEmploye->setHorizontalHeaderLabels(tblHeader);
+
     for(size_t i = 0; i < BD->getListDepartementSize(); i++)
         ui->cbxDepartement->addItem(BD->getDepartementAt(i)->getNom());
 
@@ -28,6 +32,8 @@ ModificationEmploye::ModificationEmploye(CSVBD *BD, QWidget *parent) : QWidget(p
     connect(ui->btnDel, SIGNAL(clicked()), this, SLOT(suppression()));
     connect(ui->btnMod, SIGNAL(clicked()), this, SLOT(modification()));
     connect(ui->tblEmploye, SIGNAL(cellClicked(int,int)), this, SLOT(updateTable(int,int)));
+    connect(this, SIGNAL(verificationTextField(QString, QLineEdit*, bool)), this, SLOT(verification(QString, QLineEdit*, bool)));
+    connect(qApp, SIGNAL(focusChanged(QWidget*, QWidget*)), this, SLOT(focusChange(QWidget*, QWidget*)));
 
     ui->btnQuitter->setFocusPolicy(Qt::NoFocus);
     ui->btnAdd->setFocusPolicy(Qt::NoFocus);
@@ -46,13 +52,53 @@ void ModificationEmploye::onCloseAction() {
     this->close();
 }
 
+/**
+ * @brief FenPrincipale::focusChange Activation de la vérification des champs des QLineEdits lors de la perte de focus.
+ * @param a Objet Inutile obligatoirement transmis en parametre lors de l'utilisation d'un focusChange
+ * @param b Objet Inutile obligatoirement transmis en parametre lors de l'utilisation d'un focusChange
+ */
+void ModificationEmploye::focusChange(QWidget* a, QWidget* b){
+    if(!ui->txfEmploye->hasFocus() && !ui->txfEmploye->text().isEmpty())
+        emit verificationTextField(ui->txfEmploye->text(), ui->txfEmploye, true);
+
+    if(!ui->txfNom->hasFocus() && !ui->txfNom->text().isEmpty())
+        emit verificationTextField(ui->txfNom->text(), ui->txfNom, false);
+}
+
+
+/**
+ * @brief FenPrincipale::verification Sert à enlever les caractères superflus d'une mauvaise conversion de code bar vers la norme UPC-A.
+ * @param text texte que contient le widget actuel pour vérifier.
+ * @param edit Widget (QLineEdit) actuel pour réinscription du texte sans les charactères superflus.
+ */
+void ModificationEmploye::verification(QString text, QLineEdit *edit, bool basic) {
+    if(basic){
+        if(text.contains('|', Qt::CaseInsensitive)){
+            edit->clear();
+
+            for (QString item : text.split('|'))
+                edit->setText(edit->text().append(item));
+        }
+    }
+    else{
+        QStringList textValue = text.split(" ");
+        edit->setText("");
+
+        for(size_t i = 0; i < textValue.count(); i++){
+            if(!textValue[i].isEmpty()){
+                textValue[i][0] = textValue[i][0].toUpper();
+                edit->setText(edit->text().append(textValue[i]));
+            }
+
+            if(i+1 < textValue.size() && textValue[i+1].toStdString() != "" && textValue[i].toStdString() != "")
+                edit->setText(edit->text().append(" "));
+        }
+    }
+}
+
 void ModificationEmploye::updateTable(int currentRow, int currentCol) {
     ui->tblEmploye->clearContents();
     ui->tblEmploye->setRowCount(0);
-
-    QStringList tblHeader;
-    tblHeader << "Identifiant" << "Nom" << "Département" << "Gestion";
-    ui->tblEmploye->setVerticalHeaderLabels(tblHeader);
 
     for(int i = 0; i < ui->tblEmploye->columnCount(); i++)
         ui->tblEmploye->setColumnWidth(i, ui->tblEmploye->width() / ui->tblEmploye->columnCount());
@@ -66,9 +112,21 @@ void ModificationEmploye::updateTable(int currentRow, int currentCol) {
         QCheckBox *chbGest = new QCheckBox();
         chbGest->setCheckState(BD->getEmployeAt(i)->getGestion()? Qt::Checked : Qt::Unchecked);
         chbGest->setEnabled(false);
+        QWidget *w = new QWidget();
+        QHBoxLayout *l = new QHBoxLayout();
 
-        ui->tblEmploye->setCellWidget(i, 3, chbGest);
+        l->setAlignment(Qt::AlignCenter);
+        l->addWidget(chbGest);
+        w->setLayout(l);
+        chbGest->setStyleSheet("QCheckBox::indicator{background-color:none; border-style:none; width:25px; height:25px;}  QCheckBox::checked{image: url(:/icons/res/icons/SVG/Check.svg);}");
+        w->setStyleSheet("background-color:none;");
+
+        ui->tblEmploye->setCellWidget(i, 3, w);
     }
+
+    for(int r = 0; r < ui->tblEmploye->rowCount(); r++)
+        for(int c = 0; c < ui->tblEmploye->columnCount() -1; c++)
+            ui->tblEmploye->item(r,c)->setTextAlignment(Qt::AlignCenter);
 
     if(currentRow > -1){
         ui->txfEmploye->setText(QString::fromStdString(to_string(BD->getEmployeAt(currentRow)->getId())));

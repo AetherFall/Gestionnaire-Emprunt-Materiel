@@ -15,10 +15,11 @@
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QListWidget>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -33,7 +34,7 @@ public:
     QWidget *verticalWidget;
     QVBoxLayout *verticalLayout_7;
     QLineEdit *txfRecherche;
-    QListWidget *tblDepartement;
+    QTableWidget *tblDepartement;
     QVBoxLayout *verticalLayout;
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout_5;
@@ -86,40 +87,94 @@ public:
 
         verticalLayout_7->addWidget(txfRecherche);
 
-        tblDepartement = new QListWidget(verticalWidget);
+        tblDepartement = new QTableWidget(verticalWidget);
         tblDepartement->setObjectName(QString::fromUtf8("tblDepartement"));
+        tblDepartement->setEnabled(true);
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(tblDepartement->sizePolicy().hasHeightForWidth());
         tblDepartement->setSizePolicy(sizePolicy);
+        tblDepartement->setMinimumSize(QSize(650, 0));
+        tblDepartement->setMaximumSize(QSize(670, 16777215));
         QFont font;
         font.setPointSize(12);
         tblDepartement->setFont(font);
-        tblDepartement->setStyleSheet(QString::fromUtf8("QListView{\n"
+        tblDepartement->setStyleSheet(QString::fromUtf8("QTableWidget{\n"
 "border-style:none;\n"
 "color:black;\n"
 "}\n"
 "\n"
-"QListView::item{\n"
+"QTableWidget::item{\n"
 "background-color:#D8D7D7;\n"
 "}\n"
 "\n"
+"QHeaderView::section{\n"
+"background-color:#727171;\n"
+"border-style:none;\n"
+"font: 12pt \"Segoe UI\";\n"
+"color:white;\n"
+"}\n"
 "\n"
-"QListView::item:alternate{\n"
+"QTableWidget::item:selected{\n"
+"	border-style:none;\n"
+"	background-color: rgba(0, 0, 0, 0);\n"
+"}\n"
+"\n"
+"  QScrollBar::handle:vertical {\n"
+"        background-color:rgba(127, 127, 127, 255);\n"
+"    }\n"
+"\n"
+"QScrollBar{\n"
+"	width:15px;\n"
+"	background-color:rgba(193, 193, 193, 255);\n"
+"	border-radius:5px;\n"
+"	margin-right:5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle{\n"
+"	border-radius:5px;\n"
+"}\n"
+"\n"
+"    QScrollBar::add-line:vertical {\n"
+"		border-style:none;\n"
+"        subcontrol-position: bottom;\n"
+"        subcontrol-origin: margin;\n"
+"		border-radius:5px;\n"
+"    }\n"
+"    QScrollBar::sub-line:vertical {\n"
+"        background: #C1C1C1;\n"
+"        subcontrol-position: top;\n"
+"		border-radius:5px;\n"
+"        subcontrol-origin:"
+                        " margin;\n"
+"		margin-right:5px;\n"
+"    }\n"
+"\n"
+"QTableWidget::item:alternate{\n"
 "	background-color:#B2B2B2;\n"
 "}\n"
 "\n"
-"QListWidget::item:selected {\n"
+"QTableWidget::item:selected {\n"
 "	background-color:#727171;\n"
 "	color:white;\n"
 "}"));
-        tblDepartement->setEditTriggers(QAbstractItemView::CurrentChanged);
+        tblDepartement->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+        tblDepartement->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        tblDepartement->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
+        tblDepartement->setEditTriggers(QAbstractItemView::NoEditTriggers);
         tblDepartement->setProperty("showDropIndicator", QVariant(false));
+        tblDepartement->setDragDropOverwriteMode(false);
         tblDepartement->setDefaultDropAction(Qt::IgnoreAction);
         tblDepartement->setAlternatingRowColors(true);
+        tblDepartement->setSelectionMode(QAbstractItemView::SingleSelection);
         tblDepartement->setSelectionBehavior(QAbstractItemView::SelectRows);
-        tblDepartement->setTextElideMode(Qt::ElideNone);
+        tblDepartement->setTextElideMode(Qt::ElideMiddle);
+        tblDepartement->setShowGrid(false);
+        tblDepartement->horizontalHeader()->setVisible(true);
+        tblDepartement->horizontalHeader()->setHighlightSections(false);
+        tblDepartement->verticalHeader()->setVisible(false);
+        tblDepartement->verticalHeader()->setHighlightSections(false);
 
         verticalLayout_7->addWidget(tblDepartement);
 
@@ -327,9 +382,6 @@ public:
 
 
         retranslateUi(ModificationDepartement);
-
-        tblDepartement->setCurrentRow(-1);
-
 
         QMetaObject::connectSlotsByName(ModificationDepartement);
     } // setupUi

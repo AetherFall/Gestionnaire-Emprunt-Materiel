@@ -22,28 +22,41 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ModificationEmploye_t {
-    const uint offsetsAndSize[20];
-    char stringdata0[108];
+    const uint offsetsAndSize[40];
+    char stringdata0[195];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_ModificationEmploye_t, stringdata0) + ofs), len 
 static const qt_meta_stringdata_ModificationEmploye_t qt_meta_stringdata_ModificationEmploye = {
     {
 QT_MOC_LITERAL(0, 19), // "ModificationEmploye"
-QT_MOC_LITERAL(20, 7), // "refresh"
-QT_MOC_LITERAL(28, 0), // ""
-QT_MOC_LITERAL(29, 5), // "ajout"
-QT_MOC_LITERAL(35, 11), // "suppression"
-QT_MOC_LITERAL(47, 12), // "modification"
-QT_MOC_LITERAL(60, 11), // "updateTable"
-QT_MOC_LITERAL(72, 10), // "currentRow"
-QT_MOC_LITERAL(83, 10), // "currentCol"
-QT_MOC_LITERAL(94, 13) // "onCloseAction"
+QT_MOC_LITERAL(20, 21), // "verificationTextField"
+QT_MOC_LITERAL(42, 0), // ""
+QT_MOC_LITERAL(43, 10), // "QLineEdit*"
+QT_MOC_LITERAL(54, 7), // "refresh"
+QT_MOC_LITERAL(62, 5), // "ajout"
+QT_MOC_LITERAL(68, 11), // "suppression"
+QT_MOC_LITERAL(80, 12), // "modification"
+QT_MOC_LITERAL(93, 11), // "updateTable"
+QT_MOC_LITERAL(105, 10), // "currentRow"
+QT_MOC_LITERAL(116, 10), // "currentCol"
+QT_MOC_LITERAL(127, 13), // "onCloseAction"
+QT_MOC_LITERAL(141, 11), // "focusChange"
+QT_MOC_LITERAL(153, 8), // "QWidget*"
+QT_MOC_LITERAL(162, 1), // "a"
+QT_MOC_LITERAL(164, 1), // "b"
+QT_MOC_LITERAL(166, 12), // "verification"
+QT_MOC_LITERAL(179, 4), // "text"
+QT_MOC_LITERAL(184, 4), // "edit"
+QT_MOC_LITERAL(189, 5) // "basic"
 
     },
-    "ModificationEmploye\0refresh\0\0ajout\0"
-    "suppression\0modification\0updateTable\0"
-    "currentRow\0currentCol\0onCloseAction"
+    "ModificationEmploye\0verificationTextField\0"
+    "\0QLineEdit*\0refresh\0ajout\0suppression\0"
+    "modification\0updateTable\0currentRow\0"
+    "currentCol\0onCloseAction\0focusChange\0"
+    "QWidget*\0a\0b\0verification\0text\0edit\0"
+    "basic"
 };
 #undef QT_MOC_LITERAL
 
@@ -53,32 +66,48 @@ static const uint qt_meta_data_ModificationEmploye[] = {
        9,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+      14,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       1,       // signalCount
+
+ // signals: name, argc, parameters, tag, flags, initial metatype offsets
+       1,    3,   98,    2, 0x06,    0 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   62,    2, 0x08,    0 /* Private */,
-       3,    0,   63,    2, 0x08,    1 /* Private */,
-       4,    0,   64,    2, 0x08,    2 /* Private */,
-       5,    0,   65,    2, 0x08,    3 /* Private */,
-       6,    2,   66,    2, 0x08,    4 /* Private */,
-       6,    1,   71,    2, 0x28,    7 /* Private | MethodCloned */,
-       6,    0,   74,    2, 0x28,    9 /* Private | MethodCloned */,
-       9,    0,   75,    2, 0x08,   10 /* Private */,
+       4,    0,  105,    2, 0x08,    4 /* Private */,
+       5,    0,  106,    2, 0x08,    5 /* Private */,
+       6,    0,  107,    2, 0x08,    6 /* Private */,
+       7,    0,  108,    2, 0x08,    7 /* Private */,
+       8,    2,  109,    2, 0x08,    8 /* Private */,
+       8,    1,  114,    2, 0x28,   11 /* Private | MethodCloned */,
+       8,    0,  117,    2, 0x28,   13 /* Private | MethodCloned */,
+      11,    0,  118,    2, 0x08,   14 /* Private */,
+      12,    2,  119,    2, 0x08,   15 /* Private */,
+      12,    1,  124,    2, 0x28,   18 /* Private | MethodCloned */,
+      12,    0,  127,    2, 0x28,   20 /* Private | MethodCloned */,
+      16,    3,  128,    2, 0x08,   21 /* Private */,
+      16,    2,  135,    2, 0x28,   25 /* Private | MethodCloned */,
+
+ // signals: parameters
+    QMetaType::Void, QMetaType::QString, 0x80000000 | 3, QMetaType::Bool,    2,    2,    2,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,    7,    8,
-    QMetaType::Void, QMetaType::Int,    7,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,    9,   10,
+    QMetaType::Void, QMetaType::Int,    9,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 13, 0x80000000 | 13,   14,   15,
+    QMetaType::Void, 0x80000000 | 13,   14,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString, 0x80000000 | 3, QMetaType::Bool,   17,   18,   19,
+    QMetaType::Void, QMetaType::QString, 0x80000000 | 3,   17,   18,
 
        0        // eod
 };
@@ -89,15 +118,70 @@ void ModificationEmploye::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
         auto *_t = static_cast<ModificationEmploye *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->refresh(); break;
-        case 1: _t->ajout(); break;
-        case 2: _t->suppression(); break;
-        case 3: _t->modification(); break;
-        case 4: _t->updateTable((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 5: _t->updateTable((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 6: _t->updateTable(); break;
-        case 7: _t->onCloseAction(); break;
+        case 0: _t->verificationTextField((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QLineEdit*(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3]))); break;
+        case 1: _t->refresh(); break;
+        case 2: _t->ajout(); break;
+        case 3: _t->suppression(); break;
+        case 4: _t->modification(); break;
+        case 5: _t->updateTable((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 6: _t->updateTable((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 7: _t->updateTable(); break;
+        case 8: _t->onCloseAction(); break;
+        case 9: _t->focusChange((*reinterpret_cast< QWidget*(*)>(_a[1])),(*reinterpret_cast< QWidget*(*)>(_a[2]))); break;
+        case 10: _t->focusChange((*reinterpret_cast< QWidget*(*)>(_a[1]))); break;
+        case 11: _t->focusChange(); break;
+        case 12: _t->verification((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QLineEdit*(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3]))); break;
+        case 13: _t->verification((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QLineEdit*(*)>(_a[2]))); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+        case 0:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 1:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QLineEdit* >(); break;
+            }
+            break;
+        case 9:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 1:
+            case 0:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QWidget* >(); break;
+            }
+            break;
+        case 10:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 0:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QWidget* >(); break;
+            }
+            break;
+        case 12:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 1:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QLineEdit* >(); break;
+            }
+            break;
+        case 13:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 1:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QLineEdit* >(); break;
+            }
+            break;
+        }
+    } else if (_c == QMetaObject::IndexOfMethod) {
+        int *result = reinterpret_cast<int *>(_a[0]);
+        {
+            using _t = void (ModificationEmploye::*)(QString , QLineEdit * , bool );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ModificationEmploye::verificationTextField)) {
+                *result = 0;
+                return;
+            }
         }
     }
 }
@@ -109,8 +193,8 @@ const QMetaObject ModificationEmploye::staticMetaObject = { {
     qt_static_metacall,
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_ModificationEmploye_t
-
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QLineEdit *, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QWidget *, std::false_type>, QtPrivate::TypeAndForceComplete<QWidget *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QWidget *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QLineEdit *, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QString, std::false_type>, QtPrivate::TypeAndForceComplete<QLineEdit *, std::false_type>
 
 
 >,
@@ -137,15 +221,22 @@ int ModificationEmploye::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 14)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 14;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
-            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 8;
+        if (_id < 14)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 14;
     }
     return _id;
+}
+
+// SIGNAL 0
+void ModificationEmploye::verificationTextField(QString _t1, QLineEdit * _t2, bool _t3)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

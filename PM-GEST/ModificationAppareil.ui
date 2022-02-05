@@ -104,31 +104,78 @@
            </property>
            <property name="maximumSize">
             <size>
-             <width>650</width>
+             <width>670</width>
              <height>16777215</height>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">QTableWidget {
-	alternate-background-color:blue;
-	background-color:#727171;
-	border-style:none;
-	color:black;
+            <string notr="true">QTableWidget{
+border-style:none;
+color:black;
+}
+
+QTableWidget::item{
+background-color:#D8D7D7;
 }
 
 QHeaderView::section{
 background-color:#727171;
 border-style:none;
-font: 11pt &quot;Segoe UI&quot;;
+font: 12pt &quot;Segoe UI&quot;;
+color:white;
 }
 
-QTableWidget::item{
-	background-color:#D8D7D7;
+QTableWidget::item:selected{
+	border-style:none;
+	background-color: rgba(0, 0, 0, 0);
 }
-</string>
+
+  QScrollBar::handle:vertical {
+        background-color:rgba(127, 127, 127, 255);
+    }
+
+QScrollBar:vertical{
+	width:15px;
+	background-color:rgba(193, 193, 193, 255);
+	border-radius:5px;
+	margin-right:5px;
+}
+
+QScrollBar::handle:vertical{
+	border-radius:5px;
+}
+
+    QScrollBar::add-line:vertical {
+		border-style:none;
+        subcontrol-position: bottom;
+        subcontrol-origin: margin;
+		border-radius:5px;
+    }
+    QScrollBar::sub-line:vertical {
+        background: #C1C1C1;
+        subcontrol-position: top;
+		border-radius:5px;
+        subcontrol-origin: margin;
+		margin-right:5px;
+    }
+
+QTableWidget::item:alternate{
+	background-color:#B2B2B2;
+}
+
+QTableWidget::item:selected {
+	background-color:#727171;
+	color:white;
+}</string>
+           </property>
+           <property name="verticalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOn</enum>
            </property>
            <property name="horizontalScrollBarPolicy">
             <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+           <property name="autoScroll">
+            <bool>false</bool>
            </property>
            <property name="alternatingRowColors">
             <bool>true</bool>
@@ -138,6 +185,9 @@ QTableWidget::item{
            </property>
            <property name="selectionBehavior">
             <enum>QAbstractItemView::SelectRows</enum>
+           </property>
+           <property name="textElideMode">
+            <enum>Qt::ElideMiddle</enum>
            </property>
            <property name="showGrid">
             <bool>false</bool>
@@ -641,6 +691,9 @@ QComboBox::down-arrow{
               </item>
               <item>
                <widget class="QCheckBox" name="chbGestion">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>35</width>
@@ -656,11 +709,13 @@ border: 2px solid rgb(112, 112, 112);
 width:28px;
 height:28px;
 border-radius: 15px;
+background-color:none;
 }
 
 QCheckBox::indicator:checked{
 	image: url(:/icons/res/icons/SVG/Check.svg);
 	background-color:white;
+	selection-color:black;
 	color:white;
 	text-decoration:none;
 }</string>

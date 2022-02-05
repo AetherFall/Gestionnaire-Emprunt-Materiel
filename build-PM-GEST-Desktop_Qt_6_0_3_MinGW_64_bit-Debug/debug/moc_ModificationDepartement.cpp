@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ModificationDepartement_t {
     const uint offsetsAndSize[20];
-    char stringdata0[112];
+    char stringdata0[98];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_ModificationDepartement_t, stringdata0) + ofs), len 
@@ -36,14 +36,14 @@ QT_MOC_LITERAL(33, 5), // "ajout"
 QT_MOC_LITERAL(39, 11), // "suppression"
 QT_MOC_LITERAL(51, 12), // "modification"
 QT_MOC_LITERAL(64, 11), // "updateTable"
-QT_MOC_LITERAL(76, 16), // "QListWidgetItem*"
-QT_MOC_LITERAL(93, 4), // "item"
-QT_MOC_LITERAL(98, 13) // "onCloseAction"
+QT_MOC_LITERAL(76, 3), // "row"
+QT_MOC_LITERAL(80, 3), // "col"
+QT_MOC_LITERAL(84, 13) // "onCloseAction"
 
     },
     "ModificationDepartement\0refresh\0\0ajout\0"
     "suppression\0modification\0updateTable\0"
-    "QListWidgetItem*\0item\0onCloseAction"
+    "row\0col\0onCloseAction"
 };
 #undef QT_MOC_LITERAL
 
@@ -53,7 +53,7 @@ static const uint qt_meta_data_ModificationDepartement[] = {
        9,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -61,20 +61,22 @@ static const uint qt_meta_data_ModificationDepartement[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   56,    2, 0x08,    0 /* Private */,
-       3,    0,   57,    2, 0x08,    1 /* Private */,
-       4,    0,   58,    2, 0x08,    2 /* Private */,
-       5,    0,   59,    2, 0x08,    3 /* Private */,
-       6,    1,   60,    2, 0x08,    4 /* Private */,
-       6,    0,   63,    2, 0x28,    6 /* Private | MethodCloned */,
-       9,    0,   64,    2, 0x08,    7 /* Private */,
+       1,    0,   62,    2, 0x08,    0 /* Private */,
+       3,    0,   63,    2, 0x08,    1 /* Private */,
+       4,    0,   64,    2, 0x08,    2 /* Private */,
+       5,    0,   65,    2, 0x08,    3 /* Private */,
+       6,    2,   66,    2, 0x08,    4 /* Private */,
+       6,    1,   71,    2, 0x28,    7 /* Private | MethodCloned */,
+       6,    0,   74,    2, 0x28,    9 /* Private | MethodCloned */,
+       9,    0,   75,    2, 0x08,   10 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 7,    8,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,    7,    8,
+    QMetaType::Void, QMetaType::Int,    7,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -91,9 +93,10 @@ void ModificationDepartement::qt_static_metacall(QObject *_o, QMetaObject::Call 
         case 1: _t->ajout(); break;
         case 2: _t->suppression(); break;
         case 3: _t->modification(); break;
-        case 4: _t->updateTable((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
-        case 5: _t->updateTable(); break;
-        case 6: _t->onCloseAction(); break;
+        case 4: _t->updateTable((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 5: _t->updateTable((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 6: _t->updateTable(); break;
+        case 7: _t->onCloseAction(); break;
         default: ;
         }
     }
@@ -107,7 +110,7 @@ const QMetaObject ModificationDepartement::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_ModificationDepartement_t
 
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QListWidgetItem *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
 
 
 >,
@@ -134,13 +137,13 @@ int ModificationDepartement::qt_metacall(QMetaObject::Call _c, int _id, void **_
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 8)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 7;
+        _id -= 8;
     }
     return _id;
 }

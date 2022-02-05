@@ -15,7 +15,7 @@ ModificationAppareil::ModificationAppareil(CSVBD *BD, QWidget *parent) : QWidget
     tblHeader << "Identifiant" << "Nom" << "Type d'appareil" << "En cours d'utilisation";
 
     ui->tblEmploye->setColumnCount(4);
-    ui->tblEmploye->setVerticalHeaderLabels(tblHeader);
+    ui->tblEmploye->setHorizontalHeaderLabels(tblHeader);
 
     for(size_t i = 0; i < BD->getListTypeSize(); i++)
         ui->cbxDepartement->addItem(BD->getTypeAt(i)->getName());
@@ -32,6 +32,8 @@ ModificationAppareil::ModificationAppareil(CSVBD *BD, QWidget *parent) : QWidget
     connect(ui->btnDel, SIGNAL(clicked()), this, SLOT(suppression()));
     connect(ui->btnMod, SIGNAL(clicked()), this, SLOT(modification()));
     connect(ui->tblEmploye, SIGNAL(cellClicked(int,int)), this, SLOT(updateTable(int,int)));
+    connect(this, SIGNAL(verificationTextField(QString, QLineEdit*, bool)), this, SLOT(verification(QString, QLineEdit*, bool)));
+    connect(qApp, SIGNAL(focusChanged(QWidget*, QWidget*)), this, SLOT(focusChange(QWidget*, QWidget*)));
 
     ui->btnQuitter->setFocusPolicy(Qt::NoFocus);
     ui->btnAdd->setFocusPolicy(Qt::NoFocus);
@@ -66,8 +68,18 @@ void ModificationAppareil::updateTable(int currentRow, int currentCol) {
         QCheckBox *chbUse = new QCheckBox();
         chbUse->setCheckState(BD->getObjetAt(i)->isEmprunte()? Qt::Checked : Qt::Unchecked);
         chbUse->setEnabled(false);
+        QWidget *w = new QWidget();
+        QHBoxLayout *l = new QHBoxLayout();
 
-        ui->tblEmploye->setCellWidget(i, 3, chbUse);
+        l->setAlignment(Qt::AlignCenter);
+        l->addWidget(chbUse);
+        w->setLayout(l);
+        chbUse->setStyleSheet("QCheckBox::indicator{background-color:none; border-style:none; width:25px; height:25px;}  QCheckBox::checked{image: url(:/icons/res/icons/SVG/Check.svg);}");
+        w->setStyleSheet("background-color:none;");
+
+        ui->tblEmploye->setCellWidget(i, 3, w);
+
+        ui->tblEmploye->setCellWidget(i, 3, w);
     }
 
     if(currentRow > -1){
@@ -84,6 +96,49 @@ void ModificationAppareil::onCloseAction() {
     this->close();
 }
 
+/**
+ * @brief FenPrincipale::focusChange Activation de la vérification des champs des QLineEdits lors de la perte de focus.
+ * @param a Objet Inutile obligatoirement transmis en parametre lors de l'utilisation d'un focusChange
+ * @param b Objet Inutile obligatoirement transmis en parametre lors de l'utilisation d'un focusChange
+ */
+void ModificationAppareil::focusChange(QWidget* a, QWidget* b){
+    if(!ui->txfEmploye->hasFocus() && !ui->txfEmploye->text().isEmpty())
+        emit verificationTextField(ui->txfEmploye->text(), ui->txfEmploye, true);
+
+    if(!ui->txfNom->hasFocus() && !ui->txfNom->text().isEmpty())
+        emit verificationTextField(ui->txfNom->text(), ui->txfNom, false);
+}
+
+
+/**
+ * @brief FenPrincipale::verification Sert à enlever les caractères superflus d'une mauvaise conversion de code bar vers la norme UPC-A.
+ * @param text texte que contient le widget actuel pour vérifier.
+ * @param edit Widget (QLineEdit) actuel pour réinscription du texte sans les charactères superflus.
+ */
+void ModificationAppareil::verification(QString text, QLineEdit *edit, bool basic) {
+    if(basic){
+        if(text.contains('|', Qt::CaseInsensitive)){
+            edit->clear();
+
+            for (QString item : text.split('|'))
+                edit->setText(edit->text().append(item));
+        }
+    }
+    else{
+        QStringList textValue = text.split(" ");
+        edit->setText("");
+
+        for(size_t i = 0; i < textValue.count(); i++){
+            if(!textValue[i].isEmpty()){
+                textValue[i][0] = textValue[i][0].toUpper();
+                edit->setText(edit->text().append(textValue[i]));
+            }
+
+            if(i+1 < textValue.size() && textValue[i+1].toStdString() != "" && textValue[i].toStdString() != "")
+                edit->setText(edit->text().append(" "));
+        }
+    }
+}
 void ModificationAppareil::refresh() {
     ui->tblEmploye->clearSelection();
 
@@ -162,8 +217,14 @@ void ModificationAppareil::modification() {
                 if(ui->cbxDepartement->currentIndex() != BD->getTypeId(BD->getObjetAt(indexList.at(0).row())->getType()))
                     BD->getObjetAt(indexList.at(0).row())->setType(BD->getTypeAt(ui->cbxDepartement->currentIndex()));
 
-                if(ui->chbGestion->isChecked() != BD->getObjetAt(indexList.at(0).row())->isEmprunte())
+                if(ui->chbGestion->isChecked() != BD->getObjetAt(indexList.at(0).row())->isEmprunte()){
                     BD->getObjetAt(indexList.at(0).row())->setEmprunte(ui->chbGestion->isChecked());
+
+                    if(ui->chbGestion->isChecked())
+                        BD->addToRegistre(QDate().currentDate(), new Employe(0, "Administrateur", new Departement("Gestion Système"), true), BD->getObjetAt(indexList.at(0).row()));
+                    else
+                        BD->delFromRegistre(BD->getRegistreOfThisObject(BD->getObjetAt(indexList.at(0).row())));
+                }
 
                 updateTable();
             }

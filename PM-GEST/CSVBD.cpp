@@ -1,11 +1,11 @@
 #include "CSVBD.h"
 #include <fstream>
 
-#define LINK_REGISTRE "./res/files/Registre.csv" //"../PM-GEST/res/files/Registre.csv"
-#define LINK_DEPARTEMENT "./res/files/Departements.csv"
-#define LINK_EMPLOYES "./res/files/Employe.csv"
-#define LINK_TYPEOBJETS "./res/files/TypeObjets.csv"
-#define LINK_OBJETS "./res/files/Objets.csv"
+#define LINK_REGISTRE "../PM-GEST/res/files/Registre.csv" //"../PM-GEST/res/files/Registre.csv"
+#define LINK_DEPARTEMENT "../PM-GEST/res/files/Departements.csv"
+#define LINK_EMPLOYES "../PM-GEST/res/files/Employe.csv"
+#define LINK_TYPEOBJETS "../PM-GEST/res/files/TypeObjets.csv"
+#define LINK_OBJETS "../PM-GEST/res/files/Objets.csv"
 
 
 
@@ -326,7 +326,10 @@ void CSVBD::lectureRegistre(const QString& file){
 
         while(getline(fluxRegistre, lineConvert)){
             QList<QString> line = QString::fromStdString(lineConvert).split(",");
-            registre.push_back(new Registre(QDate::fromString(line[0], "yyyy-MM-dd"), getEmployeAt(line[1].toInt()), getObjetAt(line[2].toInt())));
+            if(line[1].toInt() != -1)
+                registre.push_back(new Registre(QDate::fromString(line[0], "yyyy-MM-dd"), getEmployeAt(line[1].toInt()), getObjetAt(line[2].toInt())));
+            else
+                registre.push_back(new Registre(QDate::fromString(line[0], "yyyy-MM-dd"), new Employe(0, "Administrateur", new Departement("Gestion systeme"), true), getObjetAt(line[2].toInt())));
         }
 
         fluxRegistre.close();

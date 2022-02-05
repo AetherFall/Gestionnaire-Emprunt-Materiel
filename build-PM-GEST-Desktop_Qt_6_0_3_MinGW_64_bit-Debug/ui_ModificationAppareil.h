@@ -101,28 +101,73 @@ public:
         tblEmploye = new QTableWidget(verticalWidget);
         tblEmploye->setObjectName(QString::fromUtf8("tblEmploye"));
         tblEmploye->setMinimumSize(QSize(650, 0));
-        tblEmploye->setMaximumSize(QSize(650, 16777215));
-        tblEmploye->setStyleSheet(QString::fromUtf8("QTableWidget {\n"
-"	alternate-background-color:blue;\n"
-"	background-color:#727171;\n"
-"	border-style:none;\n"
-"	color:black;\n"
+        tblEmploye->setMaximumSize(QSize(670, 16777215));
+        tblEmploye->setStyleSheet(QString::fromUtf8("QTableWidget{\n"
+"border-style:none;\n"
+"color:black;\n"
+"}\n"
+"\n"
+"QTableWidget::item{\n"
+"background-color:#D8D7D7;\n"
 "}\n"
 "\n"
 "QHeaderView::section{\n"
 "background-color:#727171;\n"
 "border-style:none;\n"
-"font: 11pt \"Segoe UI\";\n"
+"font: 12pt \"Segoe UI\";\n"
+"color:white;\n"
 "}\n"
 "\n"
-"QTableWidget::item{\n"
-"	background-color:#D8D7D7;\n"
+"QTableWidget::item:selected{\n"
+"	border-style:none;\n"
+"	background-color: rgba(0, 0, 0, 0);\n"
 "}\n"
-""));
+"\n"
+"  QScrollBar::handle:vertical {\n"
+"        background-color:rgba(127, 127, 127, 255);\n"
+"    }\n"
+"\n"
+"QScrollBar:vertical{\n"
+"	width:15px;\n"
+"	background-color:rgba(193, 193, 193, 255);\n"
+"	border-radius:5px;\n"
+"	margin-right:5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical{\n"
+"	border-radius:5px;\n"
+"}\n"
+"\n"
+"    QScrollBar::add-line:vertical {\n"
+"		border-style:none;\n"
+"        subcontrol-position: bottom;\n"
+"        subcontrol-origin: margin;\n"
+"		border-radius:5px;\n"
+"    }\n"
+"    QScrollBar::sub-line:vertical {\n"
+"        background: #C1C1C1;\n"
+"        subcontrol-position: top;\n"
+"		border-radius:5px;\n"
+"        "
+                        "subcontrol-origin: margin;\n"
+"		margin-right:5px;\n"
+"    }\n"
+"\n"
+"QTableWidget::item:alternate{\n"
+"	background-color:#B2B2B2;\n"
+"}\n"
+"\n"
+"QTableWidget::item:selected {\n"
+"	background-color:#727171;\n"
+"	color:white;\n"
+"}"));
+        tblEmploye->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
         tblEmploye->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        tblEmploye->setAutoScroll(false);
         tblEmploye->setAlternatingRowColors(true);
         tblEmploye->setSelectionMode(QAbstractItemView::SingleSelection);
         tblEmploye->setSelectionBehavior(QAbstractItemView::SelectRows);
+        tblEmploye->setTextElideMode(Qt::ElideMiddle);
         tblEmploye->setShowGrid(false);
         tblEmploye->horizontalHeader()->setVisible(true);
         tblEmploye->horizontalHeader()->setHighlightSections(false);
@@ -385,6 +430,7 @@ public:
 
         chbGestion = new QCheckBox(gridFrame);
         chbGestion->setObjectName(QString::fromUtf8("chbGestion"));
+        chbGestion->setEnabled(true);
         chbGestion->setMaximumSize(QSize(35, 50));
         chbGestion->setCursor(QCursor(Qt::PointingHandCursor));
         chbGestion->setStyleSheet(QString::fromUtf8("QCheckBox::indicator {\n"
@@ -392,11 +438,13 @@ public:
 "width:28px;\n"
 "height:28px;\n"
 "border-radius: 15px;\n"
+"background-color:none;\n"
 "}\n"
 "\n"
 "QCheckBox::indicator:checked{\n"
 "	image: url(:/icons/res/icons/SVG/Check.svg);\n"
 "	background-color:white;\n"
+"	selection-color:black;\n"
 "	color:white;\n"
 "	text-decoration:none;\n"
 "}"));
