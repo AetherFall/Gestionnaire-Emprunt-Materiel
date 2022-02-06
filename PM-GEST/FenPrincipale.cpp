@@ -183,6 +183,17 @@ void FenPrincipale::lectureRegistre(){
         else
             colChange++;
 
+        //TODO Revoir
+        if(!user.isEmpty()){
+
+            if(user.length() > 16) {
+                string temp = user.toStdString();
+                temp.erase(temp.begin()+15, temp.end());
+                temp += " ...";
+                user = QString::fromStdString(temp);
+            }
+        }
+
         ui->tableWidget->setCellWidget(rowChange, colChange, new ElementsItem(BD->getObjetAt(i)->getName(), BD->getObjetAt(i)->getType()->getImage(), user, BD->getObjetAt(i)->isEmprunte()));
     }
 

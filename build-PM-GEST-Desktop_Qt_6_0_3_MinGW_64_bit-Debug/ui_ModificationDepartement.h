@@ -171,7 +171,7 @@ public:
         tblDepartement->setSelectionBehavior(QAbstractItemView::SelectRows);
         tblDepartement->setTextElideMode(Qt::ElideMiddle);
         tblDepartement->setShowGrid(false);
-        tblDepartement->horizontalHeader()->setVisible(true);
+        tblDepartement->horizontalHeader()->setVisible(false);
         tblDepartement->horizontalHeader()->setHighlightSections(false);
         tblDepartement->verticalHeader()->setVisible(false);
         tblDepartement->verticalHeader()->setHighlightSections(false);

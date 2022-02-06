@@ -15,10 +15,11 @@
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QListWidget>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -33,7 +34,7 @@ public:
     QWidget *verticalWidget;
     QVBoxLayout *verticalLayout_7;
     QLineEdit *txfRecherche;
-    QListWidget *tblEmploye;
+    QTableWidget *tblEmploye;
     QVBoxLayout *verticalLayout;
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout_5;
@@ -90,26 +91,81 @@ public:
 
         verticalLayout_7->addWidget(txfRecherche);
 
-        tblEmploye = new QListWidget(verticalWidget);
+        tblEmploye = new QTableWidget(verticalWidget);
         tblEmploye->setObjectName(QString::fromUtf8("tblEmploye"));
-        tblEmploye->setStyleSheet(QString::fromUtf8("QListView{\n"
+        tblEmploye->setMinimumSize(QSize(650, 0));
+        tblEmploye->setMaximumSize(QSize(670, 16777215));
+        tblEmploye->setStyleSheet(QString::fromUtf8("QTableWidget{\n"
 "border-style:none;\n"
 "color:black;\n"
 "}\n"
 "\n"
-"QListView::item{\n"
+"QTableWidget::item{\n"
 "background-color:#D8D7D7;\n"
 "}\n"
 "\n"
+"QHeaderView::section{\n"
+"background-color:#727171;\n"
+"border-style:none;\n"
+"font: 12pt \"Segoe UI\";\n"
+"color:white;\n"
+"}\n"
 "\n"
-"QListView::item:alternate{\n"
+"QTableWidget::item:selected{\n"
+"	border-style:none;\n"
+"	background-color: rgba(0, 0, 0, 0);\n"
+"}\n"
+"\n"
+"  QScrollBar::handle:vertical {\n"
+"        background-color:rgba(127, 127, 127, 255);\n"
+"    }\n"
+"\n"
+"QScrollBar{\n"
+"	width:15px;\n"
+"	background-color:rgba(193, 193, 193, 255);\n"
+"	border-radius:5px;\n"
+"	margin-right:5px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle{\n"
+"	border-radius:5px;\n"
+"}\n"
+"\n"
+"    QScrollBar::add-line:vertical {\n"
+"		border-style:none;\n"
+"        subcontrol-position: bottom;\n"
+"        subcontrol-origin: margin;\n"
+"		border-radius:5px;\n"
+"    }\n"
+"    QScrollBar::sub-line:vertical {\n"
+"        background: #C1C1C1;\n"
+"        subcontrol-position: top;\n"
+"		border-radius:5px;\n"
+"        subcontrol-origin:"
+                        " margin;\n"
+"		margin-right:5px;\n"
+"    }\n"
+"\n"
+"QTableWidget::item:alternate{\n"
 "	background-color:#B2B2B2;\n"
 "}\n"
 "\n"
-"QListWidget::item:selected {\n"
+"QTableWidget::item:selected {\n"
 "	background-color:#727171;\n"
 "	color:white;\n"
 "}"));
+        tblEmploye->setFrameShape(QFrame::StyledPanel);
+        tblEmploye->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        tblEmploye->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        tblEmploye->setProperty("showDropIndicator", QVariant(false));
+        tblEmploye->setDragDropOverwriteMode(false);
+        tblEmploye->setSelectionMode(QAbstractItemView::SingleSelection);
+        tblEmploye->setSelectionBehavior(QAbstractItemView::SelectRows);
+        tblEmploye->setTextElideMode(Qt::ElideMiddle);
+        tblEmploye->setShowGrid(false);
+        tblEmploye->horizontalHeader()->setHighlightSections(true);
+        tblEmploye->verticalHeader()->setVisible(false);
+        tblEmploye->verticalHeader()->setHighlightSections(false);
 
         verticalLayout_7->addWidget(tblEmploye);
 

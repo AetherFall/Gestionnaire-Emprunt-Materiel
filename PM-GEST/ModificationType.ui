@@ -92,27 +92,115 @@
           </widget>
          </item>
          <item>
-          <widget class="QListWidget" name="tblEmploye">
+          <widget class="QTableWidget" name="tblEmploye">
+           <property name="minimumSize">
+            <size>
+             <width>650</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>670</width>
+             <height>16777215</height>
+            </size>
+           </property>
            <property name="styleSheet">
-            <string notr="true">QListView{
+            <string notr="true">QTableWidget{
 border-style:none;
 color:black;
 }
 
-QListView::item{
+QTableWidget::item{
 background-color:#D8D7D7;
 }
 
+QHeaderView::section{
+background-color:#727171;
+border-style:none;
+font: 12pt &quot;Segoe UI&quot;;
+color:white;
+}
 
-QListView::item:alternate{
+QTableWidget::item:selected{
+	border-style:none;
+	background-color: rgba(0, 0, 0, 0);
+}
+
+  QScrollBar::handle:vertical {
+        background-color:rgba(127, 127, 127, 255);
+    }
+
+QScrollBar{
+	width:15px;
+	background-color:rgba(193, 193, 193, 255);
+	border-radius:5px;
+	margin-right:5px;
+}
+
+QScrollBar::handle{
+	border-radius:5px;
+}
+
+    QScrollBar::add-line:vertical {
+		border-style:none;
+        subcontrol-position: bottom;
+        subcontrol-origin: margin;
+		border-radius:5px;
+    }
+    QScrollBar::sub-line:vertical {
+        background: #C1C1C1;
+        subcontrol-position: top;
+		border-radius:5px;
+        subcontrol-origin: margin;
+		margin-right:5px;
+    }
+
+QTableWidget::item:alternate{
 	background-color:#B2B2B2;
 }
 
-QListWidget::item:selected {
+QTableWidget::item:selected {
 	background-color:#727171;
 	color:white;
 }</string>
            </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
+           <property name="showDropIndicator" stdset="0">
+            <bool>false</bool>
+           </property>
+           <property name="dragDropOverwriteMode">
+            <bool>false</bool>
+           </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::SingleSelection</enum>
+           </property>
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectRows</enum>
+           </property>
+           <property name="textElideMode">
+            <enum>Qt::ElideMiddle</enum>
+           </property>
+           <property name="showGrid">
+            <bool>false</bool>
+           </property>
+           <attribute name="horizontalHeaderHighlightSections">
+            <bool>true</bool>
+           </attribute>
+           <attribute name="verticalHeaderVisible">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="verticalHeaderHighlightSections">
+            <bool>false</bool>
+           </attribute>
           </widget>
          </item>
         </layout>

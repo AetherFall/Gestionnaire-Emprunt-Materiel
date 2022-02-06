@@ -89,6 +89,10 @@ void ModificationAppareil::updateTable(int currentRow, int currentCol) {
         ui->chbGestion->setCheckState(BD->getObjetAt(currentRow)->isEmprunte()? Qt::Checked : Qt::Unchecked);
         ui->tblEmploye->selectRow(currentRow);
     }
+
+    for(int r = 0; r < ui->tblEmploye->rowCount(); r++)
+        for(int c = 0; c < ui->tblEmploye->columnCount() -1; c++)
+            ui->tblEmploye->item(r,c)->setTextAlignment(Qt::AlignCenter);
 }
 
 void ModificationAppareil::onCloseAction() {
