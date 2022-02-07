@@ -27,7 +27,7 @@ class CSVBD {
         void delDepartement(int id);
         void modDepartement(QString name, int id);
         bool isThisDepartementInUse(int id);
-        bool isAnotherDepartement(QString name);
+        int isAnotherDepartement(QString name);
 
         vector<Employe*> getListEmploye();
         Employe* getEmployeAt(int i);
@@ -66,7 +66,7 @@ class CSVBD {
         void addTypeObjet(QString typeName, QString ImgfilePath);
         void delTypeObjet(int id);
         bool isThisTypeInUse(int id);
-        bool isAnotherType(QString name);
+        int isAnotherType(QString name);
 
     private:
         vector<Departement*> departements;

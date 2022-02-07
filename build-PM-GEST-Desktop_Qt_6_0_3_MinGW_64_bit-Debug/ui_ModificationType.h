@@ -163,7 +163,7 @@ public:
         tblEmploye->setSelectionBehavior(QAbstractItemView::SelectRows);
         tblEmploye->setTextElideMode(Qt::ElideMiddle);
         tblEmploye->setShowGrid(false);
-        tblEmploye->horizontalHeader()->setHighlightSections(true);
+        tblEmploye->horizontalHeader()->setHighlightSections(false);
         tblEmploye->verticalHeader()->setVisible(false);
         tblEmploye->verticalHeader()->setHighlightSections(false);
 

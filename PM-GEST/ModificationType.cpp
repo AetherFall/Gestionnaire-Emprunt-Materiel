@@ -5,6 +5,8 @@
 #include <QMessageBox>
 #include <QFileDialog>
 
+#include <iostream>
+
 ModificationType::ModificationType(CSVBD *BD, QWidget *parent) : QWidget(parent), ui(new Ui::ModificationType) {
     ui->setupUi(this);
     this->BD = BD;
@@ -24,7 +26,7 @@ ModificationType::ModificationType(CSVBD *BD, QWidget *parent) : QWidget(parent)
     connect(ui->btnAdd, SIGNAL(clicked()), this, SLOT(ajout()));
     connect(ui->btnDel, SIGNAL(clicked()), this, SLOT(suppression()));
     connect(ui->btnMod, SIGNAL(clicked()), this, SLOT(modification()));
-    connect(ui->tblEmploye, SIGNAL(cellChanged(int, int)), this, SLOT(updateTable(int, int)));
+    connect(ui->tblEmploye, SIGNAL(cellClicked(int,int)), this, SLOT(updateTable(int,int)));
     connect(ui->btnRecherche, SIGNAL(clicked()), this, SLOT(fileSearch()));
 
     ui->btnQuitter->setFocusPolicy(Qt::NoFocus);
@@ -79,15 +81,21 @@ void ModificationType::refresh() {
 }
 
 void ModificationType::ajout() {
-    if(!ui->txfEmploye->text().isEmpty())
-            BD->addTypeObjet(ui->txfEmploye->text(), ui->labImage->text());
+    if(!ui->txfEmploye->text().isEmpty() && ui->labImage->text() != "Lien vers l'image..."){
+        QString name = ui->txfEmploye->text();
+        int count = 0;
+
+        while (BD->isAnotherType(name) > -1) {
+            count++;
+            name = ui->txfEmploye->text().append(QString::fromStdString('(' + to_string(count) + ')'));
+        }
+
+        BD->addTypeObjet(name, ui->labImage->text());
+    }
     else
         QMessageBox::critical(this, getTitle(ERROR), getError(TYP_CHAMPVIDE_TOADD));
 
-    //TODO Ajouter une verification si un autre departement a le meme nom.
-    //TODO Mettre toute les erreures dans une classe d'erreur
-
-    updateTable(ui->tblEmploye->rowCount() -1);
+    updateTable();
 }
 
 void ModificationType::suppression() {
@@ -99,7 +107,7 @@ void ModificationType::suppression() {
             if(!BD->isThisTypeInUse(ui->tblEmploye->currentRow())){
                 if(QMessageBox::information(this, getTitle(INFORMATION), getInfo(TYP_DELETE), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes){
                     BD->delTypeObjet(indexList.at(0).row());
-                    updateTable(indexList.at(0).row());
+                    updateTable();
                 }
             }
             else

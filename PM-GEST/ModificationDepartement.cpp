@@ -71,16 +71,19 @@ void ModificationDepartement::refresh() {
 
 void ModificationDepartement::ajout() {
     if(!ui->txfEmploye->text().isEmpty()) {
-            BD->addDepartement(ui->txfEmploye->text());
-            updateTable();
+        QString name = ui->txfEmploye->text();
+        int count = 0;
+
+        while (BD->isAnotherDepartement(name) > -1) {
+            count++;
+            name = ui->txfEmploye->text().append(QString::fromStdString('(' + to_string(count) + ')'));
+        }
+
+        BD->addDepartement(name);
+        updateTable();
     }
     else
         QMessageBox::critical(this, getTitle(ERROR), getError(DEP_CHAMPVIDE_TOADD));
-
-    //TODO Ajouter une verification si un autre departement a le meme nom.
-    //TODO Mettre toute les erreures dans une classe d'erreur
-
-    updateTable();
 }
 
 void ModificationDepartement::suppression() {

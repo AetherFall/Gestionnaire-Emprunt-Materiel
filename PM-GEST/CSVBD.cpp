@@ -71,11 +71,11 @@ int CSVBD::getDepartementId(Departement* depart) {
     return -1;
 }
 
-bool CSVBD::isAnotherDepartement(QString name){
+int CSVBD::isAnotherDepartement(QString name){
     for(size_t i = 0; i < departements.size(); i++)
         if(departements.at(i)->getNom() == name)
-            return true;
-    return false;
+            return i;
+    return -1;
 }
 
 bool CSVBD::isThisDepartementInUse(int id){
@@ -388,11 +388,11 @@ bool CSVBD::isThisTypeInUse(int id){
     return false;
 }
 
-bool CSVBD::isAnotherType(QString name){
+int CSVBD::isAnotherType(QString name){
     for(size_t i = 0; i < typeObjet.size(); i++)
         if(typeObjet.at(i)->getName() == name)
-            return true;
-    return false;
+            return i;
+    return -1;
 }
 
 void CSVBD::lectureTypeObjets(const QString& file){
