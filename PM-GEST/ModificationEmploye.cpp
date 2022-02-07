@@ -79,6 +79,21 @@ void ModificationEmploye::verification(QString text, QLineEdit *edit, bool basic
             for (QString item : text.split('|'))
                 edit->setText(edit->text().append(item));
         }
+
+
+        if(!CSVBD::isNumeric(edit->text().toStdString())){
+            edit->clear();
+            QMessageBox::critical(this, getTitle(ERROR), getError(EMP_NOTNUMERIC));
+        }
+        else{
+            if(edit->text().toStdString().length() >= 10){ //Limite d'un integer
+                string temp = edit->text().toStdString();
+                temp.erase(temp.begin()+9, temp.end());
+
+                edit->setText(QString::fromStdString(temp));
+                QMessageBox::critical(this, getTitle(ERROR), getError(EMP_OVERINTLIMIT));
+            }
+        }
     }
     else{
         QStringList textValue = text.split(" ");

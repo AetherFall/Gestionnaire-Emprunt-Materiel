@@ -11,6 +11,8 @@
     <qresource prefix="/images">
         <file>res/images/radio.png</file>
         <file>res/images/tablette.png</file>
+        <file>res/images/RFScan.png</file>
+        <file>res/images/unknow.png</file>
     </qresource>
     <qresource prefix="/CSV">
         <file>res/files/Departements.csv</file>

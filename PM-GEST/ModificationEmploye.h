@@ -17,6 +17,7 @@ public:
     explicit ModificationEmploye(CSVBD *BD, QWidget *parent = nullptr);
     ~ModificationEmploye();
 
+
 private:
     Ui::ModificationEmploye *ui;
     CSVBD *BD;
@@ -30,6 +31,7 @@ private slots:
     void onCloseAction();
     void focusChange(QWidget* a = nullptr, QWidget* b = nullptr);
     void verification(QString text, QLineEdit *edit, bool basic = true);
+
 
 signals:
     void verificationTextField(QString, QLineEdit*, bool);

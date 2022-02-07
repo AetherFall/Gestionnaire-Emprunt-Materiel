@@ -47,7 +47,9 @@ enum ERROR{
     TYP_EXISTANT_TOMOD = 29,
     OBJ_EXISTANT_TOMOD = 30,
     EMP_COMBOBOX_VIDE = 31,
-    OBJ_COMBOBOX_VIDE = 32
+    OBJ_COMBOBOX_VIDE = 32,
+    EMP_NOTNUMERIC = 33,
+    EMP_OVERINTLIMIT = 34
 };
 
 enum TITLE{
@@ -106,6 +108,8 @@ static QString getError(enum ERROR type){
         case 30: return "Les modifications que vous tentez d'apporter existe déjà dans un autre appareil";
         case 31: return "Veuillez sélectionner un département principal auquel l'employé appartient.";
         case 32: return "Veuillez sélectionner un type d'appareil auquel cet appareil appartient.";
+        case 33: return "Le code d'employé se doit d'être un code composé de chiffre uniquement.";
+        case 34: return "La limite du nombre de chiffre pour un identifiant est dépassée. Veuillez mettre moins de 10 chiffres.";
     }
 }
 

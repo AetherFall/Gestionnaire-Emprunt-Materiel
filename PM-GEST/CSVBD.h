@@ -68,6 +68,8 @@ class CSVBD {
         bool isThisTypeInUse(int id);
         int isAnotherType(QString name);
 
+        static bool isNumeric(string str);
+
     private:
         vector<Departement*> departements;
         vector<Employe*> employe;
@@ -86,6 +88,7 @@ class CSVBD {
         void writingObjets(const QString& file);
         void writingTypeObjets(const QString& file);
         void writingRegistre(const QString& file);
+        inline bool exist (const std::string& name);
 
 };
 

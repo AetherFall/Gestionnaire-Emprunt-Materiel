@@ -1,13 +1,14 @@
 #include "CSVBD.h"
+
 #include <fstream>
+
+#include <iostream>
 
 #define LINK_REGISTRE "../PM-GEST/res/files/Registre.csv" //"../PM-GEST/res/files/Registre.csv"
 #define LINK_DEPARTEMENT "../PM-GEST/res/files/Departements.csv"
 #define LINK_EMPLOYES "../PM-GEST/res/files/Employe.csv"
 #define LINK_TYPEOBJETS "../PM-GEST/res/files/TypeObjets.csv"
 #define LINK_OBJETS "../PM-GEST/res/files/Objets.csv"
-
-
 
 CSVBD::CSVBD() {
     //Lecture des fichiers servant de base de données
@@ -402,7 +403,9 @@ void CSVBD::lectureTypeObjets(const QString& file){
 
         while(getline(fluxType, lineConvert)){
             QList<QString> line = QString::fromStdString(lineConvert).split(",");
-            typeObjet.push_back(new ObjetType(line[0], line[1]));
+            QString img = (exist(line[1].toStdString()) || line[1].split("/").at(1).toStdString() == "images")? line[1] : ":/images/res/images/unknow.png" ;
+
+            typeObjet.push_back(new ObjetType(line[0], img));
         }
 
         fluxType.close();
@@ -415,6 +418,14 @@ void CSVBD::lectureTypeObjets(const QString& file){
     }
 }
 
+inline bool CSVBD::exist (const std::string& name) {
+    if (FILE *file = fopen(name.c_str(), "r")) {
+        fclose(file);
+        return true;
+    }
+    return false;
+}
+
 void CSVBD::writingTypeObjets(const QString &file) {
     ofstream fluxType(file.toStdString().c_str());
 
@@ -424,4 +435,12 @@ void CSVBD::writingTypeObjets(const QString &file) {
 
         fluxType.close();
     }
+}
+
+
+bool CSVBD::isNumeric(string str) {
+    for (char i : str)
+          if (!isdigit(i))
+             return false;
+    return true;
 }

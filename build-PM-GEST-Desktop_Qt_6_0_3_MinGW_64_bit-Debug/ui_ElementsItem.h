@@ -62,8 +62,8 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(labImageTag->sizePolicy().hasHeightForWidth());
         labImageTag->setSizePolicy(sizePolicy);
-        labImageTag->setMinimumSize(QSize(25, 60));
-        labImageTag->setMaximumSize(QSize(45, 100));
+        labImageTag->setMinimumSize(QSize(0, 60));
+        labImageTag->setMaximumSize(QSize(100, 100));
         labImageTag->setPixmap(QPixmap(QString::fromUtf8(":/images/res/images/radio.png")));
         labImageTag->setScaledContents(true);
         labImageTag->setAlignment(Qt::AlignCenter);
