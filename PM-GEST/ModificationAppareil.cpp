@@ -78,8 +78,6 @@ void ModificationAppareil::updateTable(int currentRow, int currentCol) {
         w->setStyleSheet("background-color:none;");
 
         ui->tblEmploye->setCellWidget(i, 3, w);
-
-        ui->tblEmploye->setCellWidget(i, 3, w);
     }
 
     if(currentRow > -1){
@@ -129,6 +127,7 @@ void ModificationAppareil::verification(QString text, QLineEdit *edit, bool basi
         }
     }
     else{
+        //Mise en majuscule des premiers chars
         QStringList textValue = text.split(" ");
         edit->setText("");
 

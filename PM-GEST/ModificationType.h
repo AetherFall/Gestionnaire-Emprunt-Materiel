@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include "CSVBD.h"
-#include <QListWidgetItem>
 
 namespace Ui {
 class ModificationType;
@@ -26,7 +25,7 @@ private slots:
     void ajout();
     void suppression();
     void modification();
-    void updateTable(QListWidgetItem* item = nullptr);
+    void updateTable(int row = -1, int col = -1);
     void onCloseAction();
     void fileSearch();
 

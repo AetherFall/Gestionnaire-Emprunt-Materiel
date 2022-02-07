@@ -9,6 +9,13 @@ ModificationType::ModificationType(CSVBD *BD, QWidget *parent) : QWidget(parent)
     ui->setupUi(this);
     this->BD = BD;
 
+    QStringList tblHead;
+    tblHead << "Type d'appareil";
+
+    ui->tblEmploye->setColumnCount(1);
+    ui->tblEmploye->setColumnWidth(0, ui->tblEmploye->width());
+    ui->tblEmploye->setHorizontalHeaderLabels(tblHead);
+
     updateTable();
 
     //Connection
@@ -17,7 +24,7 @@ ModificationType::ModificationType(CSVBD *BD, QWidget *parent) : QWidget(parent)
     connect(ui->btnAdd, SIGNAL(clicked()), this, SLOT(ajout()));
     connect(ui->btnDel, SIGNAL(clicked()), this, SLOT(suppression()));
     connect(ui->btnMod, SIGNAL(clicked()), this, SLOT(modification()));
-    connect(ui->tblEmploye, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(updateTable(QListWidgetItem*)));
+    connect(ui->tblEmploye, SIGNAL(cellChanged(int, int)), this, SLOT(updateTable(int, int)));
     connect(ui->btnRecherche, SIGNAL(clicked()), this, SLOT(fileSearch()));
 
     ui->btnQuitter->setFocusPolicy(Qt::NoFocus);
@@ -44,20 +51,19 @@ void ModificationType::fileSearch() {
         ui->labImage->setText(img);
 }
 
-void ModificationType::updateTable(QListWidgetItem* item) {
-    int currentRow = ui->tblEmploye->indexFromItem(item).row();
-
-    ui->tblEmploye->clear();
+void ModificationType::updateTable(int currentRow, int currentCol) {
+    ui->tblEmploye->clearContents();
+    ui->tblEmploye->setRowCount(BD->getListTypeSize());
 
     for(size_t i = 0; i < BD->getListTypeSize(); i++){
-        ui->tblEmploye->addItem(new QListWidgetItem(BD->getTypeAt(i)->getName()));
-        ui->tblEmploye->item(i)->setTextAlignment(Qt::AlignCenter);
+        ui->tblEmploye->setItem(i, 0, new QTableWidgetItem(BD->getTypeAt(i)->getName()));
+        ui->tblEmploye->item(i,0)->setTextAlignment(Qt::AlignCenter);
     }
 
-    if(item){
+    if(currentRow > -1){
         ui->txfEmploye->setText(BD->getTypeAt(currentRow)->getName());
         ui->labImage->setText(BD->getTypeAt(currentRow)->getImage());
-        ui->tblEmploye->setCurrentRow(currentRow);
+        ui->tblEmploye->selectRow(currentRow);
     }
     else {
         ui->txfEmploye->setText("");
@@ -73,31 +79,27 @@ void ModificationType::refresh() {
 }
 
 void ModificationType::ajout() {
-    if(!ui->txfEmploye->text().isEmpty()) {
+    if(!ui->txfEmploye->text().isEmpty())
             BD->addTypeObjet(ui->txfEmploye->text(), ui->labImage->text());
-            updateTable();
-    }
     else
         QMessageBox::critical(this, getTitle(ERROR), getError(TYP_CHAMPVIDE_TOADD));
 
     //TODO Ajouter une verification si un autre departement a le meme nom.
     //TODO Mettre toute les erreures dans une classe d'erreur
 
-    updateTable(ui->tblEmploye->currentItem());
+    updateTable(ui->tblEmploye->rowCount() -1);
 }
 
 void ModificationType::suppression() {
-    if(ui->tblEmploye->count()){
+    if(ui->tblEmploye->rowCount()){
         if(ui->tblEmploye->selectionModel()->hasSelection()){
+            QModelIndexList indexList = ui->tblEmploye->selectionModel()->selectedIndexes();
 
             //Vérification contre les erreurs d'intégrité référentielle
             if(!BD->isThisTypeInUse(ui->tblEmploye->currentRow())){
                 if(QMessageBox::information(this, getTitle(INFORMATION), getInfo(TYP_DELETE), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes){
-                    BD->delTypeObjet(ui->tblEmploye->currentRow());
-
-                    //TODO -- REVOIR ICI.
-
-                    updateTable();
+                    BD->delTypeObjet(indexList.at(0).row());
+                    updateTable(indexList.at(0).row());
                 }
             }
             else
@@ -112,7 +114,7 @@ void ModificationType::suppression() {
 }
 
 void ModificationType::modification() {
-    if(ui->tblEmploye->count()){
+    if(ui->tblEmploye->rowCount()){
         if(!ui->txfEmploye->text().isEmpty()) {
             if(ui->tblEmploye->selectionModel()->hasSelection()){
                 QModelIndexList indexList = ui->tblEmploye->selectionModel()->selectedIndexes();
@@ -123,7 +125,7 @@ void ModificationType::modification() {
                 if(ui->labImage->text() != BD->getTypeAt(indexList.at(0).row())->getImage())
                     BD->getTypeAt(indexList.at(0).row())->setImage(ui->labImage->text());
 
-                updateTable(ui->tblEmploye->currentItem());
+                updateTable(indexList.at(0).row());
             }
             else
                 QMessageBox::critical(this, getTitle(ERROR), getError(TYP_NOSELECTION_TOMODIFY));

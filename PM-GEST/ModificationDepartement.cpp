@@ -47,7 +47,7 @@ void ModificationDepartement::onCloseAction() {
 
 void ModificationDepartement::updateTable(int currentRow, int currentCol) {
     ui->tblDepartement->clearContents();
-    ui->tblDepartement->setRowCount(0);
+    //ui->tblDepartement->setRowCount(0);
     ui->tblDepartement->setRowCount(BD->getListDepartementSize());
 
     for(size_t i = 0; i < BD->getListDepartementSize(); i++){
