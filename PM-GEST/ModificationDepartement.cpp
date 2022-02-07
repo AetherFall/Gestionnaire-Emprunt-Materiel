@@ -1,11 +1,11 @@
 #include "ModificationDepartement.h"
 #include "ui_ModificationDepartement.h"
 #include "CSVBD.h"
-#include <vector>
 #include "Departement.h"
-#include <iostream>
-#include <QMessageBox>
 #include "Messages.hpp"
+
+#include <vector>
+#include <QMessageBox>
 
 ModificationDepartement::ModificationDepartement(CSVBD *BD, QWidget *parent) : QWidget(parent), ui(new Ui::ModificationDepartement) {
     ui->setupUi(this);
@@ -47,7 +47,6 @@ void ModificationDepartement::onCloseAction() {
 
 void ModificationDepartement::updateTable(int currentRow, int currentCol) {
     ui->tblDepartement->clearContents();
-    //ui->tblDepartement->setRowCount(0);
     ui->tblDepartement->setRowCount(BD->getListDepartementSize());
 
     for(size_t i = 0; i < BD->getListDepartementSize(); i++){
@@ -94,6 +93,8 @@ void ModificationDepartement::suppression() {
             if(!BD->isThisDepartementInUse(ui->tblDepartement->currentRow())){
                 if(QMessageBox::information(this, getTitle(INFORMATION), getInfo(DEP_DELETE), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes){
                     BD->delDepartement(ui->tblDepartement->currentRow());
+
+                    refresh();
                     updateTable();
                 }
             }

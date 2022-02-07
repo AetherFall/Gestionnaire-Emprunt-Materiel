@@ -5,7 +5,7 @@
 #include <QMessageBox>
 #include <QFileDialog>
 
-#include <iostream>
+#define NOIMAGETEXT "Lien vers l'image..."
 
 ModificationType::ModificationType(CSVBD *BD, QWidget *parent) : QWidget(parent), ui(new Ui::ModificationType) {
     ui->setupUi(this);
@@ -69,7 +69,7 @@ void ModificationType::updateTable(int currentRow, int currentCol) {
     }
     else {
         ui->txfEmploye->setText("");
-        ui->labImage->setText("Lien vers l'image...");
+        ui->labImage->setText(NOIMAGETEXT);
     }
 }
 
@@ -77,11 +77,11 @@ void ModificationType::refresh() {
     ui->tblEmploye->clearSelection();
     ui->txfEmploye->clear();
     ui->txfRecherche->clear();
-    ui->labImage->setText("Lien vers l'image...");
+    ui->labImage->setText(NOIMAGETEXT);
 }
 
 void ModificationType::ajout() {
-    if(!ui->txfEmploye->text().isEmpty() && ui->labImage->text() != "Lien vers l'image..."){
+    if(!ui->txfEmploye->text().isEmpty() && ui->labImage->text() != NOIMAGETEXT){
         QString name = ui->txfEmploye->text();
         int count = 0;
 
@@ -91,11 +91,11 @@ void ModificationType::ajout() {
         }
 
         BD->addTypeObjet(name, ui->labImage->text());
+
+        updateTable();
     }
     else
         QMessageBox::critical(this, getTitle(ERROR), getError(TYP_CHAMPVIDE_TOADD));
-
-    updateTable();
 }
 
 void ModificationType::suppression() {
@@ -107,6 +107,8 @@ void ModificationType::suppression() {
             if(!BD->isThisTypeInUse(ui->tblEmploye->currentRow())){
                 if(QMessageBox::information(this, getTitle(INFORMATION), getInfo(TYP_DELETE), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes){
                     BD->delTypeObjet(indexList.at(0).row());
+
+                    refresh();
                     updateTable();
                 }
             }

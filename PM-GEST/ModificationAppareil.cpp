@@ -1,8 +1,9 @@
 #include "ModificationAppareil.h"
 #include "ui_ModificationAppareil.h"
-#include <QMessageBox>
 #include "Messages.hpp"
 #include "FenPrincipale.h"
+
+#include <QMessageBox>
 #include <QKeySequence>
 #include <string>
 
@@ -131,7 +132,7 @@ void ModificationAppareil::verification(QString text, QLineEdit *edit, bool basi
         QStringList textValue = text.split(" ");
         edit->setText("");
 
-        for(size_t i = 0; i < textValue.count(); i++){
+        for(int i = 0; i < textValue.count(); i++){
             if(!textValue[i].isEmpty()){
                 textValue[i][0] = textValue[i][0].toUpper();
                 edit->setText(edit->text().append(textValue[i]));

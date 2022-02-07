@@ -1,9 +1,9 @@
 #include "ModificationEmploye.h"
 #include "ui_ModificationEmploye.h"
-#include <QMessageBox>
 #include "Messages.hpp"
+
+#include <QMessageBox>
 #include <string>
-#include <iostream>
 
 ModificationEmploye::ModificationEmploye(CSVBD *BD, QWidget *parent) : QWidget(parent), ui(new Ui::ModificationEmploye) {
     //Paramétrages
@@ -184,6 +184,7 @@ void ModificationEmploye::suppression() {
                 if(QMessageBox::information(this, getTitle(INFORMATION), getInfo(EMP_DELETE), QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes){
                     BD->delEmploye(indexList.at(0).row());
 
+                    refresh();
                     updateTable();
                 }
             }
