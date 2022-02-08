@@ -60,12 +60,18 @@ void ModificationDepartement::updateTable(int currentRow, int currentCol) {
     }
     else
         ui->txfEmploye->setText("");
+
+    //Désactivation des boutons de contrôle quand le dit contrôle n'est plus possible.
+    ui->btnDel->setEnabled(ui->tblDepartement->rowCount());
+    ui->btnMod->setEnabled(ui->tblDepartement->rowCount() && currentRow > -1);
+
 }
 
 void ModificationDepartement::refresh() {
     ui->tblDepartement->clearSelection();
     ui->txfEmploye->clear();
     ui->txfRecherche->clear();
+    ui->btnMod->setEnabled(false);
 }
 
 void ModificationDepartement::ajout() {
@@ -79,6 +85,8 @@ void ModificationDepartement::ajout() {
         }
 
         BD->addDepartement(name);
+
+        refresh();
         updateTable();
     }
     else

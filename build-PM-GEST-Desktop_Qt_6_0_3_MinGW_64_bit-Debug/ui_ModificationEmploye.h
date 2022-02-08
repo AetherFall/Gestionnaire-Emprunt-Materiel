@@ -175,7 +175,7 @@ public:
         tblEmploye->setSelectionBehavior(QAbstractItemView::SelectRows);
         tblEmploye->setShowGrid(false);
         tblEmploye->setGridStyle(Qt::SolidLine);
-        tblEmploye->horizontalHeader()->setVisible(true);
+        tblEmploye->horizontalHeader()->setVisible(false);
         tblEmploye->horizontalHeader()->setDefaultSectionSize(140);
         tblEmploye->horizontalHeader()->setHighlightSections(false);
         tblEmploye->horizontalHeader()->setProperty("showSortIndicator", QVariant(false));
@@ -245,6 +245,10 @@ public:
 "\n"
 "QPushButton:hover {\n"
 "background-color:#0E8522;\n"
+"}\n"
+"\n"
+"QPushButton::!enabled{\n"
+"	background-color:rgb(80, 0, 0);\n"
 "}"));
         QIcon icon1;
         icon1.addFile(QString::fromUtf8(":/icons/res/icons/SVG/Ajout.svg"), QSize(), QIcon::Normal, QIcon::On);
@@ -270,6 +274,10 @@ public:
 "\n"
 "QPushButton:hover {\n"
 "background-color:#CE0038;\n"
+"}\n"
+"\n"
+"QPushButton::!enabled{\n"
+"	background-color:rgb(80, 0, 0);\n"
 "}"));
         QIcon icon2;
         icon2.addFile(QString::fromUtf8(":/icons/res/icons/SVG/Delete2.svg"), QSize(), QIcon::Normal, QIcon::On);
@@ -295,6 +303,10 @@ public:
 "\n"
 "QPushButton:hover {\n"
 "background-color:#D27E35;\n"
+"}\n"
+"\n"
+"QPushButton::!enabled{\n"
+"	background-color:rgb(80, 0, 0);\n"
 "}"));
         QIcon icon3;
         icon3.addFile(QString::fromUtf8(":/icons/res/icons/SVG/Modify.svg"), QSize(), QIcon::Normal, QIcon::On);

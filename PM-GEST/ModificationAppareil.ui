@@ -169,7 +169,7 @@ QTableWidget::item:selected {
 }</string>
            </property>
            <property name="verticalScrollBarPolicy">
-            <enum>Qt::ScrollBarAlwaysOn</enum>
+            <enum>Qt::ScrollBarAsNeeded</enum>
            </property>
            <property name="horizontalScrollBarPolicy">
             <enum>Qt::ScrollBarAlwaysOff</enum>
@@ -305,6 +305,9 @@ background-color:#2323A4;
                 </item>
                 <item>
                  <widget class="QPushButton" name="btnAdd">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
                   <property name="minimumSize">
                    <size>
                     <width>60</width>
@@ -330,6 +333,10 @@ color:white;
 
 QPushButton:hover {
 background-color:#0E8522;
+}
+
+QPushButton::!enabled{
+	background-color:rgb(80, 0, 0);
 }</string>
                   </property>
                   <property name="text">
@@ -378,6 +385,10 @@ color:white;
 
 QPushButton:hover {
 background-color:#CE0038;
+}
+
+QPushButton::!enabled{
+	background-color:rgb(80, 0, 0);
 }</string>
                   </property>
                   <property name="text">
@@ -426,6 +437,10 @@ color:white;
 
 QPushButton:hover {
 background-color:#D27E35;
+}
+
+QPushButton::!enabled{
+	background-color:rgb(80, 0, 0);
 }</string>
                   </property>
                   <property name="text">

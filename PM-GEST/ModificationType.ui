@@ -327,6 +327,10 @@ color:white;
 
 QPushButton:hover {
 background-color:#0E8522;
+}
+
+QPushButton::!enabled{
+	background-color:rgb(80, 0, 0);
 }</string>
                   </property>
                   <property name="text">
@@ -375,6 +379,10 @@ color:white;
 
 QPushButton:hover {
 background-color:#CE0038;
+}
+
+QPushButton::!enabled{
+	background-color:rgb(80, 0, 0);
 }</string>
                   </property>
                   <property name="text">
@@ -423,6 +431,10 @@ color:white;
 
 QPushButton:hover {
 background-color:#D27E35;
+}
+
+QPushButton::!enabled{
+	background-color:rgb(80, 0, 0);
 }</string>
                   </property>
                   <property name="text">

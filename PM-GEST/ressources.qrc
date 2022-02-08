@@ -14,13 +14,7 @@
         <file>res/images/RFScan.png</file>
         <file>res/images/unknow.png</file>
     </qresource>
-    <qresource prefix="/CSV">
-        <file>res/files/Departements.csv</file>
-        <file>res/files/Employe.csv</file>
-        <file>res/files/Objets.csv</file>
-        <file>res/files/Registre.csv</file>
-        <file>res/files/TypeObjets.csv</file>
-    </qresource>
+    <qresource prefix="/CSV"/>
     <qresource prefix="/">
         <file>myappico.ico</file>
     </qresource>

@@ -150,6 +150,16 @@ void ModificationEmploye::updateTable(int currentRow, int currentCol) {
         ui->chbGestion->setCheckState(BD->getEmployeAt(currentRow)->getGestion()? Qt::Checked : Qt::Unchecked);
         ui->tblEmploye->selectRow(currentRow);
     }
+
+    //Désactivation des boutons de contrôle quand le dit contrôle n'est plus possible.
+    ui->btnDel->setEnabled(ui->tblEmploye->rowCount());
+    ui->btnMod->setEnabled(ui->tblEmploye->rowCount() && currentRow > -1);
+    ui->btnAdd->setEnabled(BD->getListDepartementSize());
+
+    if(!BD->getListDepartementSize())
+        ui->cbxDepartement->setPlaceholderText("Erreur - Veuillez ajoutez un département avant.");
+    else
+        ui->cbxDepartement->setPlaceholderText("");
 }
 
 void ModificationEmploye::refresh() {
@@ -160,6 +170,7 @@ void ModificationEmploye::refresh() {
     ui->txfNom->clear();
     ui->chbGestion->setCheckState(Qt::Unchecked);
     ui->cbxDepartement->setCurrentIndex(-1);
+    ui->btnMod->setEnabled(false);
 }
 
 void ModificationEmploye::ajout() {
@@ -175,7 +186,10 @@ void ModificationEmploye::ajout() {
                     name = ui->txfNom->text().append(QString::fromStdString('(' + to_string(count) + ')'));
                 }
 
-                BD->addEmploye(std::stoi(ui->txfEmploye->text().toStdString()), name, BD->getDepartementAt(ui->cbxDepartement->currentIndex()), ui->chbGestion->isChecked());
+                verification(name, ui->txfNom, false);
+                BD->addEmploye(std::stoi(ui->txfEmploye->text().toStdString()), ui->txfNom->text(), BD->getDepartementAt(ui->cbxDepartement->currentIndex()), ui->chbGestion->isChecked());
+
+                refresh();
                 updateTable();
             }
             else
@@ -219,8 +233,10 @@ void ModificationEmploye::modification() {
             if(ui->tblEmploye->selectionModel()->hasSelection()){
                 QModelIndexList indexList = ui->tblEmploye->selectionModel()->selectedIndexes();
 
-                if(ui->txfNom->text() != BD->getEmployeAt(indexList.at(0).row())->getName())
+                if(ui->txfNom->text() != BD->getEmployeAt(indexList.at(0).row())->getName()){
+                    verification(ui->txfNom->text(), ui->txfNom, false);
                     BD->getEmployeAt(indexList.at(0).row())->setName(ui->txfNom->text());
+                }
 
                 if(ui->txfEmploye->text() != QString::fromStdString(to_string(BD->getEmployeAt(indexList.at(0).row())->getId())))
                     BD->getEmployeAt(indexList.at(0).row())->setId(ui->txfEmploye->text().toInt());

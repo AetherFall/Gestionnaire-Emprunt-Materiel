@@ -33,8 +33,8 @@ ModificationAppareil::ModificationAppareil(CSVBD *BD, QWidget *parent) : QWidget
     connect(ui->btnDel, SIGNAL(clicked()), this, SLOT(suppression()));
     connect(ui->btnMod, SIGNAL(clicked()), this, SLOT(modification()));
     connect(ui->tblEmploye, SIGNAL(cellClicked(int,int)), this, SLOT(updateTable(int,int)));
-    connect(this, SIGNAL(verificationTextField(QString, QLineEdit*, bool)), this, SLOT(verification(QString, QLineEdit*, bool)));
-    connect(qApp, SIGNAL(focusChanged(QWidget*, QWidget*)), this, SLOT(focusChange(QWidget*, QWidget*)));
+    connect(this, SIGNAL(verificationTextField(QString,QLineEdit*,bool)), this, SLOT(verification(QString,QLineEdit*,bool)));
+    connect(qApp, SIGNAL(focusChanged(QWidget*,QWidget*)), this, SLOT(focusChange(QWidget*,QWidget*)));
 
     ui->btnQuitter->setFocusPolicy(Qt::NoFocus);
     ui->btnAdd->setFocusPolicy(Qt::NoFocus);
@@ -92,6 +92,16 @@ void ModificationAppareil::updateTable(int currentRow, int currentCol) {
     for(int r = 0; r < ui->tblEmploye->rowCount(); r++)
         for(int c = 0; c < ui->tblEmploye->columnCount() -1; c++)
             ui->tblEmploye->item(r,c)->setTextAlignment(Qt::AlignCenter);
+
+    //Désactivation des boutons de contrôle quand le dit contrôle n'est plus possible.
+    ui->btnDel->setEnabled(ui->tblEmploye->rowCount());
+    ui->btnMod->setEnabled(ui->tblEmploye->rowCount() && currentRow > -1);
+    ui->btnAdd->setEnabled(BD->getListTypeSize());
+
+    if(!BD->getListTypeSize())
+        ui->cbxDepartement->setPlaceholderText("Erreur - Veuillez ajoutez un type d'appareil avant.");
+    else
+        ui->cbxDepartement->setPlaceholderText("");
 }
 
 void ModificationAppareil::onCloseAction() {
@@ -143,6 +153,7 @@ void ModificationAppareil::verification(QString text, QLineEdit *edit, bool basi
         }
     }
 }
+
 void ModificationAppareil::refresh() {
     ui->tblEmploye->clearSelection();
 
@@ -151,6 +162,8 @@ void ModificationAppareil::refresh() {
     ui->txfNom->clear();
     ui->chbGestion->setCheckState(Qt::Unchecked);
     ui->cbxDepartement->setCurrentIndex(-1);
+
+    ui->btnMod->setEnabled(false);
 }
 
 void ModificationAppareil::ajout() {
@@ -167,8 +180,12 @@ void ModificationAppareil::ajout() {
                     name = ui->txfNom->text().append(QString::fromStdString('(' + to_string(count) + ')'));
                 }
 
-
                 BD->addObjet(ui->txfEmploye->text(), name, BD->getTypeAt(ui->cbxDepartement->currentIndex()), ui->chbGestion->isChecked());
+
+                if(ui->chbGestion->isChecked())
+                    BD->addToRegistre(QDate().currentDate(), new Employe(0, "Administrateur", new Departement("Gestion Système"), true), BD->getObjetAt(BD->getListObjetSize() -1));
+
+                refresh();
                 updateTable();
             }
             else

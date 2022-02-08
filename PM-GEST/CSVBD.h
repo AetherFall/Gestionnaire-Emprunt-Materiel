@@ -89,7 +89,6 @@ class CSVBD {
         void writingTypeObjets(const QString& file);
         void writingRegistre(const QString& file);
         inline bool exist (const std::string& name);
-
 };
 
 #endif // CSVBD_H

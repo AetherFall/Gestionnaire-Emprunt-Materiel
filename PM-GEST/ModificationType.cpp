@@ -71,6 +71,10 @@ void ModificationType::updateTable(int currentRow, int currentCol) {
         ui->txfEmploye->setText("");
         ui->labImage->setText(NOIMAGETEXT);
     }
+
+    //Désactivation des boutons de contrôle quand le dit contrôle n'est plus possible.
+    ui->btnDel->setEnabled(ui->tblEmploye->rowCount());
+    ui->btnMod->setEnabled(ui->tblEmploye->rowCount() && currentRow > -1);
 }
 
 void ModificationType::refresh() {
@@ -78,6 +82,8 @@ void ModificationType::refresh() {
     ui->txfEmploye->clear();
     ui->txfRecherche->clear();
     ui->labImage->setText(NOIMAGETEXT);
+
+    ui->btnMod->setEnabled(false);
 }
 
 void ModificationType::ajout() {
@@ -92,6 +98,7 @@ void ModificationType::ajout() {
 
         BD->addTypeObjet(name, ui->labImage->text());
 
+        refresh();
         updateTable();
     }
     else
