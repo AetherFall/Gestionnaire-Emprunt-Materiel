@@ -2,8 +2,6 @@
 
 #include <fstream>
 
-#include <iostream>
-
 #define LINK_REGISTRE "./res/files/Registre.csv" //"../PM-GEST/res/files/Registre.csv"
 #define LINK_DEPARTEMENT "./res/files/Departements.csv"
 #define LINK_EMPLOYES "./res/files/Employe.csv"

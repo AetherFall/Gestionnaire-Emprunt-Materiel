@@ -33,6 +33,12 @@ ModificationDepartement::ModificationDepartement(CSVBD *BD, QWidget *parent) : Q
     ui->btnMod->setFocusPolicy(Qt::NoFocus);
     ui->btnDel->setFocusPolicy(Qt::NoFocus);
     ui->btnRefresh->setFocusPolicy(Qt::NoFocus);
+
+    ui->btnRefresh->setShortcut(Qt::Key_F5);
+    ui->btnAdd->setShortcut(Qt::Key_F6);
+    ui->btnMod->setShortcut(Qt::Key_F7);
+    ui->btnDel->setShortcut(Qt::Key_Delete);
+    ui->btnQuitter->setShortcut(Qt::Key_Control + Qt::Key_Q);
 }
 
 ModificationDepartement::~ModificationDepartement() {
@@ -49,10 +55,14 @@ void ModificationDepartement::updateTable(int currentRow, int currentCol) {
     ui->tblDepartement->clearContents();
     ui->tblDepartement->setRowCount(BD->getListDepartementSize());
 
-    for(size_t i = 0; i < BD->getListDepartementSize(); i++){
+    //Remplissage du tableau
+    for(size_t i = 0; i < BD->getListDepartementSize(); i++)
         ui->tblDepartement->setItem(i, 0, new QTableWidgetItem(BD->getDepartementAt(i)->getNom()));
+
+    //Remise en forme des cases
+    for(size_t i = 0; i < BD->getListDepartementSize(); i++)
         ui->tblDepartement->item(i,0)->setTextAlignment(Qt::AlignCenter);
-    }
+
 
     if(currentRow > -1){
         ui->txfEmploye->setText(BD->getDepartementAt(currentRow)->getNom());
