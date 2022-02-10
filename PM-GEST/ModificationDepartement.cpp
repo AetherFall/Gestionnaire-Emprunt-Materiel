@@ -123,7 +123,15 @@ void ModificationDepartement::modification() {
                 QModelIndexList indexList = ui->tblDepartement->selectionModel()->selectedIndexes();
 
                 if(ui->txfEmploye->text() != BD->getDepartementAt(indexList.at(0).row())->getNom()) {
-                    BD->getDepartementAt(indexList.at(0).row())->setNom(ui->txfEmploye->text());
+                    QString name = ui->txfEmploye->text();
+                    int count = 0;
+
+                    while (BD->isAnotherDepartement(name) > -1) {
+                        count++;
+                        name = ui->txfEmploye->text().append(QString::fromStdString('(' + to_string(count) + ')'));
+                    }
+
+                    BD->getDepartementAt(indexList.at(0).row())->setNom(name);
                     updateTable(indexList.at(0).row());
                 }
             }

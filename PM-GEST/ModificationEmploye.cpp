@@ -178,15 +178,8 @@ void ModificationEmploye::ajout() {
         if(ui->cbxDepartement->currentIndex() > -1){
             //Vérification si le ID est unique.
             if(!BD->isAnotherEmploye(ui->txfEmploye->text().toInt())){
-                QString name = ui->txfNom->text();
-                int count = 0;
 
-                while (BD->isAnotherEmployeName(name)) {
-                    count++;
-                    name = ui->txfNom->text().append(QString::fromStdString('(' + to_string(count) + ')'));
-                }
-
-                verification(name, ui->txfNom, false);
+                verification(ui->txfNom->text(), ui->txfNom, false);
                 BD->addEmploye(std::stoi(ui->txfEmploye->text().toStdString()), ui->txfNom->text(), BD->getDepartementAt(ui->cbxDepartement->currentIndex()), ui->chbGestion->isChecked());
 
                 refresh();

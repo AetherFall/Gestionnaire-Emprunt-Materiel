@@ -136,8 +136,17 @@ void ModificationType::modification() {
             if(ui->tblEmploye->selectionModel()->hasSelection()){
                 QModelIndexList indexList = ui->tblEmploye->selectionModel()->selectedIndexes();
 
-                if(ui->txfEmploye->text() != BD->getTypeAt(indexList.at(0).row())->getName())
+                if(ui->txfEmploye->text() != BD->getTypeAt(indexList.at(0).row())->getName()){
+                    QString name = ui->txfEmploye->text();
+                    int count = 0;
+
+                    while (BD->isAnotherDepartement(name) > -1) {
+                        count++;
+                        name = ui->txfEmploye->text().append(QString::fromStdString('(' + to_string(count) + ')'));
+                    }
+
                     BD->getTypeAt(indexList.at(0).row())->setName(ui->txfEmploye->text());
+                }
 
                 if(ui->labImage->text() != BD->getTypeAt(indexList.at(0).row())->getImage())
                     BD->getTypeAt(indexList.at(0).row())->setImage(ui->labImage->text());

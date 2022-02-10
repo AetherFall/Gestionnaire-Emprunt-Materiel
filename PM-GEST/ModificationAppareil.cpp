@@ -232,8 +232,17 @@ void ModificationAppareil::modification() {
                 if(ui->txfEmploye->text() != BD->getObjetAt(indexList.at(0).row())->getId())
                     BD->getObjetAt(indexList.at(0).row())->setId(ui->txfEmploye->text());
 
-                if(ui->txfNom->text() != BD->getObjetAt(indexList.at(0).row())->getName())
-                    BD->getObjetAt(indexList.at(0).row())->setName(ui->txfNom->text());
+                if(ui->txfNom->text() != BD->getObjetAt(indexList.at(0).row())->getName()){
+                    QString name = ui->txfNom->text();
+                    int count = 0;
+
+                    while (BD->isAnotherDepartement(name) > -1) {
+                        count++;
+                        name = ui->txfNom->text().append(QString::fromStdString('(' + to_string(count) + ')'));
+                    }
+
+                    BD->getObjetAt(indexList.at(0).row())->setName(name);
+                }
 
                 if(ui->cbxDepartement->currentIndex() != BD->getTypeId(BD->getObjetAt(indexList.at(0).row())->getType()))
                     BD->getObjetAt(indexList.at(0).row())->setType(BD->getTypeAt(ui->cbxDepartement->currentIndex()));
